@@ -21,7 +21,7 @@ class ConexionPGSQL {
 		$this->host = 'localhost';
 		$this->db = 'dbsiar';
 		$this->user = 'postgres';
-		$this->pass = 'rbbmpj1617';
+		$this->pass = '123456';
 		$this->conexion = "host=$this->host dbname=$this->db user=$this->user password=$this->pass";
 	}
 
