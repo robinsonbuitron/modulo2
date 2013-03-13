@@ -4,19 +4,22 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title></title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/DT_bootstrap.css" rel="stylesheet">
 		<script class="include" src="js/jquery-1.9.1.min.js"></script>
 		<script class="include" src="js/bootstrap.min.js"></script>
 		<script class="include" src="js/mantenimiento_usuarios.js"></script>
+		<script src="js/jquery.dataTables.min.js"></script>
+		<script src="js/DT_bootstrap.js"></script>
     </head>
     <body>
 		<div class="container">
-			<div class="row-fluid">
+			<div id="formInsertar" class="row-fluid">
 				<div class="span12 well">
 					<div class="span7 form-horizontal">
 						<div class="control-group">
 							<label class="control-label">DNI: </label>
 							<div class="controls">
-								<input id="txtCodigo" class="span6" type="text" placeholder="Codigo">
+								<input id="txtCodigo" maxlength="8" class="span6" type="text" placeholder="Codigo">
 							</div>
 						</div>
 						<div class="control-group">
@@ -44,7 +47,7 @@
 					</div>
 					<div class="text-right">
 						<button id="btnAgregar" type="button" class="btn btn-primary">Agregar</button>
-						<button type="button" class="btn">Limpiar</button>
+						<button id="btnLimpiar" type="button" class="btn">Limpiar</button>
 					</div>
 				</div>
 			</div>

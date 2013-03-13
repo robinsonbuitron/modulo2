@@ -60,6 +60,10 @@ $(document).ready(function() {
 			});
 		}
 	});
+	//funcionalidad del boton limpiar
+	$("#btnLimpiar").click(function() {
+		$("#formInsertar input").val("");
+	});
 	//funcionalidad de modificar un usuario
 	$("#btnEditar").click(function() {
 		$("#btnEditar").text("Editandoo...");
@@ -107,6 +111,7 @@ $(document).ready(function() {
 		function(data) {
 			if (data.title !== "error") {
 				$('#example > tbody:last').append('<tr id="' + codigo + '"><td>' + codigo + '</td><td>' + nombre + '</td><td>' + $('#cbInstitucion option:selected').text() + '</td><td>' + $('#cbCargo option:selected').text() + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td></tr>');
+				$("#formInsertar input").val("");
 			}
 			$("#resultado").html(data.html);
 			$("#btnAgregar").removeAttr("disabled");
