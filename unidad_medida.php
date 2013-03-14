@@ -7,7 +7,7 @@
         <link href="css/DT_bootstrap.css" rel="stylesheet">
         <script class="include" src="js/jquery-1.9.1.min.js"></script>
         <script class="include" src="js/bootstrap.min.js"></script>
-        <script class="include" src="js/mantenimiento_institucion.js"></script>
+        <script class="include" src="js/mantenimiento_um.js"></script>
         <script src="js/jquery.dataTables.min.js"></script>
         <script src="js/DT_bootstrap.js"></script>
     </head>
@@ -17,16 +17,16 @@
                 <div class="span12 well">
                     <div class="span7 form-horizontal">
                         <div class="control-group">
-                            <label class="control-label">Siglas: </label>
+                            <label class="control-label">Unidad de medida: </label>
                             <div class="controls">
-                                <input id="txtsiglas" class="span12" type="text" placeholder="Siglas">
+                                <input id="txtabreviatura" class="span12" type="text" placeholder="Unida de medida">
                             </div>
                         </div>
 
                         <div class="control-group">
-                            <label class="control-label">Nombre Institucion: </label>
+                            <label class="control-label">Descrpcion: </label>
                             <div class="controls">
-                                <input id="txtnombinst" class="span12" type="text" placeholder="Institucion">
+                                <input id="txtdescripcion" class="span12" type="text" placeholder="Descripcion">
                             </div>
                         </div>
                     </div>
@@ -39,31 +39,31 @@
 
             <div>
                 <div id="tablaInstitucion">
-                    <?php include './lista_institucion.php'; ?>
+                    <?php include './lista_um.php'; ?>
                 </div>
                 <div id="myModal" class="modal hide fade form-horizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h3 id="myModalLabel">Editar Institución</h3>
+                        <h3 id="myModalLabel">Editar Unidad de Medida</h3>
                     </div>
                     <div class="modal-body">
                         <input id="txtId" type="hidden">
                         <div class="control-group">
                             <label class="control-label">Codigo:</label>
                             <div class="controls">
-                                <input id="txtIdInstitucionE" readonly type="text">
+                                <input id="txtidunidadmedidaE" readonly type="text">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">Sigla:</label>
                             <div class="controls">
-                                <input id="txtSiglaE" type="text" class="span3" placeholder="Sigla">
+                                <input id="txtabreviaturaE" type="text" class="span3" placeholder="Unidad de Medida">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">Nombre de Institucion:</label>
                             <div class="controls">
-                                <input id="txtNombreInstE" class="span4" type="text" placeholder="Institucion ">
+                                <input id="txtdescripcionE" class="span4" type="text" placeholder="Descripcion">
                             </div>
                         </div>
 
