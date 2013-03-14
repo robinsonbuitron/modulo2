@@ -83,8 +83,9 @@ $(document).ready(function() {
 		},
 		function(data) {
 			if (data.title !== "error") {
-				$('#example > tbody:last').append('<tr id="' + codigoinst + '"><td>'+codigoinst+'</td><td>' + sigla + '</td><td>' + institucion + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td></tr>');
-				$("#formInsertar input").val("");
+				$('#example > tbody:last').append('<tr id="' + data.title + '"><td>'+data.title+'</td><td>' + sigla + '</td><td>' + institucion + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td></tr>');
+				$("#frmInsertar input").val("");
+
 			}
 			$("#resultado").html(data.html);
 			$("#btnAgregar").removeAttr("disabled");
