@@ -21,23 +21,14 @@ $(document).ready(function() {
 				$(this).children("td").each(function(index2) {
 					switch (index2) {
 						case 0:
-							$("#txtCodigoE").val($(this).text());
+							$("#txtIdInstitucionE").val($(this).text());
 							break;
 						case 1:
-							$("#txtNombreE").val($(this).text());
+							$("#txtSiglaE").val($(this).text());
 							break;
-						case 2:
-							var texto1 = $(this).text();
-							$("#cbInstitucionE").find("option").filter(function(index) {
-								return texto1 === $(this).text();
-							}).prop("selected", "selected");
-							break;
-						case 3:
-							var texto2 = $(this).text();
-							$("#cbCargoE").find("option").filter(function(index) {
-								return texto2 === $(this).text();
-							}).prop("selected", "selected");
-							break;
+                                                case 2:
+							$("#txtNombreInstE").val($(this).text());
+							break;        
 					}
 				});
 			});
@@ -45,28 +36,28 @@ $(document).ready(function() {
 	});
 	//funcionalidad del boton limpiar
 	$("#btnLimpiar").click(function() {
-		$("#formInsertar input").val("");
+		$("#frmInsertar input").val("");
 	});
-	//funcionalidad de modificar un usuario
+	//funcionalidad de modificar la tabla institucion
 	$("#btnEditar").click(function() {
 		$("#btnEditar").text("Editandoo...");
 		$("#btnEditar").attr("disabled", "disabled");
-		var codigo = $('#txtCodigoE').val();
-		var nombre = $('#txtNombreE').val();
-		var institucion = $('#cbInstitucionE').val();
-		var cargo = $('#cbCargoE').val();
-		$.post("mantenimiento_usuarios.php", {
+		var codigo = $('#txtIdInstitucionE').val();
+		var sigla = $('#txtSiglaE').val();
+		var institucion = $('#txtNombreInstE').val();
+		$.post("mantenimiento_institucion.php", {
 			action: "modificar",
-			dni: codigo,
-			idprivilegios: cargo,
-			idinstitucion: institucion,
-			nomape: nombre
+			idinstitucion: codigo,
+			siglas: sigla,
+			nombinst: institucion
+			
 		},
 		function(data) {
 			if (data.title !== "error") {
 				$("#example tbody tr").each(function(index) {
-					if ($(this).attr("id") === $("#txtCodigoE").val()) {
-						$(this).html('<td>' + codigo + '</td><td>' + nombre + '</td><td>' + $('#cbInstitucionE option:selected').text() + '</td><td>' + $('#cbCargoE option:selected').text() + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td>');
+					if ($(this).attr("id") === $("#txtIdInstitucionE").val()) {
+						$(this).html('<td>' + codigo + '</td><td>' + sigla + '</td><td>' + institucion + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td>');
+                                                
 					}
 				});
 				$("#resultado").html(data.html);
@@ -76,24 +67,23 @@ $(document).ready(function() {
 			}
 		}, "json");
 	});
-	//funcionalidad de la accion de insertar un nuevo usuario
+	//funcionalidad de la accion de insertar nueva institucion 
 	$("#btnAgregar").click(function() {
 		$("#btnAgregar").text("Agregando...");
 		$("#btnAgregar").attr("disabled", "disabled");
-		var codigo = $('#txtCodigo').val();
-		var cargo = $('#cbCargo').val();
-		var institucion = $('#cbInstitucion').val();
-		var nombre = $('#txtNombre').val();
-		$.post("mantenimiento_usuarios.php", {
+		var codigoinst = $('#txtidinst').val();
+		var sigla = $('#txtsiglas').val();
+		var institucion = $('#txtnombinst').val();
+		$.post("mantenimiento_institucion.php", {
 			action: "insertar",
-			dni: codigo,
-			idprivilegios: cargo,
-			idinstitucion: institucion,
-			nomape: nombre
+			idinstitucion: codigoinst,
+			siglas: sigla,
+			nombinst: institucion
+			
 		},
 		function(data) {
 			if (data.title !== "error") {
-				$('#example > tbody:last').append('<tr id="' + codigo + '"><td>' + codigo + '</td><td>' + nombre + '</td><td>' + $('#cbInstitucion option:selected').text() + '</td><td>' + $('#cbCargo option:selected').text() + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td></tr>');
+				$('#example > tbody:last').append('<tr id="' + codigoinst + '"><td>'+codigoinst+'</td><td>' + sigla + '</td><td>' + institucion + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td></tr>');
 				$("#formInsertar input").val("");
 			}
 			$("#resultado").html(data.html);

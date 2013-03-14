@@ -71,7 +71,7 @@
 						<div class="control-group">
 							<label class="control-label">Nombre:</label>
 							<div class="controls">
-								<input id="txtNombreE" type="text" class="span3" placeholder="Nombre">
+								<input id="txtNombreE" type="text" class="span3" placeholder="nombre">
 							</div>
 						</div>
 						<div class="control-group">
