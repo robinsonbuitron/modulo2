@@ -1,11 +1,11 @@
-jQuery(function($){
-	var r = Raphael('chaptersMap', 997, 570);
+jQuery(function($) {
+	var r = Raphael('chaptersMap', 400, 400);
 	r.safari();
 	var _label = r.popup(50, 50, "").hide();
 	attributes = {
 		fill: '#485e96',
 		stroke: '#1e336a',
-		'stroke-width': 2,
+		'stroke-width': 1,
 		'stroke-linejoin': 'round',
 		cursor: "pointer"
 	};
@@ -14,10 +14,11 @@ jQuery(function($){
 	for (var correntPath in paths) {
 		var obj = r.path(paths[correntPath].path);
 		arr[obj.id] = correntPath;
+		attributes.fill = paths[arr[obj.id]].color;
 		obj.attr(attributes);
-		
+
 		/* Al estar encima el mouse de nuestro correntPath, Cambiamos el color y se restablece cuando se deja */
-		obj.hover(function(){
+		obj.hover(function() {
 			this.animate({
 				fill: '#733A6A',
 				stroke: '#1F131D'
@@ -25,16 +26,16 @@ jQuery(function($){
 			bbox = this.getBBox();
 			_label.attr({
 				text: paths[arr[this.id]].name
-			}).update(bbox.x, bbox.y + bbox.height/2, bbox.width).toFront().show();
-		}, function(){
+			}).update(bbox.x, bbox.y + bbox.height / 2, bbox.width).toFront().show();
+		}, function() {
 			this.animate({
-				fill: attributes.fill,
+				fill: paths[arr[this.id]].color,
 				stroke: attributes.stroke
 			}, 300);
 			_label.hide();
 		});
 		/* Accion cuando le damos click a alguna parte de nuestro mapa */
-		obj.click(function(){
+		obj.click(function() {
 			location.href = paths[arr[this.id]].url;
 		});
 	}//fin For

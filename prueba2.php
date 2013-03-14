@@ -9,14 +9,24 @@
 		<script type="text/javascript" src="js/data_abancay.js"></script>
 		<script type="text/javascript" src="js/dibujar.js"></script>
 		<link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min.css" />
-		<!--		<link rel="stylesheet" type="text/css" media="all" href="css/style_mapa.css" />-->
 	</head>
     <body>
 		<div class="container">
 			<div class="row-fluid">
-				<div class="span12">
-					<div class="span8">
-						<div class="offset4 well form-horizontal">
+				<div>
+					<div class="span3">
+						<select size="7">
+							<option value="1" >Abancay</option>
+							<option value="2">Andahuaylas</option>
+							<option value="3">Antabamba</option>
+							<option value="4">Aymaraes</option>
+							<option value="5">Chicheros</option>
+							<option value="6">Cotabambas</option>
+							<option value="7">Grau</option>
+						</select>
+					</div>
+					<div class="span5">
+						<div class="well form-horizontal">
 							<div class="control-group">
 								<label class="control-label">Tipo de Grafico:</label>
 								<div class="controls">

@@ -16,30 +16,30 @@
 						<div class="control-group">
 							<label class="control-label">Nombre: </label>
 							<div class="controls">
-                                                            <input id="txtNombre" class="span12" type="text" value="JUAN PEREZ PEREZ" disabled="">  
+								<input id="txtNombre" class="span12" type="text" value="JUAN PEREZ PEREZ" disabled="">  
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">Sector/Institucion: </label>
 							<div class="controls">
-                                                            <input id="txtSector" class="span8" type="text" value="ATFFS" disabled=""> 
+								<input id="txtSector" class="span8" type="text" value="ATFFS" disabled=""> 
 							</div>
 						</div>
 					</div>
 					<div class="span5 form-horizontal">
 						<div class="control-group">
 							<label class="control-label">Cargo: </label>
-                                                        <div class="controls">
-                                                            <input id="txtZona" class="span14" type="text"   value="ADMINISTRADOR" disabled=""> 
+							<div class="controls">
+								<input id="txtZona" class="span14" type="text"   value="ADMINISTRADOR" disabled=""> 
 							</div>
 						</div>
-						
+
 					</div>
-					
+
 				</div>
 			</div>
-                    
-                    <div class="row-fluid">
+
+			<div class="row-fluid">
 				<div class="span12 well">
 					<div class="span7 form-horizontal">
 						<div class="control-group">
@@ -52,30 +52,75 @@
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label">Zona : </label>
+							<label class="control-label">Provincia : </label>
+							<div class="controls">
+								<select id="cbProvincia" class="span12">
+									
+								</select>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Distrito : </label>
 							<div class="controls">
 								<select id="cbZonarovincia" class="span12">
 									<option>Abancay</option>
 									<option>Andahuaylas</option>
-                                                                        <option>Antabamba</option>
+									<option>Antabamba</option>
 									<option>Aymaraes</option>
-                                                                        <option>Cotabambas</option>
+									<option>Cotabambas</option>
 									<option>Chincheros</option>
-                                                                        <option>Grau</option>
+									<option>Grau</option>
 								</select>
 							</div>
 						</div>
 					</div>
 					<div class="span5 form-horizontal">
 						<div class="control-group">
+							<label class="control-label">Anio: </label>
+							<div class="controls">
+								<select id="cbPeriodo" class="span12">
+									<option>2017</option>
+									<option>2016</option>
+									<option>2015</option>
+									<option>2014</option>
+									<option>2013</option>
+									<option selected>2013</option>
+									<option>2012</option>
+									<option>2011</option>
+									<option>2010</option>
+									<option>2009</option>
+									<option>2008</option>
+								</select>
+							</div>
+						</div>
+						<div class="control-group">
 							<label class="control-label">Periodo: </label>
 							<div class="controls">
 								<select id="cbPeriodo" class="span12">
-									<option>2013</option>
-									<option>2012</option>
-									<option>2011</option>
-                                                                        <option>2010</option>
-                                                                        <option>2009</option>
+									<optgroup label="Mensual">
+										<option>Enero</option>
+										<option>Febrero</option>
+										<option>Marzo</option>
+										<option>Abril</option>
+										<option>Mayo</option>
+										<option>Junio</option>
+										<option>Julio</option>
+										<option>Agosto</option>
+										<option>Setiembre</option>
+										<option>Octubre</option>
+										<option>Noviembre</option>
+										<option>Diciembre</option>
+									</optgroup>
+									<optgroup label="Semestral">
+										<option>1er Semestre</option>
+										<option>2do Semestre</option>
+									</optgroup>
+									<optgroup label="Trimestral">
+										<option>1er Trimestre</option>
+										<option>2do Trimestre</option>
+										<option>3er Trimestre</option>
+										<option>4to Trimestre</option>
+									</optgroup>
 								</select>
 							</div>
 						</div>
@@ -92,7 +137,7 @@
 					</div>
 				</div>
 			</div>
-                    
+
 			<div>
 				<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example" width="100%">
 					<thead>
@@ -131,7 +176,7 @@
 					</div>
 					<div class="modal-body">
 						<input id="txtId" type="hidden">
-                                            <div class="control-group">
+						<div class="control-group">
 							<label class="control-label">Pediodo:</label>
 							<div class="controls">
 								<input id="txtPeriodoE" readonly type="text">
@@ -143,8 +188,8 @@
 								<input id="txtValorE" type="text" class="span3" placeholder="Valor(%)">
 							</div>
 						</div>
-						
-						
+
+
 					</div>
 					<div class="modal-footer">
 						<button id="btnEditar" type="button" class="btn btn-primary">Agregar</button>
@@ -152,6 +197,7 @@
 					</div>
 				</div>
 			</div>
+			<div id="prueba"></div>
 		</div> <!-- /container -->
 	</body>
 </html>
