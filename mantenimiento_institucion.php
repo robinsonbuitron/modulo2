@@ -12,15 +12,13 @@ if (isset($_POST['action'])) {
     $conexion->conectar();
     $action = $_POST['action'];
     if ($action == "insertar") {
-        $idinstitucion = "10000";
+        //$idinstitucion = "10000";
         $resultado1 = $conexion->consulta("SELECT MAX(idinstitucion) AS idinstitucion FROM tinstitucion");
         //$filas = pg_numrows($resultado1);
         $idinstitucion = pg_result($resultado1, 0, 0);
         if ($idinstitucion == null && $idinstitucion == "")
             $idinstitucion = "10000";
-        else {
-            $idinstitucion = pg_result($resultado1, 0, 0);
-        }
+        
         //$idinstitucion = $_POST['idinstitucion'];
         $siglas = $_POST['siglas'];
         $nombinst = $_POST['nombinst'];
