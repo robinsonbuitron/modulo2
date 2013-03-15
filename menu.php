@@ -13,11 +13,11 @@
 					<li class="divider-vertical"></li>
 					<li id="menuIndicador"><a href="indicador.php"><i class="icon-file icon-white"></i> Indicadores</a></li>
 					<li class="divider-vertical"></li>
-					<li id="menuInstitucion"><a href="institucion.php"><i class="icon-envelope icon-white"></i> Instituciones</a></li>
+					<li id="menuInstitucion"><a href="institucion.php"><i class="icon-lock icon-white"></i> Instituciones</a></li>
 					<li class="divider-vertical"></li>
 					<li id="menuUMedida"><a href="unidad_medida.php"><i class="icon-signal icon-white"></i> Unidades Medida</a></li>
 					<li class="divider-vertical"></li>
-					<li id="menuLectura"><a href="lectura.php"><i class="icon-lock icon-white"></i> Lectura</a></li>
+					<li id="menuLectura"><a href="lectura.php"><i class="icon-envelope icon-white"></i> Lectura</a></li>
 					<li class="divider-vertical"></li>
 				</ul>
 				<div class="btn-group pull-right">
