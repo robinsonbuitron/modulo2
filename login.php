@@ -10,16 +10,23 @@ if (isset($_POST['username'])) {
         include 'conexion/pgsql.php';
         $conexion = new ConexionPGSQL();
         $conexion->conectar();
-        $resultado = $conexion->consulta("select password from tusuario where idusuario='$username'");
+        $resultado = $conexion->consulta("select * from tusuario where idusuario='$username'");
         $filas = pg_numrows($resultado);
         if ($filas != 0) {
             include 'lib/Encrypter.php';
-            $password2 = pg_result($resultado, 0, 0);
-            $password = Encrypter::encrypt($password);
+            $dni = pg_result($resultado, 0, 0);
+			$idinstitucion = pg_result($resultado, 0, 1);
+			$idprivilegios = pg_result($resultado, 0, 2);
+			$nomape = pg_result($resultado, 0, 3);
+			$password2 = pg_result($resultado, 0, 4);
+			$password = Encrypter::encrypt($password);
             if ($password != $password2) {
                 $msj = "Login incorrecto";
             } else {
-                $_SESSION["s_username"] = $username;
+                $_SESSION["s_username"] = $dni;
+				$_SESSION["s_nameape"] = $nomape;
+				$_SESSION["s_idprivilegios"] = $idprivilegios;
+				$_SESSION["s_idinstitucion"] = $idinstitucion;
                 header('Location: usuarios.php');
                 exit();
             }
