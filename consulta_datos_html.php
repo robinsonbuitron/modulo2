@@ -2,7 +2,7 @@
 
 session_start();
 if (!isset($_SESSION['s_username'])) {
-	header('Location: login.php');
+	header('Location: index.php');
 	exit();
 } else {
 	if (isset($_POST['peticion'])) {
