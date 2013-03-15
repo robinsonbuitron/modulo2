@@ -7,15 +7,21 @@ if (!isset($_SESSION['s_username'])) {
 	?>
 	<!DOCTYPE html>
 	<html lang="es">
-	    <head>
-	        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	        <title></title>
+		<head>
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+			<title></title>
 			<link href="css/bootstrap.min.css" rel="stylesheet">
 			<script class="include" src="js/jquery-1.9.1.min.js"></script>
 			<script class="include" src="js/bootstrap.min.js"></script>
 			<script class="include" src="js/mantenimiento_lectura.js"></script>
-	    </head>
-	    <body>
+			<script type="text/javascript">
+				$(function() {
+					$("#menuLectura").addClass("active");
+				});
+			</script>
+		</head>
+		<body>
+			<?php include './menu.php'; ?>
 			<div class="container">
 				<div class="row-fluid">
 					<div class="span12 well">

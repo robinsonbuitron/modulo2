@@ -19,10 +19,15 @@ if (!isset($_SESSION['s_username'])) {
 			<script src="js/jquery.dataTables.min.js"></script>
 			<script src="js/DT_bootstrap.js"></script>
 			<script src="js/mantenimiento_usuarios.js"></script>
+			<script type="text/javascript">
+				$(function() {
+					$("#menuUsuarios").addClass("active");
+				});
+			</script>
 		</head>
 		<body>
+			<?php include './menu.php'; ?>
 			<div class="container">
-				<div class="alert alert-success">Bienvenido: <?php echo $_SESSION['s_username']; ?> puede cerrar session<a class="btn btn-link" href="logout.php">aqui</a></div>
 				<form id="formInsertar" class="row-fluid">
 					<div class="span12 well">
 						<div class="span7 form-horizontal">
