@@ -27,6 +27,18 @@ if (isset($_POST['peticion'])) {
 			}
 		}
 	}
+        
+        if ($peticion == "unidad_medida") {
+		$resultado = $conexion->consulta("select idunidadmedida, abreviatura from tunidadmedida");
+		$filas = pg_numrows($resultado);
+		if ($filas != 0) {
+			$jsondata = array();
+			for ($cont = 0; $cont < $filas; $cont++) {
+				$jsondata[$cont]['idunidadmedida'] = pg_result($resultado, $cont, 0);
+				$jsondata[$cont]['abreviatura'] = pg_result($resultado, $cont, 1);
+			}
+		}
+	}
 }
 echo json_encode($jsondata);
 ?>
