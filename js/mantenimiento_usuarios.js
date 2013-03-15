@@ -1,4 +1,26 @@
+
 $(document).ready(function() {
+	$("#formInsertar").validate({
+		rules: {
+			txtCodigo: {
+				required: true,
+				digits: true
+			},
+			txtNombre: {
+				required: true,
+				minlength: 2
+			},
+			txtPassword: {
+				required: true,
+				minlength: 5
+			},
+			txtPasswordR: {
+				required: true,
+				minlength: 5,
+				equalTo: "#txtPassword"
+			}
+		}
+	});
 	//cargar conbobox cargo
 	$.post("consulta_datos.php", {
 		peticion: "cargo"
@@ -95,27 +117,33 @@ $(document).ready(function() {
 	});
 	//funcionalidad de la accion de insertar un nuevo usuario
 	$("#btnAgregar").click(function() {
-		$("#btnAgregar").text("Agregando...");
-		$("#btnAgregar").attr("disabled", "disabled");
-		var codigo = $('#txtCodigo').val();
-		var cargo = $('#cbCargo').val();
-		var institucion = $('#cbInstitucion').val();
-		var nombre = $('#txtNombre').val();
-		$.post("mantenimiento_usuarios.php", {
-			action: "insertar",
-			dni: codigo,
-			idprivilegios: cargo,
-			idinstitucion: institucion,
-			nomape: nombre
-		},
-		function(data) {
-			if (data.title !== "error") {
-				$('#example > tbody:last').append('<tr id="' + codigo + '"><td>' + codigo + '</td><td>' + nombre + '</td><td>' + $('#cbInstitucion option:selected').text() + '</td><td>' + $('#cbCargo option:selected').text() + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td></tr>');
-				$("#formInsertar input").val("");
-			}
-			$("#resultado").html(data.html);
-			$("#btnAgregar").removeAttr("disabled");
-			$("#btnAgregar").text("Agregar");
-		}, "json");
+		if ($("#formInsertar").valid()) {
+			$("#btnAgregar").text("Agregando...");
+			$("#btnAgregar").attr("disabled", "disabled");
+			var codigo = $('#txtCodigo').val();
+			var cargo = $('#cbCargo').val();
+			var institucion = $('#cbInstitucion').val();
+			var nombre = $('#txtNombre').val();
+			$.post("mantenimiento_usuarios.php", {
+				action: "insertar",
+				dni: codigo,
+				idprivilegios: cargo,
+				idinstitucion: institucion,
+				nomape: nombre,
+				password: $("#txtPassword").val()
+			},
+			function(data) {
+				if (data.title !== "error") {
+					$('#example > tbody:last').append('<tr id="' + codigo + '"><td>' + codigo + '</td><td>' + nombre + '</td><td>' + $('#cbInstitucion option:selected').text() + '</td><td>' + $('#cbCargo option:selected').text() + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td></tr>');
+					$("#formInsertar input").val("");
+				}
+				$("#resultado").html(data.html);
+				$("#btnAgregar").removeAttr("disabled");
+				$("#btnAgregar").text("Agregar");
+				$("#example").dataTable();
+			}, "json");
+		} else {
+			$("#resultado").html('<div class="alert alert-error"><strong>Error!</strong> Campos requeridos para insertar nuevo usuario</div>');
+		}
 	});
 });

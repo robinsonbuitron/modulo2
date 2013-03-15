@@ -54,7 +54,7 @@
 						<div class="control-group">
 							<label class="control-label">Provincia : </label>
 							<div class="controls">
-								<select id="cbProvincia" class="span12">
+								<select id="cbProvincia">
 									
 								</select>
 							</div>
@@ -62,14 +62,8 @@
 						<div class="control-group">
 							<label class="control-label">Distrito : </label>
 							<div class="controls">
-								<select id="cbZonarovincia" class="span12">
-									<option>Abancay</option>
-									<option>Andahuaylas</option>
-									<option>Antabamba</option>
-									<option>Aymaraes</option>
-									<option>Cotabambas</option>
-									<option>Chincheros</option>
-									<option>Grau</option>
+								<select id="cbDistrito">
+									
 								</select>
 							</div>
 						</div>
@@ -97,6 +91,7 @@
 							<label class="control-label">Periodo: </label>
 							<div class="controls">
 								<select id="cbPeriodo" class="span12">
+									<option style="color: blue" disabled selected>Elija un Periodo</option>
 									<optgroup label="Mensual">
 										<option>Enero</option>
 										<option>Febrero</option>

@@ -9,6 +9,7 @@ if (isset($_POST['peticion'])) {
 		$resultado = $conexion->consulta("select * from tprovincia");
 		$filas = pg_numrows($resultado);
 		if ($filas != 0) {
+			echo '<option style="color: blue" disabled selected>Elija una Provincia</option>';
 			for ($cont = 0; $cont < $filas; $cont++) {
 				$codProvincia = pg_result($resultado, $cont, 0);
 				$nombre = pg_result($resultado, $cont, 1);
@@ -22,8 +23,7 @@ if (isset($_POST['peticion'])) {
 		$filas = pg_numrows($resultado);
 		if ($filas != 0) {
 			for ($cont = 0; $cont < $filas; $cont++) {
-				echo "<option value='" + pg_result($resultado, $cont, 0);
-				+"'>" + pg_result($resultado, $cont, 1) + "</option>";
+				echo "<option value='" . pg_result($resultado, $cont, 0) . "'>" . pg_result($resultado, $cont, 1) . "</option>";
 			}
 		}
 	}

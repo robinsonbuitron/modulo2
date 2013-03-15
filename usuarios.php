@@ -7,25 +7,39 @@
 		<link href="css/DT_bootstrap.css" rel="stylesheet">
 		<script class="include" src="js/jquery-1.9.1.min.js"></script>
 		<script class="include" src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.validate.min.js"></script>
+		<script src="js/messages_es.js"></script>
 		<script class="include" src="js/mantenimiento_usuarios.js"></script>
 		<script src="js/jquery.dataTables.min.js"></script>
 		<script src="js/DT_bootstrap.js"></script>
     </head>
     <body>
 		<div class="container">
-			<div id="formInsertar" class="row-fluid">
+			<form id="formInsertar" class="row-fluid">
 				<div class="span12 well">
 					<div class="span7 form-horizontal">
 						<div class="control-group">
 							<label class="control-label">DNI: </label>
 							<div class="controls">
-								<input id="txtCodigo" maxlength="8" class="span6" type="text" placeholder="Codigo">
+								<input id="txtCodigo" name="txtCodigo" maxlength="8" class="span6" type="text" placeholder="Codigo">
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">Nombre: </label>
 							<div class="controls">
-								<input id="txtNombre" class="span12" type="text" placeholder="Nombre">
+								<input id="txtNombre" name="txtNombre" class="span12" type="text" placeholder="Nombre">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Contraseña: </label>
+							<div class="controls">
+								<input id="txtPassword" name="txtPassword" type="password" placeholder="contraseña">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Confimar contraseña: </label>
+							<div class="controls">
+								<input id="txtPasswordR" name="txtPasswordR" type="password" placeholder="confirmar contraseña">
 							</div>
 						</div>
 					</div>
@@ -50,7 +64,7 @@
 						<button id="btnLimpiar" type="button" class="btn">Limpiar</button>
 					</div>
 				</div>
-			</div>
+			</form>
 			<div>
 				<div id="tablaUsuarios">
 					<?php include './lista_usuarios.php'; ?>

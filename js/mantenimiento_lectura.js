@@ -3,13 +3,28 @@
  * @GRA
  * Proyecto Siar
  */
+function cargarDistritos() {
+	$.post("consulta_datos_html.php", {
+		peticion: "distrito",
+		codProvincia: $("#cbProvincia").val()
+	},
+	function(data) {
+		$("#cbDistrito").html(data);
+	}, "html");
+}
+
 $(document).ready(function() {
+
 	$.post("consulta_datos_html.php", {
 		peticion: "provincia"
 	},
 	function(data) {
 		$("#cbProvincia").html(data);
 	}, "html");
+
+	$('#cbProvincia').change(function() {
+		cargarDistritos();
+	});
 
 	$("#example").delegate("a", "click", function(event) {
 		if ($(this).text() === 'Eliminar') {
