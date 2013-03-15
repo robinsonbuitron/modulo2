@@ -6,11 +6,13 @@ if (isset($_POST['action'])) {
 	$conexion->conectar();
 	$action = $_POST['action'];
 	if ($action == "insertar") {
+		include 'lib/Encrypter.php';
 		$DNI = $_POST['dni'];
 		$idprivilegios = $_POST['idprivilegios'];
 		$idinstitucion = $_POST['idinstitucion'];
 		$nomape = $_POST['nomape'];
-		$sql = $conexion->consulta("INSERT INTO tusuario VALUES (E'$DNI',E'$idinstitucion',E'$idprivilegios',E'$nomape')");
+		$password = Encrypter::encrypt($_POST['password']);
+		$sql = $conexion->consulta("INSERT INTO tusuario VALUES (E'$DNI',E'$idinstitucion',E'$idprivilegios',E'$nomape',E'$password')");
 		if (!$sql) {
 			$jsondata['title'] = "error";
 			$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> No se pudo registrar el nuevo usuario</div>';

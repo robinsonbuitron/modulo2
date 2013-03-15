@@ -9,9 +9,9 @@
 		<script class="include" src="js/bootstrap.min.js"></script>
 		<script src="js/jquery.validate.min.js"></script>
 		<script src="js/messages_es.js"></script>
-		<script class="include" src="js/mantenimiento_usuarios.js"></script>
 		<script src="js/jquery.dataTables.min.js"></script>
 		<script src="js/DT_bootstrap.js"></script>
+		<script src="js/mantenimiento_usuarios.js"></script>
     </head>
     <body>
 		<div class="container">
