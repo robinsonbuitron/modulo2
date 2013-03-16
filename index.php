@@ -38,10 +38,7 @@
                     padding-right: 20px;
                 }
             }
-            .container {
-                width: auto;
-                max-width: 680px;   
-            }
+            
             .container .credit {
                 margin: 20px 0;
             }
@@ -81,7 +78,7 @@
         </div>
         <div id="footer">
             <div class="container">
-                <p class="muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">t</a>.</p>
+                <p class="muted credit">SIAR Apurimac <a href="http://siar.regionapurimac.gob.pe/">SIAR Apurimac 2013</a> and <a href="http://ryanfait.com/sticky-footer/">t</a>.</p>
             </div>
         </div>
     </body>
