@@ -72,14 +72,12 @@ $(document).ready(function() {
             idinstitucion: codigo,
             siglas: sigla,
             nombinst: institucion
-
         },
         function(data) {
             if (data.title !== "error") {
                 $("#example tbody tr").each(function(index) {
                     if ($(this).attr("id") === $("#txtIdInstitucionE").val()) {
-                        $(this).html('<td>' + codigo + '</td><td>' + sigla + '</td><td>' + institucion + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td>');
-
+                        $(this).html('<td>' + codigo + '</td><td>' + sigla + '</td><td>' + institucion + '</td><td><a href="#myModal" data-toggle="modal" class="btn btn-success"><i class="icon-edit"></i><strong>Editar</strong></a></td><td><a href="#" class="btn btn-danger"><i class="icon-trash"></i><strong>Eliminar</strong></a></td></tr>');
                     }
                 });
                 $("#resultado").html(data.html);
@@ -102,11 +100,10 @@ $(document).ready(function() {
                 idinstitucion: codigoinst,
                 siglas: sigla,
                 nombinst: institucion
-
             },
             function(data) {
                 if (data.title !== "error") {
-                    $('#example > tbody:last').append('<tr id="' + data.title + '"><td>' + data.title + '</td><td>' + sigla + '</td><td>' + institucion + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td></tr>');
+                    $('#example > tbody:last').append('<tr id="' + data.title + '"><td>' + data.title + '</td><td>' + sigla + '</td><td>' + institucion + '</td><td><a href="#myModal" data-toggle="modal" class="btn btn-success"><i class="icon-edit"></i><strong>Editar</strong></a></td><td><a href="#" class="btn btn-danger"><i class="icon-trash"></i><strong>Eliminar</strong></a></td></tr>');
                     $("#frmInsertar input").val("");
 
                 }

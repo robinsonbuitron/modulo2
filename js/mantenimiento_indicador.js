@@ -126,7 +126,7 @@ $(document).ready(function() {
             if (data.title !== "error") {
                 $("#example tbody tr").each(function(index) {
                     if ($(this).attr("id") === $("#txtIdindicadorE").val()) {
-                        $(this).html('<td>' + codigo + '</td><td>' + $('#cbInstitucionE option:selected').text() + '</td><td>' + indicador + '</td><td>' + $('#cbUnidadMedidaE option:selected').text() + '</td><td>' + valormin + '</td><td>' + valormax + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td>');
+                        $(this).html('<td>' + codigo + '</td><td>' + $('#cbInstitucionE option:selected').text() + '</td><td>' + indicador + '</td><td>' + $('#cbUnidadMedidaE option:selected').text() + '</td><td>' + valormin + '</td><td>' + valormax + '</td><td><a href="#myModal" data-toggle="modal" class="btn btn-success"><i class="icon-edit"></i><strong>Editar</strong></a></td><td><a href="#" class="btn btn-danger"><i class="icon-trash"></i><strong>Eliminar</strong></a></td></tr>');   
                     }
                 });
                 $("#resultado").html(data.html);
@@ -156,7 +156,7 @@ $(document).ready(function() {
             },
             function(data) {
                 if (data.title !== "error") {
-                    $('#example > tbody:last').append('<tr id="' + data.title + '"><td>' + data.title + '</td><td>' + $('#cbInstitucion option:selected').text() + '</td><td>' + indicador + '</td><td>' + $('#cbUnidadMedida option:selected').text() + '</td><td>' + valormin + '</td><td>' + valormax + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td>');
+                    $('#example > tbody:last').append('<tr id="' + data.title + '"><td>' + data.title + '</td><td>' + $('#cbInstitucion option:selected').text() + '</td><td>' + indicador + '</td><td>' + $('#cbUnidadMedida option:selected').text() + '</td><td>' + valormin + '</td><td>' + valormax + '</td><td><a href="#myModal" data-toggle="modal" class="btn btn-success"><i class="icon-edit"></i><strong>Editar</strong></a></td><td><a href="#" class="btn btn-danger"><i class="icon-trash"></i><strong>Eliminar</strong></a></td></tr>');
                     $("#formInsertar input").val("");
                 }
                 $("#resultado").html(data.html);

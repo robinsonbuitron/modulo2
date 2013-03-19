@@ -9,13 +9,11 @@
 			<a class="brand" href="index.php" name="top">SIAR Indicadores</a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
-					<?php if ($_SESSION["s_idprivilegios"] == "00001") { ?>
-						<li id="menuUsuarios"><a href="usuarios.php"><i class="icon-home icon-white"></i> Usuaios</a></li>
-						<li class="divider-vertical"></li>
-						<li id="menuInstitucion"><a href="institucion.php"><i class="icon-lock icon-white"></i> Instituciones</a></li>
-						<li class="divider-vertical"></li>
-					<?php } ?>
+					<li id="menuUsuarios"><a href="usuarios.php"><i class="icon-home icon-white"></i> Usuaios</a></li>
+					<li class="divider-vertical"></li>
 					<li id="menuIndicador"><a href="indicador.php"><i class="icon-file icon-white"></i> Indicadores</a></li>
+					<li class="divider-vertical"></li>
+					<li id="menuInstitucion"><a href="institucion.php"><i class="icon-lock icon-white"></i> Instituciones</a></li>
 					<li class="divider-vertical"></li>
 					<li id="menuUMedida"><a href="unidad_medida.php"><i class="icon-signal icon-white"></i> Unidades Medida</a></li>
 					<li class="divider-vertical"></li>
