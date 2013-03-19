@@ -8,14 +8,14 @@ if (!isset($_SESSION['s_username'])) {
 	<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example" width="100%">
 		<thead>
 			<tr>
-				<th width="5%%">id</th>
-				<th width="20%">Institucion</th>
-				<th width="30%">Indicador</th>
-				<th width="10%">Unidad </th>
-				<th width="10%">Valor_Min</th>
-				<th width="10%">Valor_Max</th>
-				<th width="10%">Editar</th>
-				<th width="10%">Eliminar</th>
+				<th width="5%">id</th>
+				<th width="12%">Institucion</th>
+				<th width="35%">Indicador</th>
+				<th width="8%">Unidad </th>
+				<th width="8%">ValorMin</th>
+				<th width="8%">ValorMax</th>
+				<th width="11%">Editar</th>
+				<th width="13%">Eliminar</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -40,8 +40,8 @@ if (!isset($_SESSION['s_username'])) {
 					echo "<td>$unidadmedida</td>";
 					echo "<td>$valormin</td>";
 					echo "<td>$valormax</td>";
-					echo "<td><a href='#myModal' data-toggle='modal'>Editar</a></td>";
-					echo "<td><a href='#'>Eliminar</a></td>";
+					echo "<td><a href='#myModal' data-toggle='modal' class='btn btn-success'><i class='icon-edit'></i><strong>Editar</strong></a></td>";
+					echo "<td><a href='#' class='btn btn-danger'><i class='icon-trash'></i><strong>Eliminar</strong></a></td>";
 					echo "</tr>";
 				}
 			}

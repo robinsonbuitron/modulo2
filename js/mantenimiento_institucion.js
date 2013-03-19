@@ -72,14 +72,12 @@ $(document).ready(function() {
             idinstitucion: codigo,
             siglas: sigla,
             nombinst: institucion
-
         },
         function(data) {
             if (data.title !== "error") {
                 $("#example tbody tr").each(function(index) {
                     if ($(this).attr("id") === $("#txtIdInstitucionE").val()) {
                         $(this).html('<td>' + codigo + '</td><td>' + sigla + '</td><td>' + institucion + '</td><td><a href="#myModal" data-toggle="modal" class="btn btn-success"><i class="icon-edit"></i><strong>Editar</strong></a></td><td><a href="#" class="btn btn-danger"><i class="icon-trash"></i><strong>Eliminar</strong></a></td></tr>');
-
                     }
                 });
                 $("#resultado").html(data.html);
@@ -102,7 +100,6 @@ $(document).ready(function() {
                 idinstitucion: codigoinst,
                 siglas: sigla,
                 nombinst: institucion
-
             },
             function(data) {
                 if (data.title !== "error") {
