@@ -1,4 +1,36 @@
 $(document).ready(function() {
+    $("#formInsertar").validate({
+        rules: {
+            txtIndicador: {
+                required: true,
+                minlength: 5
+
+            },
+            txtValorMin: {
+                required: true,
+                digits: true,
+                minlength: 1
+            },
+            txtValorMax: {
+                required: true,
+                digits: true,
+                minlength: 1,
+                min: "#txtValorMin"
+            }
+        },
+        messages: {
+            txtIndicador: {
+                required: "Ingrese la descripcion del Indicador. Por Favor"
+            },
+            txtValorMin: {
+                required: "se requiere el Valor Minimo"
+            },
+            txtValorMax: {
+                required: "se requiere el Valor Maximo"
+            }
+        }
+    });
+
     //cargar conbobox unidad de medida
     $.post("consulta_datos.php", {
         peticion: "unidad_medida"
@@ -84,9 +116,9 @@ $(document).ready(function() {
         $.post("mantenimiento_indicador.php", {
             action: "modificar",
             idindicador: codigo,
-            idunidadmedida:unidadmedida,
+            idunidadmedida: unidadmedida,
             idinstitucion: institucion,
-            descripcion:indicador,
+            descripcion: indicador,
             valorminimo: valormin,
             valormaximo: valormax
         },
@@ -106,30 +138,35 @@ $(document).ready(function() {
     });
     //funcionalidad de la accion de insertar un nuevo indicador
     $("#btnAgregar").click(function() {
-        $("#btnAgregar").text("Agregando...");
-        $("#btnAgregar").attr("disabled", "disabled");
-        var institucion = $('#cbInstitucion').val();
-        var indicador = $('#txtIndicador').val();
-        var unidadmedida = $('#cbUnidadMedida').val();
-        var valormin = $('#txtValorMin').val();
-        var valormax = $('#txtValorMax').val();
-        $.post("mantenimiento_indicador.php", {
-            action: "insertar",
-            idunidadmedida:unidadmedida,
-            idinstitucion: institucion,
-            descripcion:indicador,
-            valorminimo: valormin,
-            valormaximo: valormax
-        },
-        function(data) {
-            if (data.title !== "error") {
-                $('#example > tbody:last').append('<tr id="' + data.title + '"><td>'+data.title+'</td><td>' + $('#cbInstitucion option:selected').text() + '</td><td>' + indicador + '</td><td>' + $('#cbUnidadMedida option:selected').text() + '</td><td>' + valormin + '</td><td>' + valormax + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td>');
-                $("#formInsertar input").val("");
-            }
-            $("#resultado").html(data.html);
-            $("#btnAgregar").removeAttr("disabled");
-            $("#btnAgregar").text("Agregar");
-        }, "json");
+        if ($("#formInsertar").valid()) {
+            $("#btnAgregar").text("Agregando...");
+            $("#btnAgregar").attr("disabled", "disabled");
+            var institucion = $('#cbInstitucion').val();
+            var indicador = $('#txtIndicador').val();
+            var unidadmedida = $('#cbUnidadMedida').val();
+            var valormin = $('#txtValorMin').val();
+            var valormax = $('#txtValorMax').val();
+            $.post("mantenimiento_indicador.php", {
+                action: "insertar",
+                idunidadmedida: unidadmedida,
+                idinstitucion: institucion,
+                descripcion: indicador,
+                valorminimo: valormin,
+                valormaximo: valormax
+            },
+            function(data) {
+                if (data.title !== "error") {
+                    $('#example > tbody:last').append('<tr id="' + data.title + '"><td>' + data.title + '</td><td>' + $('#cbInstitucion option:selected').text() + '</td><td>' + indicador + '</td><td>' + $('#cbUnidadMedida option:selected').text() + '</td><td>' + valormin + '</td><td>' + valormax + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td>');
+                    $("#formInsertar input").val("");
+                }
+                $("#resultado").html(data.html);
+                $("#btnAgregar").removeAttr("disabled");
+                $("#btnAgregar").text("Agregar");
+            }, "json");
+
+        } else {
+            $("#resultado").html('<div class="alert alert-error"><strong>Error!</strong> Campos requeridos para insertar nuevo usuario</div>');
+        }
     });
 });
 

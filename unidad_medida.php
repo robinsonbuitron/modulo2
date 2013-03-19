@@ -16,6 +16,8 @@ if (!isset($_SESSION['s_username'])) {
 			<script class="include" src="js/bootstrap.min.js"></script>
 			<script class="include" src="js/mantenimiento_um.js"></script>
 			<script src="js/jquery.dataTables.min.js"></script>
+                         <script src="js/jquery.validate.min.js"></script>
+			<script src="js/messages_es.js"></script>
 			<script src="js/DT_bootstrap.js"></script>
 			<script type="text/javascript">
 				$(function() {
@@ -26,20 +28,20 @@ if (!isset($_SESSION['s_username'])) {
 		<body>
 			<?php include './menu.php'; ?>
 			<div class="container">
-				<div id="frmInsertar" class="row-fluid">
+				<form id="frmInsertar" class="row-fluid">
 					<div class="span12 well">
 						<div class="span7 form-horizontal">
 							<div class="control-group">
 								<label class="control-label">Unidad de medida: </label>
 								<div class="controls">
-									<input id="txtabreviatura" class="span12" type="text" placeholder="Unida de medida">
+                                                                    <input id="txtabreviatura" name="txtabreviatura" class="span12" type="text" placeholder="Unida de medida">
 								</div>
 							</div>
 
 							<div class="control-group">
 								<label class="control-label">Descrpcion: </label>
 								<div class="controls">
-									<input id="txtdescripcion" class="span12" type="text" placeholder="Descripcion">
+                                                                    <input id="txtdescripcion" name="txtdescripcion" class="span12" type="text" placeholder="Descripcion">
 								</div>
 							</div>
 						</div>
@@ -48,7 +50,7 @@ if (!isset($_SESSION['s_username'])) {
 							<button id="btnLimpiar"type="button" class="btn">Limpiar</button>
 						</div>
 					</div>
-				</div>
+				</form>
 
 				<div>
 					<div id="tablaInstitucion">

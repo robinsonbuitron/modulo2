@@ -1,6 +1,28 @@
 //Funcionalidad para realizar opreaciones sobre la tabla unidad de medida
 
 $(document).ready(function() {
+    $("#frmInsertar").validate({
+        rules: {
+            txtabreviatura: {
+                required: true,
+                minlength: 1
+
+            },
+            txtdescripcion: {
+                required: true,
+                minlength: 5
+            }
+        },
+        messages: {
+            txtabreviatura: {
+                required: "Debe ingresar Unidad de Medida"
+            },
+            txtdescripcion: {
+                required: "Ingrese la descripcion de la Unidad de Medida"
+            }
+
+        }
+    });
     $("#example").delegate("a", "click", function(event) {
         if ($(this).text() === 'Eliminar') {
             var codigo = $(this).closest("tr").attr("id");
@@ -69,27 +91,31 @@ $(document).ready(function() {
     });
     //funcionalidad de la accion de insertar nueva unidad de medida 
     $("#btnAgregar").click(function() {
-        $("#btnAgregar").text("Agregando...");
-        $("#btnAgregar").attr("disabled", "disabled");
-        
-        var unidad = $('#txtabreviatura').val();
-        var desc = $('#txtdescripcion').val();
-        $.post("mantenimiento_um.php", {
-            action: "insertar",
-            abreviatura: unidad,
-            descripcion: desc
+        if ($("#frmInsertar").valid()) {
+            $("#btnAgregar").text("Agregando...");
+            $("#btnAgregar").attr("disabled", "disabled");
 
-        },
-        function(data) {
-            if (data.title !== "error") {
-                $('#example > tbody:last').append('<tr id="' + data.title + '"><td>' + data.title + '</td><td>' + unidad + '</td><td>' + desc + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td></tr>');
-                $("#frmInsertar input").val("");
+            var unidad = $('#txtabreviatura').val();
+            var desc = $('#txtdescripcion').val();
+            $.post("mantenimiento_um.php", {
+                action: "insertar",
+                abreviatura: unidad,
+                descripcion: desc
 
-            }
-            $("#resultado").html(data.html);
-            $("#btnAgregar").removeAttr("disabled");
-            $("#btnAgregar").text("Agregar");
-        }, "json");
+            },
+            function(data) {
+                if (data.title !== "error") {
+                    $('#example > tbody:last').append('<tr id="' + data.title + '"><td>' + data.title + '</td><td>' + unidad + '</td><td>' + desc + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td></tr>');
+                    $("#frmInsertar input").val("");
+
+                }
+                $("#resultado").html(data.html);
+                $("#btnAgregar").removeAttr("disabled");
+                $("#btnAgregar").text("Agregar");
+            }, "json");
+        } else {
+            $("#resultado").html('<div class="alert alert-error"><strong>Error!</strong> Campos requeridos para insertar nuevo usuario</div>');
+        }
     });
 });
 

@@ -16,6 +16,8 @@ if (!isset($_SESSION['s_username'])) {
 			<script class="include" src="js/bootstrap.min.js"></script>
 			<script class="include" src="js/mantenimiento_indicador.js"></script>
 			<script src="js/jquery.dataTables.min.js"></script>
+                        <script src="js/jquery.validate.min.js"></script>
+			<script src="js/messages_es.js"></script>
 			<script src="js/DT_bootstrap.js"></script>
 			<script type="text/javascript">
 				$(function() {
@@ -26,7 +28,7 @@ if (!isset($_SESSION['s_username'])) {
 		<body>
 			<?php include './menu.php'; ?>
 			<div class="container">
-				<div id="formInsertar" class="row-fluid">
+				<form id="formInsertar" class="row-fluid">
 					<div class="span12 well">
 						<div class="span7 form-horizontal">
 							<div class="control-group">
@@ -40,7 +42,7 @@ if (!isset($_SESSION['s_username'])) {
 							<div class="control-group">
 								<label class="control-label">Ingrese Indicador: </label>
 								<div class="controls">
-									<input id="txtIndicador" class="span12" type="text" placeholder="descripcion Indicador">
+                                                                    <input id="txtIndicador" name="txtIndicador" class="span12" type="text" placeholder="descripcion Indicador">
 								</div>
 							</div>
 							<div class="control-group">
@@ -55,13 +57,13 @@ if (!isset($_SESSION['s_username'])) {
 							<div class="control-group">
 								<label class="control-label">Valor Min: </label>
 								<div class="controls">
-									<input id="txtValorMin" class="span6" type="text" placeholder="Valor Minimo">
+                                                                    <input id="txtValorMin" name="txtValorMin" class="span6" type="text" placeholder="Valor Minimo">
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label">Valor Max: </label>
 								<div class="controls">
-									<input id="txtValorMax"  class="span6" type="text" placeholder="Valor Máximo">
+                                                                    <input id="txtValorMax" name="txtValorMax" class="span6" type="text" placeholder="Valor Máximo">
 								</div>
 							</div>
 
@@ -71,7 +73,7 @@ if (!isset($_SESSION['s_username'])) {
 							<button id="btnLimpiar" type="button" class="btn">Limpiar</button>
 						</div>
 					</div>
-				</div>
+				</form>
 				<div>
 					<div id="tablaUsuarios">
 						<?php include './lista_indicador.php'; ?>
