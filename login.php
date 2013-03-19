@@ -47,13 +47,13 @@ if (isset($_POST['username'])) {
 	                    <div class="control-group">
 	                        <label class="control-label">DNI:</label>
 	                        <div class="controls">
-	                            <span class="add-on"><i class="icon-user"></i></span><input type="text" name="username" id="username" placeholder="Ingrese usuario">
+	                            <input type="text" name="username" id="username" placeholder="Ingrese usuario">
 	                        </div>
 	                    </div>
 	                    <div class="control-group">
 	                        <label class="control-label" for="inputPassword">Password:</label>
 	                        <div class="controls">
-                                    <span class="add-on"><i class="icon-lock"></i></span><input type="password" name="password" id="password" placeholder="Password">
+	                            <input type="password" name="password" id="password" placeholder="Password">
 	                        </div>
 	                    </div>
 	                    <div class="control-group">

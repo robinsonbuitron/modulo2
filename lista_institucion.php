@@ -8,11 +8,11 @@ if (!isset($_SESSION['s_username'])) {
 	<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example" width="100%">
 		<thead>
 			<tr>
-				<th width="8%">Codigo</th>
-				<th width="15%">Siglas</th>
-				<th width="45%">Nombre Institucion</th>
+				<th width="10%">Codigo</th>
+				<th width="18%">Siglas</th>
+				<th width="40%">Nombre Institucion</th>
 				<th width="10%">Editar</th>
-				<th width="12%">Eliminar</th>
+				<th width="10%">Eliminar</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -31,8 +31,8 @@ if (!isset($_SESSION['s_username'])) {
 					echo "<td>$idinstitucion</td>";
 					echo "<td>$siglas</td>";
 					echo "<td>$nombinst</td>";
-                                        echo "<td><a href='#myModal' data-toggle='modal' class='btn btn-success'><i class='icon-edit'></i><strong>Editar</strong></a></td>";
-					echo "<td><a href='#' class='btn btn-danger'><i class='icon-trash'></i><strong>Eliminar</strong></a></td>";
+					echo "<td><a href='#myModal' data-toggle='modal'>Editar</a></td>";
+					echo "<td><a href='#'>Eliminar</a></td>";
 					echo "</tr>";
 				}
 			}

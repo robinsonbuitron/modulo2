@@ -165,27 +165,39 @@ if (!isset($_SESSION['s_username'])) {
 					<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example" width="100%">
 						<thead>
 							<tr>
-								<th width="40%">Periodo</th>
-								<th width="18%">Valor(%)</th>
+								<th width="40%">Indicador</th>
+								<th width="15%">Localidad</th>
+								<th width="5%">Anio</th>
+								<th width="15%">Periodo</th>
+								<th width="5%">Valor(%)</th>
 								<th width="10%">Editar</th>
 								<th width="10%">Eliminar</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr id="L0001">
+								<td>Especie de Flora y Fauna amenazado</td>
+								<td>Abancay</td>
 								<td>2009</td>
+								<td>Junio</td>
 								<td>20.5%</td>
 								<td><a href="#myModal" data-toggle="modal">Editar</a></td>
 								<td><a href="#">Eliminar</a></td>
 							</tr>
 							<tr id="L0002">
-								<td>20010</td>
+								<td>Especie de Flora y Fauna amenazado</td>
+								<td>Chalhuanca</td>
+								<td>2011</td>
+								<td>1er Semestre</td>
 								<td>25.5%</td>
 								<td><a href="#myModal" data-toggle="modal">Editar</a></td>
 								<td><a href="#">Eliminar</a></td>
 							</tr>
 							<tr id="L0003">
-								<td>2013</td>
+								<td>Intencion por cultivo</td>
+								<td>Andahuaylas</td>
+								<td>2012</td>
+								<td>2do Trimestre</td>
 								<td>214.5%</td>
 								<td><a href="#myModal" data-toggle="modal">Editar</a></td>
 								<td><a href="#">Eliminar</a></td>
@@ -198,7 +210,30 @@ if (!isset($_SESSION['s_username'])) {
 							<h3 id="myModalLabel">Editar Indicador</h3>
 						</div>
 						<div class="modal-body">
-							<input id="txtId" type="hidden">
+							<div class="control-group">
+								<label class="control-label">Indicador:</label>
+								<div class="controls">
+									<input id="txtIndicadorE" readonly type="text">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">Provincia:</label>
+								<div class="controls">
+									<input id="txtProvinciaE" readonly type="text">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">Distrito:</label>
+								<div class="controls">
+									<input id="txtDistritoE" readonly type="text">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">Anio:</label>
+								<div class="controls">
+									<input id="txtAnioE" readonly type="text">
+								</div>
+							</div>
 							<div class="control-group">
 								<label class="control-label">Pediodo:</label>
 								<div class="controls">
@@ -211,8 +246,6 @@ if (!isset($_SESSION['s_username'])) {
 									<input id="txtValorE" type="text" class="span3" placeholder="Valor(%)">
 								</div>
 							</div>
-
-
 						</div>
 						<div class="modal-footer">
 							<button id="btnEditar" type="button" class="btn btn-primary">Agregar</button>

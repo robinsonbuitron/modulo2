@@ -105,7 +105,7 @@ $(document).ready(function() {
 			if (data.title !== "error") {
 				$("#example tbody tr").each(function(index) {
 					if ($(this).attr("id") === $("#txtCodigoE").val()) {
-						$(this).html('<td>' + codigo + '</td><td>' + nombre + '</td><td>' + $('#cbInstitucionE option:selected').text() + '</td><td>' + $('#cbCargoE option:selected').text() + '</td><td><a href="#myModal" data-toggle="modal" class="btn btn-success"><i class="icon-edit"></i><strong>Editar</strong></a></td><td><a href="#" class="btn btn-danger"><i class="icon-trash"></i><strong>Eliminar</strong></a></td></tr>');
+						$(this).html('<td>' + codigo + '</td><td>' + nombre + '</td><td>' + $('#cbInstitucionE option:selected').text() + '</td><td>' + $('#cbCargoE option:selected').text() + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td>');
 					}
 				});
 				$("#resultado").html(data.html);
@@ -134,7 +134,7 @@ $(document).ready(function() {
 			},
 			function(data) {
 				if (data.title !== "error") {
-					$('#example > tbody:last').append('<tr id="' + codigo + '"><td>' + codigo + '</td><td>' + nombre + '</td><td>' + $('#cbInstitucion option:selected').text() + '</td><td>' + $('#cbCargo option:selected').text() + '</td><td><a href="#myModal" data-toggle="modal" class="btn btn-success"><i class="icon-edit"></i><strong>Editar</strong></a></td><td><a href="#" class="btn btn-danger"><i class="icon-trash"></i><strong>Eliminar</strong></a></td></tr>');
+					$('#example > tbody:last').append('<tr id="' + codigo + '"><td>' + codigo + '</td><td>' + nombre + '</td><td>' + $('#cbInstitucion option:selected').text() + '</td><td>' + $('#cbCargo option:selected').text() + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td></tr>');
 					$("#formInsertar input").val("");
 				}
 				$("#resultado").html(data.html);

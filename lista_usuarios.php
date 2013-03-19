@@ -10,10 +10,10 @@ if (!isset($_SESSION['s_username'])) {
 			<tr>
 				<th width="10%">DNI</th>
 				<th width="40%">Nombre y Apellidos</th>
-				<th width="14%">Institucion</th>
+				<th width="18%">Institucion</th>
 				<th width="12%">Cargo</th>
-				<th width="11%">Editar</th>
-				<th width="13%">Eliminar</th>
+				<th width="10%">Editar</th>
+				<th width="10%">Eliminar</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,8 +34,8 @@ if (!isset($_SESSION['s_username'])) {
 					echo "<td>$nombre</td>";
 					echo "<td>$institucion</td>";
 					echo "<td>$cargo</td>";
-					echo "<td><a href='#myModal' data-toggle='modal' class='btn btn-success'><i class='icon-edit'></i><strong>Editar</strong></a></td>";
-					echo "<td><a href='#' class='btn btn-danger'><i class='icon-trash'></i><strong>Eliminar</strong></a></td>";
+					echo "<td><a href='#myModal' data-toggle='modal'>Editar</a></td>";
+					echo "<td><a href='#'>Eliminar</a></td>";
 					echo "</tr>";
 				}
 			}
