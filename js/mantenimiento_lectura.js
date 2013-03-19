@@ -14,14 +14,21 @@ function cargarDistritos() {
 }
 
 $(document).ready(function() {
-
+	//llenar combobox de provincia
 	$.post("consulta_datos_html.php", {
 		peticion: "provincia"
 	},
 	function(data) {
 		$("#cbProvincia").html(data);
 	}, "html");
-
+	//llenar combobox de indicadores segun su institucion del usuario
+	$.post("consulta_datos_html.php", {
+		peticion: "indicador"
+	},
+	function(data) {
+		$("#cbindicador").html(data);
+	}, "html");
+	//llenr combobox de distritos segun la provincia seleccionada
 	$('#cbProvincia').change(function() {
 		cargarDistritos();
 	});

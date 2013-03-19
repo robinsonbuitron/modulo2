@@ -7,14 +7,14 @@ if (!isset($_SESSION['s_username'])) {
 	include_once 'conexion/pgsql.php';
 	$conexion = new ConexionPGSQL();
 	$conexion->conectar();
-	$resultado = $conexion->consulta("select Siglas from tinstitucion where idinstitucion='".$_SESSION["s_idinstitucion"]."'");
+	$resultado = $conexion->consulta("select Siglas from tinstitucion where idinstitucion='" . $_SESSION["s_idinstitucion"] . "'");
 	$filas = pg_numrows($resultado);
 	if ($filas != 0) {
 		for ($cont = 0; $cont < $filas; $cont++) {
 			$siglas = pg_result($resultado, $cont, 0);
 		}
 	}
-	$resultado1 = $conexion->consulta("select nombprivi from tprivilegios where idprivilegios='".$_SESSION["s_idprivilegios"]."'");
+	$resultado1 = $conexion->consulta("select nombprivi from tprivilegios where idprivilegios='" . $_SESSION["s_idprivilegios"] . "'");
 	$filas1 = pg_numrows($resultado1);
 	if ($filas1 != 0) {
 		for ($cont = 0; $cont < $filas1; $cont++) {
@@ -76,8 +76,6 @@ if (!isset($_SESSION['s_username'])) {
 								<label class="control-label">Seleccione Indicador: </label>
 								<div class="controls">
 									<select id="cbindicador" class="span12">
-										<option>Especie de Flora y Fauna amenazado</option>
-										<option>Intencion por cultivo</option>
 									</select>
 								</div>
 							</div>

@@ -25,7 +25,7 @@ if (!isset($_SESSION['s_username'])) {
 			$abreviatura = $_POST['abreviatura'];
 			$descripcion = $_POST['descripcion'];
 			$idunidadmedida++;
-			$sql = $conexion->consulta("INSERT INTO tunidadmedida VALUES ('$idunidadmedida','$abreviatura','$abreviatura')");
+			$sql = $conexion->consulta("INSERT INTO tunidadmedida VALUES ('$idunidadmedida','$abreviatura','$descripcion')");
 			if (!$sql) {
 				$jsondata['title'] = "error";
 				$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> No se pudo registrar el nuevo registro</div>';

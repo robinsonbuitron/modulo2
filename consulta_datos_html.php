@@ -32,6 +32,15 @@ if (!isset($_SESSION['s_username'])) {
 				}
 			}
 		}
+		if ($peticion == "indicador") {
+			$resultado = $conexion->consulta("select idindicador, descripcion from tindicador where idinstitucion='" . $_SESSION["s_idinstitucion"] . "'");
+			$filas = pg_numrows($resultado);
+			if ($filas != 0) {
+				for ($cont = 0; $cont < $filas; $cont++) {
+					echo "<option value='" . pg_result($resultado, $cont, 0) . "'>" . pg_result($resultado, $cont, 1) . "</option>";
+				}
+			}
+		}
 	}
 }
 ?>
