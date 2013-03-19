@@ -40,8 +40,8 @@ if (!isset($_SESSION['s_username'])) {
 					echo "<td>$unidadmedida</td>";
 					echo "<td>$valormin</td>";
 					echo "<td>$valormax</td>";
-					echo "<td><a href='#myModal' data-toggle='modal' class='btn btn-success'><i class='icon-edit'></i><strong>Editar</strong></a></td>";
-					echo "<td><a href='#' class='btn btn-danger'><i class='icon-trash'></i><strong>Eliminar</strong></a></td>";
+					echo "<td><a href='#myModal' data-toggle='modal' class='btn-small btn-success'><i class='icon-edit'></i><strong> Editar</strong></a></td>";
+					echo "<td><a href='#' class='btn-small btn-danger'><i class='icon-trash'></i><strong> Eliminar</strong></a></td>";
 					echo "</tr>";
 				}
 			}

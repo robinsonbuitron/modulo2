@@ -24,7 +24,7 @@ $(document).ready(function() {
         }
     });
     $("#example").delegate("a", "click", function(event) {
-        if ($(this).text() === 'Eliminar') {
+        if ($(this).text() === ' Eliminar') {
             var codigo = $(this).closest("tr").attr("id");
             var tr = $(this).closest("tr");
             $.post("mantenimiento_institucion.php", {
@@ -38,7 +38,7 @@ $(document).ready(function() {
                 $("#resultado").html(data.html);
             }, "json");
         }
-        if ($(this).text() === 'Editar') {
+        if ($(this).text() === ' Editar') {
             $(this).closest("tr").each(function(index) {
                 $(this).children("td").each(function(index2) {
                     switch (index2) {
@@ -77,7 +77,7 @@ $(document).ready(function() {
             if (data.title !== "error") {
                 $("#example tbody tr").each(function(index) {
                     if ($(this).attr("id") === $("#txtIdInstitucionE").val()) {
-                        $(this).html('<td>' + codigo + '</td><td>' + sigla + '</td><td>' + institucion + '</td><td><a href="#myModal" data-toggle="modal" class="btn btn-success"><i class="icon-edit"></i><strong>Editar</strong></a></td><td><a href="#" class="btn btn-danger"><i class="icon-trash"></i><strong>Eliminar</strong></a></td></tr>');
+                        $(this).html('<td>' + codigo + '</td><td>' + sigla + '</td><td>' + institucion + '</td><td><a href="#myModal" data-toggle="modal" class="btn-small btn-success"><i class="icon-edit"></i><strong> Editar</strong></a></td><td><a href="#" class="btn-small btn-danger"><i class="icon-trash"></i><strong> Eliminar</strong></a></td></tr>');
                     }
                 });
                 $("#resultado").html(data.html);
@@ -103,7 +103,7 @@ $(document).ready(function() {
             },
             function(data) {
                 if (data.title !== "error") {
-                    $('#example > tbody:last').append('<tr id="' + data.title + '"><td>' + data.title + '</td><td>' + sigla + '</td><td>' + institucion + '</td><td><a href="#myModal" data-toggle="modal" class="btn btn-success"><i class="icon-edit"></i><strong>Editar</strong></a></td><td><a href="#" class="btn btn-danger"><i class="icon-trash"></i><strong>Eliminar</strong></a></td></tr>');
+                    $('#example > tbody:last').append('<tr id="' + data.title + '"><td>' + data.title + '</td><td>' + sigla + '</td><td>' + institucion + '</td><td><a href="#myModal" data-toggle="modal" class="btn-small btn-success"><i class="icon-edit"></i><strong> Editar</strong></a></td><td><a href="#" class="btn-small btn-danger"><i class="icon-trash"></i><strong> Eliminar</strong></a></td></tr>');
                     $("#frmInsertar input").val("");
 
                 }
