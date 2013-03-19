@@ -31,8 +31,8 @@ if (!isset($_SESSION['s_username'])) {
 					echo "<td>$idunidadmedida</td>";
 					echo "<td>$abreviatura</td>";
 					echo "<td>$descripcion</td>";
-					echo "<td><a href='#myModal' data-toggle='modal' class='btn btn-success'><i class='icon-edit'></i><strong>Editar</strong></a></td>";
-					echo "<td><a href='#' class='btn btn-danger'><i class='icon-trash'></i><strong>Eliminar</strong></a></td>";
+					echo "<td><a href='#myModal' data-toggle='modal' class='btn-small btn-success'><i class='icon-edit'></i><strong> Editar</strong></a></td>";
+					echo "<td><a href='#' class='btn-small btn-danger'><i class='icon-trash'></i><strong> Eliminar</strong></a></td>";
 					echo "</tr>";
 				}
 			}
