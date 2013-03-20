@@ -81,11 +81,10 @@ if (!isset($_SESSION['s_username'])) {
 									<input id="txtdescripcionE" class="span4" type="text" placeholder="Descripcion">
 								</div>
 							</div>
-
 						</div>
 						<div class="modal-footer">
 							<button id="btnEditar" type="button" class="btn btn-primary">Agregar</button>
-							<button class="btnCerrar" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+							<button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
 						</div>
 					</div>
 				</div>

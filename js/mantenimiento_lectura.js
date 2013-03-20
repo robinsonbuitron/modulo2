@@ -26,7 +26,7 @@ $(document).ready(function() {
 		peticion: "indicador"
 	},
 	function(data) {
-		$("#cbindicador").html(data);
+		$("#cbIndicador").html(data);
 	}, "html");
 	//llenr combobox de distritos segun la provincia seleccionada
 	$('#cbProvincia').change(function() {
@@ -42,8 +42,19 @@ $(document).ready(function() {
 				$(this).children("td").each(function(index2) {
 					switch (index2) {
 						case 0:
+							$("#txtIndicadorE").val($(this).text());
+							$("#txtId").val($(this).closest("tr").attr("id"));
+							break;
+						case 1:
+							$("#txtDistritoE").val($(this).text());
+							break;
+						case 2:
+							$("#txtAnioE").val($(this).text());
+							break;
+						case 3:
 							$("#txtPeriodoE").val($(this).text());
 							break;
+						case 4:
 							$("#txtValorE").val($(this).text());
 							break;
 					}
@@ -54,15 +65,20 @@ $(document).ready(function() {
 
 	$("#btnEditar").click(function() {
 		$("#example tbody tr").each(function(index) {
-			if ($(this).attr("id") === $("#txtPeriodoE").val()) {
-				$(this).html('<td>' + $('#txtPeriodoE').val() + '</td><td>' + $('#txtValorE').val() + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td>');
+			if ($(this).attr("id") === $("#txtId").val()) {
+				$(this).html('<td>' + $('#txtIndicadorE').val() + '</td><td>' + $('#txtDistritoE').val() + '</td><td>' + $('#txtAnioE').val() + '</td><td>' + $('#txtPeriodoE').val() + '</td><td>' + $('#txtValorE').val() + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td>');
 			}
 		});
 		$('#myModal').modal('hide');
 	});
 
 	$("#btnAgregar").click(function() {
-		$('#example > tbody:last').append('<tr id="' + $('#cbPeriodo').val() + '"><td>' + $('#cbPeriodo').val() + '<td>' + $('#txtValor').val() + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td></tr>');
+		var indicador = $('#cbIndicador').val();
+		var ubigeo = $('#cbDistrito').val();
+		var anio = $('#cbAnio option:selected').text();
+		var periodo = $('#cbPeriodo').val();
+		var codigo = indicador + ubigeo + anio + periodo;
+		$('#example > tbody:last').append('<tr id="' + codigo + '"><td>' + $('#cbIndicador option:selected').text() + '</td><td>' + $('#cbDistrito option:selected').text() + '</td><td>' + $("#cbAnio option:selected").text() + '</td><td>' + $("#cbPeriodo option:selected").text() + '</td><td>' + $("#txtValor").val() + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td></tr>');
 	});
 });
 

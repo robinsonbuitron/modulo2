@@ -75,7 +75,7 @@ if (!isset($_SESSION['s_username'])) {
 							<div class="control-group">
 								<label class="control-label">Seleccione Indicador: </label>
 								<div class="controls">
-									<select id="cbindicador" class="span12">
+									<select id="cbIndicador" class="span12">
 									</select>
 								</div>
 							</div>
@@ -100,7 +100,7 @@ if (!isset($_SESSION['s_username'])) {
 							<div class="control-group">
 								<label class="control-label">Anio: </label>
 								<div class="controls">
-									<select id="cbPeriodo" class="span12">
+									<select id="cbAnio" class="span12">
 										<option>2017</option>
 										<option>2016</option>
 										<option>2015</option>
@@ -210,6 +210,7 @@ if (!isset($_SESSION['s_username'])) {
 							<h3 id="myModalLabel">Editar Indicador</h3>
 						</div>
 						<div class="modal-body">
+							<input id="txtId" type="hidden">
 							<div class="control-group">
 								<label class="control-label">Indicador:</label>
 								<div class="controls">
@@ -217,13 +218,7 @@ if (!isset($_SESSION['s_username'])) {
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label">Provincia:</label>
-								<div class="controls">
-									<input id="txtProvinciaE" readonly type="text">
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">Distrito:</label>
+								<label class="control-label">Localidad:</label>
 								<div class="controls">
 									<input id="txtDistritoE" readonly type="text">
 								</div>
@@ -249,7 +244,7 @@ if (!isset($_SESSION['s_username'])) {
 						</div>
 						<div class="modal-footer">
 							<button id="btnEditar" type="button" class="btn btn-primary">Agregar</button>
-							<button class="btnClose" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+							<button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
 						</div>
 					</div>
 				</div>
