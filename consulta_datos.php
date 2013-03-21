@@ -44,6 +44,18 @@ if (!isset($_SESSION['s_username'])) {
 				}
 			}
 		}
+
+		if ($peticion == "minimo_maximo") {
+			$idindicador = $_POST['indicador'];
+			$resultado = $conexion->consulta("select valorminimo, valormaximo from tindicador where idindicador='$idindicador'");
+			$filas = pg_numrows($resultado);
+			if ($filas != 0) {
+				for ($cont = 0; $cont < $filas; $cont++) {
+					$jsondata['minimo'] = pg_result($resultado, $cont, 0);
+					$jsondata['maximo'] = pg_result($resultado, $cont, 1);
+				}
+			}
+		}
 	}
 	echo json_encode($jsondata);
 }
