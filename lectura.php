@@ -28,11 +28,15 @@ if (!isset($_SESSION['s_username'])) {
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 			<title></title>
 			<link href="css/bootstrap.min.css" rel="stylesheet">
+			<link href="css/DT_bootstrap.css" rel="stylesheet">
 			<script class="include" src="js/jquery-1.9.1.min.js"></script>
 			<script class="include" src="js/bootstrap.min.js"></script>
 			<script class="include" src="js/mantenimiento_lectura.js"></script>
-                        <script src="js/jquery.validate.min.js"></script>
+			<script src="js/jquery.validate.min.js"></script>
+			<script src="js/jquery.dataTables.min.js"></script>
+			<script src="js/jquery.validate.min.js"></script>
 			<script src="js/messages_es.js"></script>
+			<script src="js/DT_bootstrap.js"></script>
 			<script type="text/javascript">
 				$(function() {
 					$("#menuLectura").addClass("active");
@@ -71,7 +75,7 @@ if (!isset($_SESSION['s_username'])) {
 					</div>
 				</div>
 
-                            <form id="frmInsertar" class="row-fluid">
+				<form id="frmInsertar" class="row-fluid">
 					<div class="span12 well">
 						<div class="span7 form-horizontal">
 							<div class="control-group">
@@ -122,6 +126,9 @@ if (!isset($_SESSION['s_username'])) {
 								<div class="controls">
 									<select id="cbPeriodo" class="span12">
 										<option style="color: blue" disabled selected>Elija un Periodo</option>
+										<optgroup label="Unico">
+											<option value="101">Anual</option>
+										</optgroup>
 										<optgroup label="Mensual">
 											<option value="101">Enero</option>
 											<option value="102">Febrero</option>
@@ -150,9 +157,9 @@ if (!isset($_SESSION['s_username'])) {
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label">Valor (%): </label>
+								<label class="control-label">Valor:</label>
 								<div class="controls">
-                                                                    <input id="txtValor" name="txtValor" class="span14" type="text" placeholder="Valor"  > 
+									<input id="txtValor" name="txtValor" class="span14" type="text" placeholder="Valor"  > 
 								</div>
 							</div>
 						</div>
@@ -199,7 +206,7 @@ if (!isset($_SESSION['s_username'])) {
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label">Valor(%):</label>
+								<label class="control-label">Valor:</label>
 								<div class="controls">
 									<input id="txtValorE" type="text" class="span3" placeholder="Valor(%)">
 								</div>

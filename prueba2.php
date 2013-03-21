@@ -13,8 +13,90 @@
     <body>
 		<div class="container">
 			<div class="row-fluid">
-				<div>
+				<div class="span12 well">
+					<div class="row-fluid">
+						<div class="span8 form-horizontal">
+							<div class="control-group">
+								<label class="control-label">Tipo de Grafico:</label>
+								<div class="controls">
+									<select class="span5">
+										<option>Mapas</option>
+										<option>Barras</option>
+										<option>Circulares</option>
+									</select>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">Anio:</label>
+								<div class="controls">
+									<select class="span4">
+										<option>2013</option>
+										<option>2012</option>
+										<option>2011</option>
+									</select>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">Periodo:</label>
+								<div class="controls">
+									<select id="cbPeriodo" class="span5">
+										<option style="color: blue" disabled selected>Elija un Periodo</option>
+										<optgroup label="Unico">
+											<option value="101">Anual</option>
+										</optgroup>
+										<optgroup label="Mensual">
+											<option value="101">Enero</option>
+											<option value="102">Febrero</option>
+											<option value="103">Marzo</option>
+											<option value="104">Abril</option>
+											<option value="105">Mayo</option>
+											<option value="106">Junio</option>
+											<option value="107">Julio</option>
+											<option value="108">Agosto</option>
+											<option value="109">Setiembre</option>
+											<option value="110">Octubre</option>
+											<option value="111">Noviembre</option>
+											<option value="112">Diciembre</option>
+										</optgroup>
+										<optgroup label="Semestral">
+											<option value="113">1er Semestre</option>
+											<option value="114">2do Semestre</option>
+										</optgroup>
+										<optgroup label="Trimestral">
+											<option value="115">1er Trimestre</option>
+											<option value="116">2do Trimestre</option>
+											<option value="117">3er Trimestre</option>
+											<option value="118">4to Trimestre</option>
+										</optgroup>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="span4">
+							<legend>Leyenda</legend>
+							<ul>
+								<li class="text-error">Bajo < 10%</li>
+								<li class="text-warning">Medio <= 10% < 15%</li>
+								<li class="text-success">Alto 15%<=</li>
+							</ul>
+						</div>
+
+					</div>
+
+				</div>
+				<div class="row-fluid">
 					<div class="span3">
+						<legend>Indicadores</legend>
+						<select>
+							<option value="1" >Abancay</option>
+							<option value="2">Andahuaylas</option>
+							<option value="3">Antabamba</option>
+							<option value="4">Aymaraes</option>
+							<option value="5">Chicheros</option>
+							<option value="6">Cotabambas</option>
+							<option value="7">Grau</option>
+						</select>
+						<legend>Localidad</legend>
 						<select size="7">
 							<option value="1" >Abancay</option>
 							<option value="2">Andahuaylas</option>
@@ -25,77 +107,8 @@
 							<option value="7">Grau</option>
 						</select>
 					</div>
-					<div class="span5">
-						<div class="well form-horizontal">
-							<div class="control-group">
-								<label class="control-label">Tipo de Grafico:</label>
-								<div class="controls">
-									<select class="span10">
-										<option>Mapas</option>
-										<option>Barras</option>
-										<option>Circulares</option>
-									</select>
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">Anio:</label>
-								<div class="controls">
-									<select class="span8">
-										<option>2013</option>
-										<option>2012</option>
-										<option>2011</option>
-									</select>
-								</div>
-							</div>
-						</div>
+					<div class="span9 text-center">
 						<div id="chaptersMap">
-						</div>
-					</div>
-					<div class="span4">
-						<div class="well">
-							<strong>Leyenda</strong>
-							<ul>
-								<li>Bajo < 10%</li>
-								<li>Medio <= 10% < 15%</li>
-								<li>Alto 15%<=</li>
-							</ul>
-						</div>
-						<div class="">
-							<h4>Indicadores</h4>
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<th width="80%">Nombre Indicador</th>
-										<th width="20%"></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr id="U0001">
-										<td>Rendimiento Principales Cultivos</td>
-										<td>
-											<label class="text-center">
-												<input type="radio" name="optionsRadios" value="option1">
-											</label>
-										</td>
-									</tr>
-									<tr id="U0001">
-										<td>Intencion de Siembra por Cultivo</td>
-										<td>
-											<label class="text-center">
-												<input type="radio" name="optionsRadios" value="option1" checked>
-											</label>
-										</td>
-									</tr>
-									<tr id="U0001">
-										<td>Especies de Flora y Fauna Amenzada	</td>
-										<td>
-											<label class="text-center">
-												<input type="radio" name="optionsRadios" value="option1">
-											</label>
-										</td>
-									</tr>
-								</tbody>
-							</table>
 						</div>
 					</div>
 				</div>

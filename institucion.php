@@ -16,7 +16,7 @@ if (!isset($_SESSION['s_username'])) {
 			<script class="include" src="js/bootstrap.min.js"></script>
 			<script class="include" src="js/mantenimiento_institucion.js"></script>
 			<script src="js/jquery.dataTables.min.js"></script>
-                        <script src="js/jquery.validate.min.js"></script>
+			<script src="js/jquery.validate.min.js"></script>
 			<script src="js/messages_es.js"></script>
 			<script src="js/DT_bootstrap.js"></script>
 			<script type="text/javascript">
@@ -34,14 +34,14 @@ if (!isset($_SESSION['s_username'])) {
 							<div class="control-group">
 								<label class="control-label">Siglas: </label>
 								<div class="controls">
-                                                                    <input id="txtsiglas" name="txtsiglas" class="span12" type="text" placeholder="Siglas">
+									<input id="txtsiglas" name="txtsiglas" class="span12" type="text" placeholder="Siglas">
 								</div>
 							</div>
 
 							<div class="control-group">
 								<label class="control-label">Nombre Institucion: </label>
 								<div class="controls">
-                                                                    <input id="txtnombinst" name="txtnombinst" class="span12" type="text" placeholder="Institucion">
+									<input id="txtnombinst" name="txtnombinst" class="span12" type="text" placeholder="Institucion">
 								</div>
 							</div>
 						</div>
