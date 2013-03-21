@@ -34,10 +34,10 @@ $(document).ready(function() {
 	});
 
 	$("#example").delegate("a", "click", function(event) {
-		if ($(this).text() === 'Eliminar') {
+		if ($(this).text() === ' Eliminar') {
 			$(this).closest("tr").remove(); // remove row
 		}
-		if ($(this).text() === 'Editar') {
+		if ($(this).text() === ' Editar') {
 			$(this).closest("tr").each(function(index) {
 				$(this).children("td").each(function(index2) {
 					switch (index2) {
@@ -64,21 +64,62 @@ $(document).ready(function() {
 	});
 
 	$("#btnEditar").click(function() {
-		$("#example tbody tr").each(function(index) {
-			if ($(this).attr("id") === $("#txtId").val()) {
-				$(this).html('<td>' + $('#txtIndicadorE').val() + '</td><td>' + $('#txtDistritoE').val() + '</td><td>' + $('#txtAnioE').val() + '</td><td>' + $('#txtPeriodoE').val() + '</td><td>' + $('#txtValorE').val() + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td>');
+		$("#btnEditar").text("Editandoo...");
+		$("#btnEditar").attr("disabled", "disabled");
+		var codigo = $("#txtId").val();
+		var indicador = codigo.substring(0, 4);
+		var ubigeo = codigo.substring(4, 10);
+		var anio = codigo.substring(10, 14);
+		var periodo = codigo.substring(14, 17);
+		//$("#resultado").html(codigo + " : " + indicador + " - " + ubigeo + " - " + anio + " - " + periodo);
+		$.post("mantenimiento_lectura.php", {
+			action: "modificar",
+			indicador: indicador,
+			ubigeo: ubigeo,
+			anio: anio,
+			periodo: periodo,
+			valor: $("#txtValorE").val()
+		},
+		function(data) {
+			if (data.title !== "error") {
+				$("#example tbody tr").each(function(index) {
+					if ($(this).attr("id") === $("#txtId").val()) {
+						$(this).html('<td>' + $('#txtIndicadorE').val() + '</td><td>' + $('#txtDistritoE').val() + '</td><td>' + $('#txtAnioE').val() + '</td><td>' + $('#txtPeriodoE').val() + '</td><td>' + $('#txtValorE').val() + '</td><td><a class="btn-small btn-success" href="#myModal" data-toggle="modal"><i class="icon-edit"></i><strong> Editar</strong></a></td><td><a class="btn-small btn-danger" href="#"><i class="icon-trash"></i><strong> Eliminar</strong></a></td>');
+					}
+				});
+				$("#resultado").html(data.html);
+				$("#btnEditar").removeAttr("disabled");
+				$("#btnEditar").text("Editar");
+				$('#myModal').modal('hide');
 			}
-		});
-		$('#myModal').modal('hide');
+		}, "json");
 	});
 
 	$("#btnAgregar").click(function() {
+		$("#btnAgregar").text("Agregando...");
+		$("#btnAgregar").attr("disabled", "disabled");
 		var indicador = $('#cbIndicador').val();
 		var ubigeo = $('#cbDistrito').val();
 		var anio = $('#cbAnio option:selected').text();
 		var periodo = $('#cbPeriodo').val();
 		var codigo = indicador + ubigeo + anio + periodo;
-		$('#example > tbody:last').append('<tr id="' + codigo + '"><td>' + $('#cbIndicador option:selected').text() + '</td><td>' + $('#cbDistrito option:selected').text() + '</td><td>' + $("#cbAnio option:selected").text() + '</td><td>' + $("#cbPeriodo option:selected").text() + '</td><td>' + $("#txtValor").val() + '</td><td><a href="#myModal" data-toggle="modal">Editar</a></td><td><a href="#">Eliminar</a></td></tr>');
+		$.post("mantenimiento_lectura.php", {
+			action: "insertar",
+			indicador: indicador,
+			ubigeo: ubigeo,
+			anio: anio,
+			periodo: periodo,
+			valor: $("#txtValor").val()
+		},
+		function(data) {
+			if (data.title !== "error") {
+				$('#example > tbody:last').append('<tr id="' + codigo + '"><td>' + $('#cbIndicador option:selected').text() + '</td><td>' + $('#cbDistrito option:selected').text() + '</td><td>' + $("#cbAnio option:selected").text() + '</td><td>' + $("#cbPeriodo option:selected").text() + '</td><td>' + $("#txtValor").val() + '</td><td><a class="btn-small btn-success" href="#myModal" data-toggle="modal"><i class="icon-trash"></i><strong> Editar</strong></a></td><td><a class="btn-small btn-danger" href="#"><i class="icon-trash"></i><strong> Eliminar</strong></a></td></tr>');
+				$("#formInsertar input").val("");
+			}
+			$("#resultado").html(data.html);
+			$("#btnAgregar").removeAttr("disabled");
+			$("#btnAgregar").text("Agregar");
+		}, "json");
 	});
 });
 
