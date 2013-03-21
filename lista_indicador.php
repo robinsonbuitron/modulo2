@@ -23,7 +23,7 @@ if (!isset($_SESSION['s_username'])) {
 			include_once 'conexion/pgsql.php';
 			$conexion = new ConexionPGSQL();
 			$conexion->conectar();
-			$resultado = $conexion->consulta("select tid.idindicador, ti.siglas, tid.descripcion, tu.abreviatura, tid.valorminimo,tid.valormaximo from tindicador tid join tinstitucion ti on tid.idinstitucion=ti.idinstitucion join tunidadmedida tu on tu.idunidadmedida=tid.idunidadmedida");
+			$resultado = $conexion->consulta("select tid.idindicador, ti.siglas, tid.descripcion, tu.abreviatura, tid.valorminimo,tid.valormaximo from tindicador tid join tinstitucion ti on tid.idinstitucion=ti.idinstitucion join tunidadmedida tu on tu.idunidadmedida=tid.idunidadmedida where ti.idinstitucion='" . $_SESSION["s_idinstitucion"] . "'");
 			$filas = pg_numrows($resultado);
 			if ($filas != 0) {
 				for ($cont = 0; $cont < $filas; $cont++) {
