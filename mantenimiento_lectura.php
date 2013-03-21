@@ -49,8 +49,11 @@ if (!isset($_SESSION['s_username'])) {
 			}
 		}
 		if ($action == "eliminar") {
-			$idinstitucion = $_POST['idinstitucion'];
-			$sql = $conexion->consulta("delete from tinstitucion where idinstitucion='$idinstitucion'");
+			$indicador = $_POST['indicador'];
+			$ubigeo = $_POST['ubigeo'];
+			$anio = $_POST['anio'];
+			$periodo = $_POST['periodo'];
+			$sql = $conexion->consulta("delete from tlectura WHERE idindicador='$indicador' and ubigeo='$ubigeo' and idperiodo='$periodo' and anio='$anio'");
 			if (!$sql) {
 				$jsondata['title'] = "error";
 				$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> No se pudo eliminar el usuario</div>';

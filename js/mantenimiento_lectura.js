@@ -35,7 +35,25 @@ $(document).ready(function() {
 
 	$("#example").delegate("a", "click", function(event) {
 		if ($(this).text() === ' Eliminar') {
-			$(this).closest("tr").remove(); // remove row
+			var codigo = $(this).closest("tr").attr("id");
+			var tr = $(this).closest("tr");
+			var indicador = codigo.substring(0, 4);
+			var ubigeo = codigo.substring(4, 10);
+			var anio = codigo.substring(10, 14);
+			var periodo = codigo.substring(14, 17);
+			$.post("mantenimiento_lectura.php", {
+				action: "eliminar",
+				indicador: indicador,
+				ubigeo: ubigeo,
+				anio: anio,
+				periodo: periodo
+			},
+			function(data) {
+				if (data.title !== "error") {
+					tr.remove();
+				}
+				$("#resultado").html(data.html);
+			}, "json");
 		}
 		if ($(this).text() === ' Editar') {
 			$(this).closest("tr").each(function(index) {
