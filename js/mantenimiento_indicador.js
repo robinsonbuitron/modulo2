@@ -1,19 +1,26 @@
 $(document).ready(function() {
+    $(function() {
+// Agregamos un metodo nuevo para revisar el nombre
+        jQuery.validator.addMethod("check_indicador", function(value, element, params) {
+            return this.optional(element) || /^([a-zA-Z'-áéíóúÁÉÍÓÚ]+\s+){1,4}[a-zA-z'-áéíóúÁÉÍÓÚ]+$/i.test(value);
+        }, jQuery.format("Escriba un indicador válido"));
+// Validamos el form
     $("#formInsertar").validate({
         rules: {
             txtIndicador: {
                 required: true,
-                minlength: 5
+                minlength: 5,
+                check_indicador:true
 
             },
             txtValorMin: {
                 required: true,
-                digits: true,
+                number: true,
                 minlength: 1
             },
             txtValorMax: {
                 required: true,
-                digits: true,
+                number: true,
                 minlength: 1,
                 min: "#txtValorMin"
             }
@@ -29,6 +36,7 @@ $(document).ready(function() {
                 required: "se requiere el Valor Maximo"
             }
         }
+    });
     });
 
     //cargar conbobox unidad de medida

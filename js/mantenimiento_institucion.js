@@ -1,27 +1,39 @@
 //Funcionalidad para realizar opreaciones sobre la tabla institucion
 
 $(document).ready(function() {
-    $("#frmInsertar").validate({
-        rules: {
-            txtsiglas: {
-                required: true,
-                minlength: 4
+    $(function() {
+// Agregamos un metodo nuevo para revisar el nombre
+        jQuery.validator.addMethod("check_siglas", function(value, element, params) {
+            return this.optional(element) || /^([a-zA-Z'-áéíóúÁÉÍÓÚ]+){1,4}[a-zA-z'-áéíóúÁÉÍÓÚ]+$/i.test(value);
+        }, jQuery.format("Escriba una SIGLA válida"));
+        jQuery.validator.addMethod("check_institucion", function(value, element, params) {
+            return this.optional(element) || /^([a-zA-Z'-áéíóúÁÉÍÓÚ]+\s+){1,4}[a-zA-z'-áéíóúÁÉÍÓÚ]+$/i.test(value);
+        }, jQuery.format("Escriba un nombre de institucion válido"));
 
-            },
-            txtnombinst: {
-                required: true,
-                minlength: 5
-            }
-        },
-        messages: {
-            txtsiglas: {
-                required: "Debe ingresar sigla de la Institucion"
-            },
-            txtnombinst: {
-                required: "Debe ingresar nombre de la Institución"
-            }
+        $("#frmInsertar").validate({
+            rules: {
+                txtsiglas: {
+                    required: true,
+                    minlength: 2,
+                    check_siglas:true
 
-        }
+                },
+                txtnombinst: {
+                    required: true,
+                    minlength: 5,
+                    check_institucion: true
+                }
+            },
+            messages: {
+                txtsiglas: {
+                    required: "Debe ingresar sigla de la Institucion"
+                },
+                txtnombinst: {
+                    required: "Debe ingresar nombre de la Institución"
+                }
+
+            }
+        });
     });
     $("#example").delegate("a", "click", function(event) {
         if ($(this).text() === ' Eliminar') {

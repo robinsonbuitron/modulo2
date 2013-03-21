@@ -9,9 +9,9 @@ if (!isset($_SESSION['s_username'])) {
 		<thead>
 			<tr>
 				<th width="10%">DNI</th>
-				<th width="40%">Nombre y Apellidos</th>
+				<th width="30%">Nombre y Apellidos</th>
 				<th width="14%">Institucion</th>
-				<th width="12%">Cargo</th>
+				<th width="22%">Cargo</th>
 				<th width="11%">Editar</th>
 				<th width="13%">Eliminar</th>
 			</tr>

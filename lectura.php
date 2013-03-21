@@ -31,6 +31,8 @@ if (!isset($_SESSION['s_username'])) {
 			<script class="include" src="js/jquery-1.9.1.min.js"></script>
 			<script class="include" src="js/bootstrap.min.js"></script>
 			<script class="include" src="js/mantenimiento_lectura.js"></script>
+                        <script src="js/jquery.validate.min.js"></script>
+			<script src="js/messages_es.js"></script>
 			<script type="text/javascript">
 				$(function() {
 					$("#menuLectura").addClass("active");
@@ -69,7 +71,7 @@ if (!isset($_SESSION['s_username'])) {
 					</div>
 				</div>
 
-				<div class="row-fluid">
+                            <form id="frmInsertar" class="row-fluid">
 					<div class="span12 well">
 						<div class="span7 form-horizontal">
 							<div class="control-group">
@@ -150,7 +152,7 @@ if (!isset($_SESSION['s_username'])) {
 							<div class="control-group">
 								<label class="control-label">Valor (%): </label>
 								<div class="controls">
-									<input id="txtValor" class="span14" type="text" placeholder="Valor"  > 
+                                                                    <input id="txtValor" name="txtValor" class="span14" type="text" placeholder="Valor"  > 
 								</div>
 							</div>
 						</div>
@@ -159,7 +161,7 @@ if (!isset($_SESSION['s_username'])) {
 							<button type="button" class="btn">Limpiar</button>
 						</div>
 					</div>
-				</div>
+				</form>
 
 				<div>
 					<div id="tablaInstitucion">

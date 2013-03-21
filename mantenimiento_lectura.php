@@ -25,11 +25,11 @@ if (!isset($_SESSION['s_username'])) {
 			$sql = $conexion->consulta("INSERT INTO tlectura VALUES ('$indicador','$ubigeo','$periodo','$anio','$valor')");
 			if (!$sql) {
 				$jsondata['title'] = "error";
-				$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> No se pudo registrar el nuevo usuario</div>';
+				$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> No se pudo registrar nueva lectura</div>';
 				//echo "Consulta: " . $contador . "Fallo en la insercion de registro en la Base de Datos: " . mysql_error() . "<br>";
 			} else {
 				$jsondata['title'] = $indicador;
-				$jsondata['html'] = '<div class="alert alert-success"><strong>Correcto!</strong> Se ingreso un nuevo usuario</div>';
+				$jsondata['html'] = '<div class="alert alert-success"><strong>Correcto!</strong> Se ingreso un nuevo valor de lecturao</div>';
 			}
 		}
 		if ($action == "modificar") {
@@ -41,11 +41,11 @@ if (!isset($_SESSION['s_username'])) {
 			$sql = $conexion->consulta("UPDATE tlectura SET valor='$valor' WHERE idindicador='$indicador' and ubigeo='$ubigeo' and idperiodo='$periodo' and anio='$anio'");
 			if (!$sql) {
 				$jsondata['title'] = "error";
-				$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> No se pudo modificar el usuario</div>';
+				$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> No se pudo modificar el valor</div>';
 				//echo "Consulta: " . $contador . "Fallo en la insercion de registro en la Base de Datos: " . mysql_error() . "<br>";
 			} else {
 				$jsondata['title'] = "correcto";
-				$jsondata['html'] = '<div class="alert alert-success"><strong>Correcto!</strong> Se modifico un usuario</div>';
+				$jsondata['html'] = '<div class="alert alert-success"><strong>Correcto!</strong> Se modifico de manera satisfactoria</div>';
 			}
 		}
 		if ($action == "eliminar") {

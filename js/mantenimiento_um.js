@@ -1,27 +1,34 @@
 //Funcionalidad para realizar opreaciones sobre la tabla unidad de medida
 
 $(document).ready(function() {
-    $("#frmInsertar").validate({
-        rules: {
-            txtabreviatura: {
-                required: true,
-                minlength: 1
-
-            },
-            txtdescripcion: {
-                required: true,
-                minlength: 5
-            }
+    $(function() {
+// Agregamos un metodo nuevo para revisar el nombre
+        jQuery.validator.addMethod("check_um", function(value, element, params) {
+            return this.optional(element) || /^([a-zA-Z'-áéíóúÁÉÍÓÚ]+\s+){1,4}[a-zA-z'-áéíóúÁÉÍÓÚ]+$/i.test(value);
         },
-        messages: {
-            txtabreviatura: {
-                required: "Debe ingresar Unidad de Medida"
-            },
-            txtdescripcion: {
-                required: "Ingrese la descripcion de la Unidad de Medida"
-            }
+                jQuery.format("Ingrese una descripcion valida"));
+        $("#frmInsertar").validate({
+            rules: {
+                txtabreviatura: {
+                    required: true,
+                    minlength: 1
 
-        }
+                },
+                txtdescripcion: {
+                    required: true,
+                    minlength: 5,
+                    check_um: true
+                }
+            },
+            messages: {
+                txtabreviatura: {
+                    required: "Debe ingresar Unidad de Medida"
+                },
+                txtdescripcion: {
+                    required: "Ingrese la descripcion de la Unidad de Medida"
+                }
+            }
+        });
     });
     $("#example").delegate("a", "click", function(event) {
         if ($(this).text() === ' Eliminar') {
@@ -93,7 +100,6 @@ $(document).ready(function() {
         if ($("#frmInsertar").valid()) {
             $("#btnAgregar").text("Agregando...");
             $("#btnAgregar").attr("disabled", "disabled");
-
             var unidad = $('#txtabreviatura').val();
             var desc = $('#txtdescripcion').val();
             $.post("mantenimiento_um.php", {
@@ -112,7 +118,7 @@ $(document).ready(function() {
                 $("#btnAgregar").text("Agregar");
             }, "json");
         } else {
-            $("#resultado").html('<div class="alert alert-error"><strong>Error!</strong> Campos requeridos para insertar nuevo usuario</div>');
+            $("#resultado").html('<div class="alert alert-error"><strong>Error!</strong> Por Favor complete los campos para que sean ingresados</div>');
         }
     });
 });
