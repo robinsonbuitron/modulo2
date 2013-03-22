@@ -159,8 +159,8 @@ if (!isset($_SESSION['s_username'])) {
 						</div>
 						<div class="text-right">
 							<a href='#myModal' id="btnCargar" data-toggle='modal' class='btn btn-success'>Cargar Datos</a>
-							<a href='#myModal' id="btnCargar" data-toggle='modal' class='btn btn-info'>Descargar Excel</a>
-							<a href='#myModal' id="btnCargar" data-toggle='modal' class='btn btn-warning'>Cargar Datos</a>
+							<a href='#myModal' data-toggle='modal' class='btn btn-info'>Descargar Excel</a>
+							<a href='#myModal' data-toggle='modal' class='btn btn-warning'>Cargar Excel</a>
 						</div>
 					</div>
 				</form>
