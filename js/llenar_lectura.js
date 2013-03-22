@@ -32,7 +32,7 @@ $(document).ready(function() {
 		var indicador = $('#cbIndicador option:selected').text();
 		var anio = $('#cbAnio option:selected').text()
 		var periodo = $('#cbPeriodo option:selected').text()
-		$.post("llenar_lectura_tabla", {
+		$.post("llenar_lectura_tabla.php", {
 			provincia: "todo",
 			indicador: indicador,
 			anio: anio,

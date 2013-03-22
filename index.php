@@ -13,6 +13,7 @@
         <script src="js/DT_bootstrap.js"></script>
         <script src="js/mantenimiento_usuarios.js"></script>
         <style type="text/css">
+
             html,
             body {
                 height: 100%;
@@ -38,14 +39,15 @@
                     padding-right: 20px;
                 }
             }
-            
+
             .container .credit {
                 margin: 20px 0;
             }
         </style>
-        
+
     </head>
     <body>
+
         <div class="navbar navbar-fixed-top ">
             <div class="navbar-inner">
                 <div class="container">
@@ -63,13 +65,14 @@
             <!-- Begin page content -->
             <div style="padding-top: 60px" class="container">
                 <div class="row-fluid">
-                    <div class="span8">
+                    <div class="span8">    
                         <h2>Bienvenidos al SIAR</h2>
                         <p>
                             Descripción del producto presentado. Descripción del producto presentado. 
                         </p>
                     </div>
                     <div class="span4">
+
                         <?php include './login.php'; ?>
                     </div>
                 </div>
