@@ -37,7 +37,7 @@ function guardarDato(indicador, ubigeo, periodo, anio, valor) {
 }
 
 function guardarLectura() {
-	$("#resultado").append("");
+	$("#resultado").html("");
 	var indicador = $('#cbIndicador').val();
 	var anio = $('#cbAnio').val();
 	var periodo = $('#cbPeriodo').val();
