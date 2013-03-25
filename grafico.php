@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>Raphaël · Australia</title>
+        <title>MAPAS-SIARAPURIMAC</title>
 		<script src="js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/raphael-min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" src="js/data_abancay.js"></script>
