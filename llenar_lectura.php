@@ -126,7 +126,7 @@ if (!isset($_SESSION['s_username'])) {
 								<div class="controls">
 									<select id="cbPeriodo" class="span12">
 										<optgroup label="Unico">
-											<option value="101">Anual</option>
+											<option value="119">Anual</option>
 										</optgroup>
 										<optgroup label="Mensual">
 											<option value="101">Enero</option>

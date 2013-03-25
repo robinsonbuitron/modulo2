@@ -13,52 +13,7 @@ function cargarDistritos() {
 	}, "html");
 }
 
-$(document).ready(function() {
-
-	$("#frmInsertar").validate({
-		rules: {
-			txtValor: {
-				required: true,
-				minlength: 1,
-				number: true
-			}
-		},
-		messages: {
-			txtValor: {
-				required: "Debe ingresar por lo menos un valor"
-			}
-		}
-	});
-	$("#cbIndicador").on('change', function() {
-		$.post("lista_lectura.php", {
-			indicador: $("#cbIndicador").val()
-		},
-		function(data) {
-			$("#tablaInstitucion").html(data);
-			$('#example').dataTable();
-		}, "html");
-	});
-	//llenar combobox de provincia
-	$.post("consulta_datos_html.php", {
-		peticion: "provincia"
-	},
-	function(data) {
-		$("#cbProvincia").html(data);
-		$("#cbProvincia").trigger('change');
-	}, "html");
-	//llenar combobox de indicadores segun su institucion del usuario
-	$.post("consulta_datos_html.php", {
-		peticion: "indicador"
-	},
-	function(data) {
-		$("#cbIndicador").html(data);
-		$("#cbIndicador").trigger('change');
-	}, "html");
-	//llenr combobox de distritos segun la provincia seleccionada
-	$('#cbProvincia').change(function() {
-		cargarDistritos();
-	});
-
+function editarEliminar() {
 	$("#example").delegate("a", "click", function(event) {
 		if ($(this).text() === ' Eliminar') {
 			var codigo = $(this).closest("tr").attr("id");
@@ -104,6 +59,24 @@ $(document).ready(function() {
 					}
 				});
 			});
+		}
+	});
+}
+
+$(document).ready(function() {
+
+	$("#frmInsertar").validate({
+		rules: {
+			txtValor: {
+				required: true,
+				minlength: 1,
+				number: true
+			}
+		},
+		messages: {
+			txtValor: {
+				required: "Debe ingresar por lo menos un valor"
+			}
 		}
 	});
 
@@ -168,6 +141,37 @@ $(document).ready(function() {
 		} else {
 			$("#resultado").html('<div class="alert alert-error"><strong>Error!</strong> Campos requeridos para insertar nuevo valor</div>');
 		}
+	});
+
+	$("#cbIndicador").on('change', function() {
+		$.post("lista_lectura.php", {
+			indicador: $("#cbIndicador").val()
+		},
+		function(data) {
+			$("#tablaInstitucion").html(data);
+			$('#example').dataTable();
+			editarEliminar();
+		}, "html");
+	});
+	//llenar combobox de provincia
+	$.post("consulta_datos_html.php", {
+		peticion: "provincia"
+	},
+	function(data) {
+		$("#cbProvincia").html(data);
+		$("#cbProvincia").trigger('change');
+	}, "html");
+	//llenar combobox de indicadores segun su institucion del usuario
+	$.post("consulta_datos_html.php", {
+		peticion: "indicador"
+	},
+	function(data) {
+		$("#cbIndicador").html(data);
+		$("#cbIndicador").trigger('change');
+	}, "html");
+	//llenr combobox de distritos segun la provincia seleccionada
+	$('#cbProvincia').change(function() {
+		cargarDistritos();
 	});
 });
 

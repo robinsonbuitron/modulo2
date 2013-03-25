@@ -42,7 +42,6 @@ if (isset($_POST['peticion'])) {
 		$resultado = $conexion->consulta("select idindicador, descripcion from tindicador where idinstitucion='" . $idinstitucion . "'");
 		$filas = pg_numrows($resultado);
 		if ($filas != 0) {
-			echo '<option style="color: blue" disabled selected>Elija un Indicador</option>';
 			for ($cont = 0; $cont < $filas; $cont++) {
 				echo "<option value='" . pg_result($resultado, $cont, 0) . "'>" . pg_result($resultado, $cont, 1) . "</option>";
 			}

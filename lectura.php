@@ -127,7 +127,7 @@ if (!isset($_SESSION['s_username'])) {
 									<select id="cbPeriodo" class="span12">
 										<option style="color: blue" disabled selected>Elija un Periodo</option>
 										<optgroup label="Unico">
-											<option value="101">Anual</option>
+											<option value="119">Anual</option>
 										</optgroup>
 										<optgroup label="Mensual">
 											<option value="101">Enero</option>
