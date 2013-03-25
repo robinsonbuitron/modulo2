@@ -24,6 +24,10 @@ if (!isset($_SESSION['s_username'])) {
 			$conexion->conectar();
 			$resultado = $conexion->consulta("select ti.idindicador||td.ubigeo||tl.anio||tp.idperiodo, ti.descripcion, td.nombre, tl.anio, tp.descripcion, tl.valor
 											from tlectura tl join tindicador ti on tl.idindicador=ti.idindicador 
+												join tprovincia td on td.ubigeo=tl.ubigeo
+												join tperiodo tp on tp.idperiodo=tl.idperiodo 
+											where ti.idinstitucion='" . $_SESSION["s_idinstitucion"] . "' union select ti.idindicador||td.ubigeo||tl.anio||tp.idperiodo, ti.descripcion, td.nombre, tl.anio, tp.descripcion, tl.valor
+											from tlectura tl join tindicador ti on tl.idindicador=ti.idindicador 
 												join tdistrito td on td.ubigeo=tl.ubigeo
 												join tperiodo tp on tp.idperiodo=tl.idperiodo 
 											where ti.idinstitucion='" . $_SESSION["s_idinstitucion"] . "'");

@@ -35,6 +35,7 @@ $(document).ready(function() {
 	},
 	function(data) {
 		$("#cbProvincia").html(data);
+		$("#cbProvincia").trigger('change');
 	}, "html");
 	//llenar combobox de indicadores segun su institucion del usuario
 	$.post("consulta_datos_html.php", {

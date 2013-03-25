@@ -4,6 +4,16 @@ if (!isset($_SESSION['s_username'])) {
 	header('Location: index.php');
 	exit();
 } else {
+	include_once 'conexion/pgsql.php';
+	$conexion = new ConexionPGSQL();
+	$conexion->conectar();
+	$resultado = $conexion->consulta("select Siglas from tinstitucion where idinstitucion='" . $_SESSION["s_idinstitucion"] . "'");
+	$filas = pg_numrows($resultado);
+	if ($filas != 0) {
+		for ($cont = 0; $cont < $filas; $cont++) {
+			$siglas = pg_result($resultado, $cont, 0);
+		}
+	}
 	?>
 	<!DOCTYPE html>
 	<html lang="es">
@@ -16,7 +26,7 @@ if (!isset($_SESSION['s_username'])) {
 			<script class="include" src="js/bootstrap.min.js"></script>
 			<script class="include" src="js/mantenimiento_indicador.js"></script>
 			<script src="js/jquery.dataTables.min.js"></script>
-                        <script src="js/jquery.validate.min.js"></script>
+			<script src="js/jquery.validate.min.js"></script>
 			<script src="js/messages_es.js"></script>
 			<script src="js/DT_bootstrap.js"></script>
 			<script type="text/javascript">
@@ -34,15 +44,14 @@ if (!isset($_SESSION['s_username'])) {
 							<div class="control-group">
 								<label class="control-label">Institucion: </label>
 								<div class="controls">
-									<select id="cbInstitucion" class="span12 cbInstitucion">
-									</select>
+									<input id="txtInstitucion" class="span8" type="text" value="<?php echo $siglas; ?>" disabled=""> 
 								</div>
 							</div>
 
 							<div class="control-group">
 								<label class="control-label">Ingrese Indicador: </label>
 								<div class="controls">
-                                                                    <input id="txtIndicador" name="txtIndicador" class="span12" type="text" placeholder="descripcion Indicador">
+									<input id="txtIndicador" name="txtIndicador" class="span12" type="text" placeholder="descripcion Indicador">
 								</div>
 							</div>
 							<div class="control-group">
@@ -57,13 +66,13 @@ if (!isset($_SESSION['s_username'])) {
 							<div class="control-group">
 								<label class="control-label">Valor Min: </label>
 								<div class="controls">
-                                                                    <input id="txtValorMin" name="txtValorMin" class="span6" type="text" placeholder="Valor Minimo">
+									<input id="txtValorMin" name="txtValorMin" class="span6" type="text" placeholder="Valor Minimo">
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label">Valor Max: </label>
 								<div class="controls">
-                                                                    <input id="txtValorMax" name="txtValorMax" class="span6" type="text" placeholder="Valor Máximo">
+									<input id="txtValorMax" name="txtValorMax" class="span6" type="text" placeholder="Valor Máximo">
 								</div>
 							</div>
 
@@ -94,8 +103,7 @@ if (!isset($_SESSION['s_username'])) {
 							<div class="control-group">
 								<label class="control-label">Institucion: </label>
 								<div class="controls">
-									<select id="cbInstitucionE" class="cbInstitucion">
-									</select>
+									<input id="txtInstitucionE" type="text" disabled=""> 
 								</div>
 							</div>
 							<div class="control-group">

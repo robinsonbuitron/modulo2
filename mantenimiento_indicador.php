@@ -16,7 +16,7 @@ if (!isset($_SESSION['s_username'])) {
 			if ($idindicador == null && $idindicador == "")
 				$idindicador = "1000";
 			$idunidadmedida = $_POST['idunidadmedida'];
-			$idinstitucion = $_POST['idinstitucion'];
+			$idinstitucion = $_SESSION["s_idinstitucion"];
 			$descripcion = $_POST['descripcion'];
 			$valormin = $_POST['valorminimo'];
 			$valormax = $_POST['valormaximo'];
@@ -35,11 +35,10 @@ if (!isset($_SESSION['s_username'])) {
 		if ($action == "modificar") {
 			$idindicador = $_POST['idindicador'];
 			$idunidadmedida = $_POST['idunidadmedida'];
-			$idinstitucion = $_POST['idinstitucion'];
 			$descripcion = $_POST['descripcion'];
 			$valormin = $_POST['valorminimo'];
 			$valormax = $_POST['valormaximo'];
-			$sql = $conexion->consulta("UPDATE tindicador SET idunidadmedida='$idunidadmedida', idinstitucion='$idinstitucion', descripcion='$descripcion', valorminimo='$valormin', valormaximo='$valormax'  WHERE idindicador='$idindicador';");
+			$sql = $conexion->consulta("UPDATE tindicador SET idunidadmedida='$idunidadmedida', descripcion='$descripcion', valorminimo='$valormin', valormaximo='$valormax'  WHERE idindicador='$idindicador';");
 			if (!$sql) {
 				$jsondata['title'] = "error";
 				$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> No se pudo modificar el Indicador</div>';
