@@ -97,7 +97,7 @@ if (!isset($_SESSION['s_username'])) {
 								<label class="control-label">Provincia : </label>
 								<div class="controls">
 									<select id="cbProvincia">
-
+										<option value='xx'>Todo</option>
 									</select>
 								</div>
 							</div>
@@ -125,7 +125,6 @@ if (!isset($_SESSION['s_username'])) {
 								<label class="control-label">Periodo: </label>
 								<div class="controls">
 									<select id="cbPeriodo" class="span12">
-										<option style="color: blue" disabled selected>Elija un Periodo</option>
 										<optgroup label="Unico">
 											<option value="101">Anual</option>
 										</optgroup>
@@ -158,27 +157,30 @@ if (!isset($_SESSION['s_username'])) {
 							</div>
 						</div>
 						<div class="text-right">
-							<a href='#myModal' id="btnCargar" data-toggle='modal' class='btn btn-success'>Cargar Datos</a>
-							<a href='#myModal' data-toggle='modal' class='btn btn-info'>Descargar Excel</a>
-							<a href='#myModal' data-toggle='modal' class='btn btn-warning'>Cargar Excel</a>
+							<a id="btnCargar" class='btn btn-success'>Cargar Datos</a>
+							<a id="btnDescargarExcel" class='btn btn-info'>Descargar Excel</a>
+							<a id="btnCargarExcel" class='btn btn-warning'>Cargar Excel</a>
 						</div>
 					</div>
 				</form>
 
 				<div>
-					<div id="myModal" class="modal hide fade form-horizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-							<h3 id="myModalLabel">Editar Indicador</h3>
-						</div>
-						<form class="modal-body" id="tablaInstitucion">
+					<form id="tablaInstitucion">
 
-						</form>
-						<div class="modal-footer">
-							<button id="btnEditar" type="button" class="btn btn-primary">Editar</button>
-							<button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
-						</div>
-					</div>
+					</form>
+					<!--					<div id="myModal" class="modal hide fade form-horizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+													<h3 id="myModalLabel">Editar Indicador</h3>
+												</div>
+												<form class="modal-body" id="tablaInstitucion">
+						
+												</form>
+												<div class="modal-footer">
+													<button id="btnEditar" type="button" class="btn btn-primary">Editar</button>
+													<button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+												</div>
+											</div>-->
 				</div>
 				<div id="resultado"></div>
 			</div> <!-- /container -->
