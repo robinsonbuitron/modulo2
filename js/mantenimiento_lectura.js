@@ -29,6 +29,15 @@ $(document).ready(function() {
 			}
 		}
 	});
+	$("#cbIndicador").on('change', function() {
+		$.post("lista_lectura.php", {
+			indicador: $("#cbIndicador").val()
+		},
+		function(data) {
+			$("#tablaInstitucion").html(data);
+			$('#example').dataTable();
+		}, "html");
+	});
 	//llenar combobox de provincia
 	$.post("consulta_datos_html.php", {
 		peticion: "provincia"
@@ -43,6 +52,7 @@ $(document).ready(function() {
 	},
 	function(data) {
 		$("#cbIndicador").html(data);
+		$("#cbIndicador").trigger('change');
 	}, "html");
 	//llenr combobox de distritos segun la provincia seleccionada
 	$('#cbProvincia').change(function() {

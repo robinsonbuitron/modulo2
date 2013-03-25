@@ -32,7 +32,7 @@ function guardarDato(indicador, ubigeo, periodo, anio, valor) {
 		valor: valor
 	},
 	function(data) {
-		$("#resultado").append(data.html);
+		$("#resultado").html(data.html);
 	}, "json");
 }
 
@@ -41,6 +41,8 @@ function guardarLectura() {
 	var indicador = $('#cbIndicador').val();
 	var anio = $('#cbAnio').val();
 	var periodo = $('#cbPeriodo').val();
+	var lectura = new Array();
+	var estado = true;
 	$("#example tbody tr").each(function(index) {
 		var valor, ubigeo;
 		$(this).children("td").each(function(index2) {
@@ -48,11 +50,24 @@ function guardarLectura() {
 			switch (index2) {
 				case 4:
 					valor = $(this).children().first().val();
+					if (!valor.match(/^[-+]?(?:\d+\.?\d*|\.\d+)$/)) {
+						estado = false;
+					}
 					break;
 			}
 		});
-		guardarDato(indicador, ubigeo, periodo, anio, valor);
+		lectura.push(new Array(ubigeo, valor));
 	});
+	if (estado) {
+		var total = lectura.length;
+		for (i = 0; i < total; i++) {
+			var registro = lectura[i];
+			guardarDato(indicador, registro[0], periodo, anio, registro[1]);
+		}
+	} else {
+		$("#resultado").html('<div class="alert alert-error"><strong>Error!</strong> Corriga o complete los valores que faltan</div>');
+	}
+	//guardarDato(indicador, ubigeo, periodo, anio, valor);
 }
 
 $(document).ready(function() {

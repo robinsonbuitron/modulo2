@@ -172,7 +172,7 @@ if (!isset($_SESSION['s_username'])) {
 
 				<div>
 					<div id="tablaInstitucion">
-						<?php include './lista_lectura.php'; ?>
+						
 					</div>
 					<div id="myModal" class="modal hide fade form-horizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
 						<div class="modal-header">

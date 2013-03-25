@@ -22,15 +22,16 @@ if (!isset($_SESSION['s_username'])) {
 			include_once 'conexion/pgsql.php';
 			$conexion = new ConexionPGSQL();
 			$conexion->conectar();
-			$resultado = $conexion->consulta("select ti.idindicador||td.ubigeo||tl.anio||tp.idperiodo, ti.descripcion, td.nombre, tl.anio, tp.descripcion, tl.valor
+			$indicador = $_POST['indicador'];
+			$resultado = $conexion->consulta("select ti.idindicador||td.ubigeo||tl.anio||tp.idperiodo, ti.descripcion, td.nombre||' - Provincia', tl.anio, tp.descripcion, tl.valor
 											from tlectura tl join tindicador ti on tl.idindicador=ti.idindicador 
 												join tprovincia td on td.ubigeo=tl.ubigeo
 												join tperiodo tp on tp.idperiodo=tl.idperiodo 
-											where ti.idinstitucion='" . $_SESSION["s_idinstitucion"] . "' union select ti.idindicador||td.ubigeo||tl.anio||tp.idperiodo, ti.descripcion, td.nombre, tl.anio, tp.descripcion, tl.valor
+											where ti.idindicador='$indicador' and ti.idinstitucion='" . $_SESSION["s_idinstitucion"] . "' union select ti.idindicador||td.ubigeo||tl.anio||tp.idperiodo, ti.descripcion, td.nombre||' - Distrito', tl.anio, tp.descripcion, tl.valor
 											from tlectura tl join tindicador ti on tl.idindicador=ti.idindicador 
 												join tdistrito td on td.ubigeo=tl.ubigeo
 												join tperiodo tp on tp.idperiodo=tl.idperiodo 
-											where ti.idinstitucion='" . $_SESSION["s_idinstitucion"] . "'");
+											where ti.idindicador='$indicador' and ti.idinstitucion='" . $_SESSION["s_idinstitucion"] . "'");
 			$filas = pg_numrows($resultado);
 			if ($filas != 0) {
 				for ($cont = 0; $cont < $filas; $cont++) {

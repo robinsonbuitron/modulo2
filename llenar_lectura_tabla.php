@@ -49,7 +49,7 @@ if (!isset($_SESSION['s_username'])) {
 						echo "<td>$indicador</td>";
 						echo "<td>$anio</td>";
 						echo "<td>$periodo</td>";
-						echo "<td><input id='txtValor' class='span2' name='txtValor' type='text' /></td>";
+						echo "<td><input class='span2' name='txtValor' type='text' /></td>";
 						echo "</tr>";
 					}
 				}

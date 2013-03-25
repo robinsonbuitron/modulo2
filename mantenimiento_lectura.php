@@ -26,7 +26,7 @@ if (!isset($_SESSION['s_username'])) {
 			if (!$sql) {
 				$jsondata['title'] = "error";
 				$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> No se pudo registrar nueva lectura</div>';
-				//echo "Consulta: " . $contador . "Fallo en la insercion de registro en la Base de Datos: " . mysql_error() . "<br>";
+				$sql = $conexion->consulta("ROLLBACK;");
 			} else {
 				$jsondata['title'] = $indicador;
 				$jsondata['html'] = '<div class="alert alert-success"><strong>Correcto!</strong> Se ingreso un nuevo valor de lecturao</div>';
