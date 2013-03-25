@@ -16,9 +16,9 @@ if (isset($_POST['provincia'])) {
 		if ($filas != 0) {
 			$jsondata = array();
 			for ($cont = 0; $cont < $filas; $cont++) {
-				$jsondata[$cont]['ubigeo'] = pg_result($resultado, $cont, 0);
-				$jsondata[$cont]['nombre'] = pg_result($resultado, $cont, 1);
-				$jsondata[$cont]['valor'] = pg_result($resultado, $cont, 2);
+				$ubigeo = pg_result($resultado, $cont, 0);
+				$jsondata[$ubigeo]['nombre'] = pg_result($resultado, $cont, 1);
+				$jsondata[$ubigeo]['valor'] = pg_result($resultado, $cont, 2);
 			}
 		}
 	} else {
@@ -29,9 +29,9 @@ if (isset($_POST['provincia'])) {
 		if ($filas != 0) {
 			$jsondata = array();
 			for ($cont = 0; $cont < $filas; $cont++) {
-				$jsondata[$cont]['ubigeo'] = pg_result($resultado, $cont, 0);
-				$jsondata[$cont]['nombre'] = pg_result($resultado, $cont, 1);
-				$jsondata[$cont]['valor'] = pg_result($resultado, $cont, 2);
+				$ubigeo = pg_result($resultado, $cont, 0);
+				$jsondata[$ubigeo]['nombre'] = pg_result($resultado, $cont, 1);
+				$jsondata[$ubigeo]['valor'] = pg_result($resultado, $cont, 2);
 			}
 		}
 	}
