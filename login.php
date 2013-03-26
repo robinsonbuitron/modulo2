@@ -31,6 +31,10 @@ if (isset($_POST['username'])) {
                     header('Location: usuarios.php');
                     exit();
                 }
+                if ($_SESSION["s_idprivilegios"] == "00003") {
+                    header('Location: llenar_lectura.php');
+                    exit();
+                }
                 header('Location: lectura.php');
                 exit();
             }

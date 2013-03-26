@@ -19,8 +19,10 @@
 						<li class="divider-vertical"></li>
 						<li id="menuUMedida"><a href="unidad_medida.php"><i class="icon-signal icon-white"></i> Unidades Medida</a></li>
 						<li class="divider-vertical"></li>
-					<?php } if ($_SESSION["s_idprivilegios"] != "00001") { ?>
-						<li id="menuLectura"><a href="lectura.php"><i class="icon-envelope icon-white"></i> Lectura</a></li>
+                                                <li id="menuLectura"><a href="lectura.php"><i class="icon-envelope icon-white"></i> Lectura</a></li>
+						<li class="divider-vertical"></li>
+					<?php } if ($_SESSION["s_idprivilegios"] == "00003") { ?>
+						<li id="menuLectura"><a href="llenar_lectura.php"><i class="icon-envelope icon-white"></i> Lectura</a></li>
 						<li class="divider-vertical"></li>
 					<?php } ?>
 				</ul>

@@ -8,8 +8,8 @@ if (!isset($_SESSION['s_username'])) {
 	<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example" width="100%">
 		<thead>
 			<tr>
-				<th width="40%">Indicador</th>
-				<th width="15%">Localidad</th>
+				<th width="30%">Indicador</th>
+				<th width="25%">Localidad</th>
 				<th width="5%">Anio</th>
 				<th width="11%">Periodo</th>
 				<th width="5%">Valor</th>
