@@ -1,3 +1,18 @@
+function graficarCirculares(data) {
+	$('#chaptersMap').html('');
+	var plot1 = jQuery.jqplot('chaptersMap', [data],
+			{
+				seriesDefaults: {
+					renderer: jQuery.jqplot.PieRenderer,
+					rendererOptions: {
+						showDataLabels: true
+					}
+				},
+				legend: {show: true, location: 'e'}
+			}
+	);
+}
+
 function graficarBarra(valores, colores) {
 	$('#chaptersMap').html('');
 	$('#chaptersMap').jqplot([valores], {
@@ -146,8 +161,7 @@ $(document).ready(function() {
 				var grafico = $('#cbGrafico').val();
 				if (grafico === '01') {
 					graficarMapa(provincia, data, minimo, maximo);
-				}
-				if (grafico === '02') {
+				} else {
 					var valores = new Array();
 					var colores = new Array();
 					for (ubigeo in data) {
@@ -163,7 +177,12 @@ $(document).ready(function() {
 							colores.push("yellow");
 						}
 					}
-					graficarBarra(valores, colores);
+					if (grafico === '02') {
+						graficarBarra(valores, colores);
+					}
+					if (grafico === '03') {
+						graficarCirculares(valores);
+					}
 				}
 			}, "json");
 		}, "json");

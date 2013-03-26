@@ -4,16 +4,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>MAPAS-SIARAPURIMAC</title>
+		<link rel="stylesheet" type="text/css" href="jqplot/jquery.jqplot.min.css" />
+		<!--[if lt IE 9]><script language="javascript" type="text/javascript" src="../excanvas.js"></script><![endif]-->
 		<script src="js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/raphael-min.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript" src="js/grafico.js"></script>
-		<link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min.css" />
 		<script type="text/javascript" src="jqplot/jquery.jqplot.min.js"></script>
+		<script type="text/javascript" src="jqplot/plugins/jqplot.pieRenderer.min.js"></script>
+		<script src="js/raphael-min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min.css" />
 		<script type="text/javascript" src="jqplot/plugins/jqplot.barRenderer.min.js"></script>
 		<script type="text/javascript" src="jqplot/plugins/jqplot.pieRenderer.min.js"></script>
 		<script type="text/javascript" src="jqplot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
 		<script type="text/javascript" src="jqplot/plugins/jqplot.pointLabels.min.js"></script>
-		<link rel="stylesheet" type="text/css" hrf="jqplot/jquery.jqplot.min.css" />
+		<script type="text/javascript" src="jqplot/plugins/jqplot.donutRenderer.min.js"></script>
+		<script type="text/javascript" src="js/grafico.js"></script>
 	</head>
     <body>
 		<div class="container">
