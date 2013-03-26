@@ -1,4 +1,25 @@
-function graficar(provincia, data, minimo, maximo) {
+function graficarBarra(valores, colores) {
+	$('#chaptersMap').html('');
+	$('#chaptersMap').jqplot([valores], {
+		title: 'Bar Chart with Custom Colors',
+		// Provide a custom seriesColors array to override the default colors.
+		seriesColors: colores,
+		seriesDefaults: {
+			renderer: $.jqplot.BarRenderer,
+			rendererOptions: {
+				// Set varyBarColor to tru to use the custom colors on the bars.
+				varyBarColor: true
+			}
+		},
+		axes: {
+			xaxis: {
+				renderer: $.jqplot.CategoryAxisRenderer
+			}
+		}
+	});
+}
+
+function graficarMapa(provincia, data, minimo, maximo) {
 	$('#chaptersMap').html('');
 	$.getScript('js/data_' + provincia + '.js', function() {
 		var r = Raphael('chaptersMap', 400, 400);
@@ -31,20 +52,11 @@ function graficar(provincia, data, minimo, maximo) {
 			obj.attr(attributes);
 			/* Al estar encima el mouse de nuestro correntPath, Cambiamos el color y se restablece cuando se deja */
 			obj.hover(function() {
-				this.animate({
-					fill: '#733A6A',
-					stroke: '#1F131D'
-				}, 300);
 				bbox = this.getBBox();
 				_label.attr({
-					text: paths[arr[this.id]].name
-							//text: data["030105"].valor
+					text: paths[arr[this.id]].name + " , " + data[paths[arr[this.id]].ubigeo].valor
 				}).update(bbox.x, bbox.y + bbox.height / 2, bbox.width).toFront().show();
 			}, function() {
-				this.animate({
-					fill: paths[arr[this.id]].color,
-					stroke: attributes.stroke
-				}, 300);
 				_label.hide();
 			});
 			/* Accion cuando le damos click a alguna parte de nuestro mapa */
@@ -123,7 +135,28 @@ $(document).ready(function() {
 			function(datos2) {
 				minimo = datos2.minimo;
 				maximo = datos2.maximo;
-				graficar(provincia, data, minimo, maximo);
+				var grafico = $('#cbGrafico').val();
+				if (grafico === '01') {
+					graficarMapa(provincia, data, minimo, maximo);
+				}
+				if (grafico === '02') {
+					var valores = new Array();
+					var colores = new Array();
+					for (ubigeo in data) {
+						var dataValor = parseFloat(data[ubigeo].valor);
+						valores.push([data[ubigeo].nombre, dataValor]);
+						if (dataValor < minimo) {
+							colores.push("red");
+						}
+						if (dataValor > maximo) {
+							colores.push("green");
+						}
+						if (dataValor >= minimo && dataValor <= maximo) {
+							colores.push("yellow");
+						}
+					}
+					graficarBarra(valores, colores);
+				}
 			}, "json");
 		}, "json");
 	});

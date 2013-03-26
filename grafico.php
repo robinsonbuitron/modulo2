@@ -8,6 +8,12 @@
 		<script src="js/raphael-min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" src="js/grafico.js"></script>
 		<link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min.css" />
+		<script type="text/javascript" src="jqplot/jquery.jqplot.min.js"></script>
+		<script type="text/javascript" src="jqplot/plugins/jqplot.barRenderer.min.js"></script>
+		<script type="text/javascript" src="jqplot/plugins/jqplot.pieRenderer.min.js"></script>
+		<script type="text/javascript" src="jqplot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+		<script type="text/javascript" src="jqplot/plugins/jqplot.pointLabels.min.js"></script>
+		<link rel="stylesheet" type="text/css" hrf="jqplot/jquery.jqplot.min.css" />
 	</head>
     <body>
 		<div class="container">
@@ -18,10 +24,10 @@
 							<div class="control-group">
 								<label class="control-label">Tipo de Grafico:</label>
 								<div class="controls">
-									<select class="span5">
-										<option>Mapas</option>
-										<option>Barras</option>
-										<option>Circulares</option>
+									<select id="cbGrafico" class="span5">
+										<option value="01">Mapas</option>
+										<option value="02">Barras</option>
+										<option value="03">Circulares</option>
 									</select>
 								</div>
 							</div>
@@ -29,7 +35,7 @@
 								<label class="control-label">Institucion:</label>
 								<div class="controls">
 									<select id="cbInstitucion" class="span6">
-										
+
 									</select>
 								</div>
 							</div>
@@ -44,7 +50,7 @@
 						<div class="span4">
 							<legend>Leyenda</legend>
 							<div id="leyenda">
-							
+
 							</div>
 						</div>
 
