@@ -4,12 +4,14 @@ function graficarBarra(valores, colores) {
 		title: 'Bar Chart with Custom Colors',
 		// Provide a custom seriesColors array to override the default colors.
 		seriesColors: colores,
+		animate: !$.jqplot.use_excanvas,
 		seriesDefaults: {
 			renderer: $.jqplot.BarRenderer,
 			rendererOptions: {
 				// Set varyBarColor to tru to use the custom colors on the bars.
 				varyBarColor: true
-			}
+			},
+			pointLabels: {show: true}
 		},
 		axes: {
 			xaxis: {
@@ -17,6 +19,12 @@ function graficarBarra(valores, colores) {
 			}
 		}
 	});
+
+	$('#chaptersMap').bind('jqplotDataClick',
+			function(ev, seriesIndex, pointIndex, data) {
+				$('#info1').html('series: ' + seriesIndex + ', point: ' + pointIndex + ', data: ' + data);
+			}
+	);
 }
 
 function graficarMapa(provincia, data, minimo, maximo) {
