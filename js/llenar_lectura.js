@@ -32,7 +32,8 @@ function guardarDato(indicador, ubigeo, periodo, anio, valor) {
 		valor: valor
 	},
 	function(data) {
-		$("#resultado").html(data.html);
+		//$("#resultado").html(data.html);
+		alert(data.html);
 	}, "json");
 }
 
@@ -65,7 +66,8 @@ function guardarLectura() {
 			guardarDato(indicador, registro[0], periodo, anio, registro[1]);
 		}
 	} else {
-		$("#resultado").html('<div class="alert alert-error"><strong>Error!</strong> Corriga o complete los valores que faltan</div>');
+		//$("#resultado").html('<div class="alert alert-error"><strong>Error!</strong> Corriga o complete los valores que faltan</div>');
+		alert("Error! Corriga o complete los valores que faltan");
 	}
 	//guardarDato(indicador, ubigeo, periodo, anio, valor);
 }

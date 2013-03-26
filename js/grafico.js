@@ -28,6 +28,13 @@ function graficarBarra(valores, colores) {
 			},
 			pointLabels: {show: true}
 		},
+		axesDefaults: {
+			tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+			tickOptions: {
+				angle: -30,
+				fontSize: '10pt'
+			}
+		},
 		axes: {
 			xaxis: {
 				renderer: $.jqplot.CategoryAxisRenderer
