@@ -38,6 +38,11 @@ function graficarBarra(valores, colores) {
 		axes: {
 			xaxis: {
 				renderer: $.jqplot.CategoryAxisRenderer
+			},
+			yaxis: {
+				tickOptions: {
+					formatString: "%#.2f"
+				}
 			}
 		}
 	});
