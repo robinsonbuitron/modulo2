@@ -16,7 +16,7 @@ function graficarCirculares(data) {
 function graficarBarra(valores, colores) {
 	$('#chaptersMap').html('');
 	$('#chaptersMap').jqplot([valores], {
-		title: 'Bar Chart with Custom Colors',
+		title: 'Grafico de ' + $("#cbIndicador option:selected").text(),
 		// Provide a custom seriesColors array to override the default colors.
 		seriesColors: colores,
 		animate: !$.jqplot.use_excanvas,
