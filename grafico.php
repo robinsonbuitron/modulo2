@@ -54,7 +54,7 @@
 							</div>
 						</div>
 						<div class="span4">
-							<legend>Leyenda</legend>
+							<legend id="tituloLeyenda">Leyenda</legend>
 							<div id="leyenda">
 
 							</div>

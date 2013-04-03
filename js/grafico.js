@@ -120,6 +120,7 @@ function cargarLeyenda() {
 	},
 	function(data) {
 		$("#leyenda").html('');
+		$('#tituloLeyenda').html("Leyenda en " + data.unidadMedida);
 		$("#leyenda").html("<li class='text-error'>Bajo < " + data.minimo + "</li><li class='text-warning'> " + data.minimo + " <= Medio < " + data.maximo + "</li><li class='text-success'>Alto >= " + data.maximo + "</li>");
 	}, "json");
 }

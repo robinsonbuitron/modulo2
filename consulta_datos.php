@@ -43,12 +43,13 @@ if (isset($_POST['peticion'])) {
 
 	if ($peticion == "minimo_maximo") {
 		$idindicador = $_POST['indicador'];
-		$resultado = $conexion->consulta("select valorminimo, valormaximo from tindicador where idindicador='$idindicador'");
+		$resultado = $conexion->consulta("select ti.valorminimo, ti.valormaximo,tu.abreviatura from tindicador ti join tunidadmedida tu on ti.idunidadmedida=tu.idunidadmedida where idindicador='$idindicador'");
 		$filas = pg_numrows($resultado);
 		if ($filas != 0) {
 			for ($cont = 0; $cont < $filas; $cont++) {
 				$jsondata['minimo'] = pg_result($resultado, $cont, 0);
 				$jsondata['maximo'] = pg_result($resultado, $cont, 1);
+				$jsondata['unidadMedida'] = pg_result($resultado, $cont, 2);
 			}
 		}
 	}
