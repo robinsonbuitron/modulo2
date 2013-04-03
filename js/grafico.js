@@ -124,6 +124,57 @@ function cargarLeyenda() {
 	}, "json");
 }
 
+function graficar() {
+	var provincia = $('#cbProvincia').val();
+	var indicador = $('#cbIndicador').val();
+	var anio = $('#cbAnio').val();
+	var periodo = $('#cbPeriodo').val();
+	var data, minimo, maximo;
+	$.post("consulta_grafico.php", {
+		provincia: provincia,
+		indicador: indicador,
+		anio: anio,
+		periodo: periodo
+	},
+	function(datos) {
+		data = datos;
+		$.post("consulta_datos.php", {
+			peticion: "minimo_maximo",
+			indicador: indicador
+		},
+		function(datos2) {
+			minimo = datos2.minimo;
+			maximo = datos2.maximo;
+			var grafico = $('#cbGrafico').val();
+			if (grafico === '01') {
+				graficarMapa(provincia, data, minimo, maximo);
+			} else {
+				var valores = new Array();
+				var colores = new Array();
+				for (ubigeo in data) {
+					var dataValor = parseFloat(data[ubigeo].valor);
+					valores.push([data[ubigeo].nombre, dataValor]);
+					if (dataValor < minimo) {
+						colores.push("red");
+					}
+					if (dataValor > maximo) {
+						colores.push("green");
+					}
+					if (dataValor >= minimo && dataValor <= maximo) {
+						colores.push("yellow");
+					}
+				}
+				if (grafico === '02') {
+					graficarBarra(valores, colores);
+				}
+				if (grafico === '03') {
+					graficarCirculares(valores);
+				}
+			}
+		}, "json");
+	}, "json");
+}
+
 $(document).ready(function() {
 	$('#cbInstitucion').change(function() {
 		cargarIndicadores();
@@ -149,54 +200,24 @@ $(document).ready(function() {
 		});
 		$("#cbInstitucion").trigger('change');
 	}, "json");
-	$('#btnGraficar').on('click', function() {
-		var provincia = $('#cbProvincia').val();
-		var indicador = $('#cbIndicador').val();
-		var anio = $('#cbAnio').val();
-		var periodo = $('#cbPeriodo').val();
-		var data, minimo, maximo;
-		$.post("consulta_grafico.php", {
-			provincia: provincia,
-			indicador: indicador,
-			anio: anio,
-			periodo: periodo
-		},
-		function(datos) {
-			data = datos;
-			$.post("consulta_datos.php", {
-				peticion: "minimo_maximo",
-				indicador: indicador
-			},
-			function(datos2) {
-				minimo = datos2.minimo;
-				maximo = datos2.maximo;
-				var grafico = $('#cbGrafico').val();
-				if (grafico === '01') {
-					graficarMapa(provincia, data, minimo, maximo);
-				} else {
-					var valores = new Array();
-					var colores = new Array();
-					for (ubigeo in data) {
-						var dataValor = parseFloat(data[ubigeo].valor);
-						valores.push([data[ubigeo].nombre, dataValor]);
-						if (dataValor < minimo) {
-							colores.push("red");
-						}
-						if (dataValor > maximo) {
-							colores.push("green");
-						}
-						if (dataValor >= minimo && dataValor <= maximo) {
-							colores.push("yellow");
-						}
-					}
-					if (grafico === '02') {
-						graficarBarra(valores, colores);
-					}
-					if (grafico === '03') {
-						graficarCirculares(valores);
-					}
-				}
-			}, "json");
-		}, "json");
+
+	$('#cbGrafico').on('change', function() {
+		graficar();
 	});
+	$('#cbInstitucion').on('change', function() {
+		graficar();
+	});
+	$('#cbIndicador').on('change', function() {
+		graficar();
+	});
+	$('#cbAnio').on('change', function() {
+		graficar();
+	});
+	$('#cbPeriodo').on('change', function() {
+		graficar();
+	});
+	$('#cbProvincia').on('change', function() {
+		graficar();
+	});
+	$('#cbGrafico').trigger('change');
 });

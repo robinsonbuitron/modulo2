@@ -24,17 +24,22 @@ function cargarTabla() {
 	var indicador = $('#cbIndicador option:selected').text();
 	var anio = $('#cbAnio option:selected').text();
 	var periodo = $('#cbPeriodo option:selected').text();
+	var idperiodo = $('#cbPeriodo').val();
+	var idindicador = $('#cbIndicador').val();
 	$.get("llenar_lectura_tabla.php", {
 		provincia: provincia,
 		indicador: indicador,
 		anio: anio,
-		periodo: periodo
+		periodo: periodo,
+		idindicador: idindicador,
+		idperiodo: idperiodo
 	},
 	function(data) {
 		$("#tablaInstitucion").html(data);
 		//$("#tablaInstitucion").valid();
 	}, "html");
 }
+
 function cargarExcel() {
 	var provincia = $('#cbProvincia').val();
 	var indicador = $('#cbIndicador option:selected').text();

@@ -105,7 +105,6 @@
 						<select id="cbProvincia" size="8">
 							<option selected value="xx" >Todo Apurimac</option>
 						</select>
-						<button class="btn btn-primary" id="btnGraficar">Graficar</button>
 					</div>
 					<div class="span9 text-center">
 						<div id="chaptersMap">
