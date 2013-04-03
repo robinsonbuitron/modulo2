@@ -1,3 +1,24 @@
+function cargarVariablesExcel(file) {
+	var provincia = $('#cbProvincia').val();
+	$.get("procesar_variables.php", {
+		provincia: provincia,
+		file: file
+	},
+	function(data) {
+		$("#example tbody tr").each(function(index) {
+			var valor, ubigeo;
+			$(this).children("td").each(function(index2) {
+				ubigeo = $(this).closest('tr').attr("id");
+				switch (index2) {
+					case 4:
+						valor = $(this).children().first().val(data[ubigeo]);
+						break;
+				}
+			});
+		});
+	}, "json");
+}
+
 function cargarTabla() {
 	var provincia = $('#cbProvincia').val();
 	var indicador = $('#cbIndicador option:selected').text();
@@ -112,7 +133,30 @@ $(document).ready(function() {
 		cargarExcel();
 	});
 
-	$('#btnCargarExcel').on('click', function() {
+	$('#btnGuardarDatos').on('click', function() {
 		guardarLectura();
+	});
+	$('#btnCargarVariablesExcel').on('click', function() {
+		cargarTabla();
+		var aux = new AjaxUpload('#btnCargarVariablesExcel', {
+			action: 'upload.php',
+			onSubmit: function(file, ext) {
+				if (!(ext && /^(xls|xlsx|xlt|xltx)$/.test(ext))) {
+					// extensiones permitidas
+					alert('Error: Solo se permiten archivos excel');
+					// cancela upload
+					return false;
+				} else {
+					$('#btnCargarVariablesExcel').val('Cargando...');
+					this.disable();
+				}
+			},
+			onComplete: function(file, response) {
+				cargarVariablesExcel(file);
+				$('#btnCargarVariablesExcel').val('Importar');
+				alert('El Archivo ha sido cargado, empezaremos a procesar...');
+				this.enable();
+			}
+		});
 	});
 });
