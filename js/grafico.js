@@ -13,11 +13,47 @@ function graficarCirculares(data) {
 	);
 }
 
+function graficarHistorico(valores) {
+	$('#chaptersMap').html('');
+	$('#chaptersMap').jqplot([valores], {
+		title: $("#cbIndicador option:selected").text(),
+		animate: !$.jqplot.use_excanvas,
+		seriesDefaults: {
+			renderer: $.jqplot.BarRenderer,
+			rendererOptions: {
+				varyBarColor: true
+			},
+			pointLabels: {show: true}
+		},
+		axesDefaults: {
+			tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+			tickOptions: {
+				angle: -30,
+				fontSize: '10pt'
+			}
+		},
+		axes: {
+			xaxis: {
+				renderer: $.jqplot.CategoryAxisRenderer
+			},
+			yaxis: {
+				tickOptions: {
+					formatString: "%#.2f"
+				}
+			}
+		}
+	});
+
+	$('#chaptersMap').bind('jqplotDataClick', function(ev, seriesIndex, pointIndex, data) {
+		$('#info1').html('series: ' + seriesIndex + ', point: ' + pointIndex + ', data: ' + data);
+	});
+}
+
 function graficarBarra(valores, colores) {
 	$('#chaptersMap').html('');
 	$('#chaptersMap').jqplot([valores], {
-		title: 'Grafico de ' + $("#cbIndicador option:selected").text(),
-		// Provide a custom seriesColors array to override the default colors.
+		title: $("#cbIndicador option:selected").text(),
+// Provide a custom seriesColors array to override the default colors.
 		seriesColors: colores,
 		animate: !$.jqplot.use_excanvas,
 		seriesDefaults: {
@@ -47,11 +83,9 @@ function graficarBarra(valores, colores) {
 		}
 	});
 
-	$('#chaptersMap').bind('jqplotDataClick',
-			function(ev, seriesIndex, pointIndex, data) {
-				$('#info1').html('series: ' + seriesIndex + ', point: ' + pointIndex + ', data: ' + data);
-			}
-	);
+	$('#chaptersMap').bind('jqplotDataClick', function(ev, seriesIndex, pointIndex, data) {
+		$('#info1').html('series: ' + seriesIndex + ', point: ' + pointIndex + ', data: ' + data);
+	});
 }
 
 function graficarMapa(provincia, data, minimo, maximo) {
@@ -93,8 +127,7 @@ function graficarMapa(provincia, data, minimo, maximo) {
 				}).update(bbox.x, bbox.y + bbox.height / 2, bbox.width).toFront().show();
 			}, function() {
 				_label.hide();
-			});
-			/* Accion cuando le damos click a alguna parte de nuestro mapa */
+			}); 	 	/* Accion cuando le damos click a alguna parte de nuestro mapa */
 			obj.click(function() {
 				location.href = paths[arr[this.id]].url;
 			});
@@ -131,60 +164,70 @@ function graficar() {
 	var anio = $('#cbAnio').val();
 	var periodo = $('#cbPeriodo').val();
 	var data, minimo, maximo;
-	$.post("consulta_grafico.php", {
-		provincia: provincia,
-		indicador: indicador,
-		anio: anio,
-		periodo: periodo
-	},
-	function(datos) {
-		data = datos;
-		$.post("consulta_datos.php", {
-			peticion: "minimo_maximo",
-			indicador: indicador
+	var grafico = $('#cbGrafico').val();
+	if (grafico == "04") {
+		$.post("consulta_grafico.php", {
+			peticion: "historico",
+			provincia: provincia,
+			indicador: indicador,
+			periodo: periodo
 		},
-		function(datos2) {
-			minimo = datos2.minimo;
-			maximo = datos2.maximo;
-			var grafico = $('#cbGrafico').val();
-			if (grafico === '01') {
-				graficarMapa(provincia, data, minimo, maximo);
-			} else {
-				var valores = new Array();
-				var colores = new Array();
-				for (ubigeo in data) {
-					var dataValor = parseFloat(data[ubigeo].valor);
-					valores.push([data[ubigeo].nombre, dataValor]);
-					if (dataValor < minimo) {
-						colores.push("red");
-					}
-					if (dataValor > maximo) {
-						colores.push("green");
-					}
-					if (dataValor >= minimo && dataValor <= maximo) {
-						colores.push("yellow");
-					}
-				}
-				if (grafico === '02') {
-					graficarBarra(valores, colores);
-				}
-				if (grafico === '03') {
-					graficarCirculares(valores);
-				}
-			}
+		function(datos) {
+			graficarHistorico(datos);
 		}, "json");
-	}, "json");
+	} else {
+		$.post("consulta_grafico.php", {
+			provincia: provincia,
+			indicador: indicador,
+			anio: anio,
+			periodo: periodo
+		},
+		function(datos) {
+			data = datos;
+			$.post("consulta_datos.php", {
+				peticion: "minimo_maximo",
+				indicador: indicador
+			},
+			function(datos2) {
+				minimo = datos2.minimo;
+				maximo = datos2.maximo;
+				if (grafico === '01') {
+					graficarMapa(provincia, data, minimo, maximo);
+				} else {
+					var valores = new Array();
+					var colores = new Array();
+					for (ubigeo in data) {
+						var dataValor = parseFloat(data[ubigeo].valor);
+						valores.push([data[ubigeo].nombre, dataValor]);
+						if (dataValor < minimo) {
+							colores.push("red");
+						}
+						if (dataValor > maximo) {
+							colores.push("green");
+						}
+						if (dataValor >= minimo && dataValor <= maximo) {
+							colores.push("yellow");
+						}
+					}
+					if (grafico === '02') {
+						graficarBarra(valores, colores);
+					}
+					if (grafico === '03') {
+						graficarCirculares(valores);
+					}
+				}
+			}, "json");
+		}, "json");
+	}
 }
 
 $(document).ready(function() {
 	$('#cbInstitucion').change(function() {
 		cargarIndicadores();
 	});
-
 	$('#cbIndicador').change(function() {
 		cargarLeyenda();
 	});
-
 	$.post("consulta_datos_html.php", {
 		peticion: "provincia"
 	},

@@ -119,6 +119,14 @@ if (!isset($_SESSION['s_username'])) {
 										<option>2010</option>
 										<option>2009</option>
 										<option>2008</option>
+										<option>2007</option>
+										<option>2006</option>
+										<option>2005</option>
+										<option>2004</option>
+										<option>2003</option>
+										<option>2002</option>
+										<option>2001</option>
+										<option>2000</option>
 									</select>
 								</div>
 							</div>

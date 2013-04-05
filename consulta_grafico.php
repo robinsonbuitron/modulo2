@@ -37,4 +37,23 @@ if (isset($_POST['provincia'])) {
 	}
 	echo json_encode($jsondata);
 }
+if (isset($_POST['peticion'])) {
+	if ($_POST['peticion'] == "historico") {
+		$provincia = $_POST['provincia'];
+		$indicador = $_POST['indicador'];
+		$periodo = $_POST['periodo'];
+		include_once 'conexion/pgsql.php';
+		$conexion = new ConexionPGSQL();
+		$conexion->conectar();
+		$resultado = $conexion->consulta("select tl.valor, tl.anio from tlectura tl join tprovincia tp on tl.ubigeo=tp.ubigeo where tl.idindicador='$indicador' and tl.idperiodo='$periodo' and tp.codprovincia='$provincia'");
+		$filas = pg_numrows($resultado);
+		if ($filas != 0) {
+			$jsondata = array();
+			for ($cont = 0; $cont < $filas; $cont++) {
+				array_push($jsondata, array(pg_result($resultado, $cont, 0), pg_result($resultado, $cont, 1)));
+			}
+			echo json_encode($jsondata);
+		}
+	}
+}
 ?>
