@@ -13,14 +13,17 @@ function graficarCirculares(data) {
 	);
 }
 
-function graficarHistorico(valores) {
+function graficarHistorico(valores, colores) {
 	$('#chaptersMap').html('');
 	$('#chaptersMap').jqplot([valores], {
-		title: $("#cbIndicador option:selected").text(),
+		title: $("#cbIndicador option:selected").text() + " - " + $("#cbProvincia option:selected").text(),
+// Provide a custom seriesColors array to override the default colors.
+		seriesColors: colores,
 		animate: !$.jqplot.use_excanvas,
 		seriesDefaults: {
 			renderer: $.jqplot.BarRenderer,
 			rendererOptions: {
+				// Set varyBarColor to tru to use the custom colors on the bars.
 				varyBarColor: true
 			},
 			pointLabels: {show: true}
@@ -165,15 +168,30 @@ function graficar() {
 	var periodo = $('#cbPeriodo').val();
 	var data, minimo, maximo;
 	var grafico = $('#cbGrafico').val();
-	if (grafico == "04") {
+	if (grafico === "04") {
 		$.post("consulta_grafico.php", {
 			peticion: "historico",
 			provincia: provincia,
 			indicador: indicador,
 			periodo: periodo
 		},
-		function(datos) {
-			graficarHistorico(datos);
+		function(data) {
+			var valores = new Array();
+			var colores = new Array();
+			for (ubigeo in data) {
+				var dataValor = parseFloat(data[ubigeo].valor);
+				valores.push([String(data[ubigeo].anio), dataValor]);
+				if (dataValor < minimo) {
+					colores.push("red");
+				}
+				if (dataValor > maximo) {
+					colores.push("green");
+				}
+				if (dataValor >= minimo && dataValor <= maximo) {
+					colores.push("yellow");
+				}
+			}
+			graficarHistorico(valores, colores);
 		}, "json");
 	} else {
 		$.post("consulta_grafico.php", {

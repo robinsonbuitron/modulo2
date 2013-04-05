@@ -20,6 +20,38 @@
 		<script type="text/javascript" src="jqplot/plugins/jqplot.pointLabels.min.js"></script>
 		<script type="text/javascript" src="jqplot/plugins/jqplot.donutRenderer.min.js"></script>
 		<script type="text/javascript" src="js/grafico.js"></script>
+		<style type="text/css">
+
+            html,
+            body {
+                height: 100%;
+            }
+            #wrap {
+                min-height: 100%;
+                height: auto !important;
+                height: 100%;
+                margin: 0 auto -60px;
+            }
+            #push,
+            #footer {
+                height: 60px;
+            }
+            #footer {
+                background-color: #f5f5f5;
+            }
+            @media (max-width: 767px) {
+                #footer {
+                    margin-left: -20px;
+                    margin-right: -20px;
+                    padding-left: 20px;
+                    padding-right: 20px;
+                }
+            }
+
+            .container .credit {
+                margin: 20px 0;
+            }
+        </style>
 	</head>
     <body>
 		<div class="container">
@@ -31,16 +63,16 @@
 								<label class="control-label">Tipo de Grafico:</label>
 								<div class="controls">
 									<select id="cbGrafico" class="span5">
-										<option value="01">Mapas</option>
-										<option value="02">Barras</option>
-										<option value="03">Circulares</option>
-										<option value="04">Historico</option>
-									</select>
+											   <option value="01">Mapas</option>
+											   <option value="02">Barras</option>
+											   <option value="03">Circulares</option>
+											   <option value="04">Historico</option>
+										   </select>
+									</div>
 								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">Institucion:</label>
-								<div class="controls">
+								<div class="control-group">
+									<label class="control-label">Institucion:</label>
+									<div class="controls">
 									<select id="cbInstitucion" class="span6">
 
 									</select>
@@ -128,5 +160,10 @@
 				</div>
 			</div>
 		</div>
+		<div id="footer">
+            <div class="container">
+                <p class="muted credit">Gobierno Regional de Apurimac - <strong>Proyecto SIAR</strong> <a href="http://siar.regionapurimac.gob.pe/indicadores/grafico.php">Indicadores Apurimac</a></p>
+            </div>
+        </div>
     </body>
 </html>
