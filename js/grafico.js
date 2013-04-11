@@ -155,9 +155,11 @@ function cargarLeyenda() {
 		indicador: $('#cbIndicador').val()
 	},
 	function(data) {
+		//var data = JSON.parse(datos);
 		$("#leyenda").html('');
 		$('#tituloLeyenda').html("Leyenda en " + data.unidadMedida);
 		$("#leyenda").html("<li class='text-error'>Bajo < " + data.minimo + "</li><li class='text-warning'> " + data.minimo + " <= Medio < " + data.maximo + "</li><li class='text-success'>Alto >= " + data.maximo + "</li>");
+		//alert(data.toSource());
 	}, "json");
 }
 
@@ -239,6 +241,14 @@ function graficar() {
 	}
 }
 
+function descargarExcel() {
+	var provincia = $('#cbProvincia').val();
+	var indicador = $('#cbIndicador').val();
+	var anio = $('#cbAnio option:selected').text();
+	var periodo = $('#cbPeriodo').val();
+	window.location.href = 'excel_grafico.php?provincia=' + provincia + '&idindicador=' + indicador + '&anio=' + anio + '&idperiodo=' + periodo;
+}
+
 $(document).ready(function() {
 	$('#cbInstitucion').change(function() {
 		cargarIndicadores();
@@ -280,6 +290,9 @@ $(document).ready(function() {
 	});
 	$('#cbProvincia').on('change', function() {
 		graficar();
+	});
+	$("#btnExcel").on('click', function() {
+		descargarExcel();
 	});
 	$('#cbGrafico').trigger('change');
 });

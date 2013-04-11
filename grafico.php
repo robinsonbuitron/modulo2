@@ -5,8 +5,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>MAPAS-SIARAPURIMAC</title>
 		<link rel="stylesheet" type="text/css" href="jqplot/jquery.jqplot.min.css" />
-		<!--[if lt IE 9]><script language="javascript" type="text/javascript" src="../excanvas.js"></script><![endif]-->
+		<script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js" type="text/javascript"></script>
 		<script src="js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<!--[if lt IE 9]><script language="javascript" type="text/javascript" src="js/excanvas.js"></script><![endif]-->
 		<script type="text/javascript" src="jqplot/jquery.jqplot.min.js"></script>
 		<script type="text/javascript" src="jqplot/plugins/jqplot.pieRenderer.min.js"></script>
 		<script src="js/raphael-min.js" type="text/javascript" charset="utf-8"></script>
@@ -63,16 +64,16 @@
 								<label class="control-label">Tipo de Grafico:</label>
 								<div class="controls">
 									<select id="cbGrafico" class="span5">
-											   <option value="01">Mapas</option>
-											   <option value="02">Barras</option>
-											   <option value="03">Circulares</option>
-											   <option value="04">Historico</option>
-										   </select>
-									</div>
+										<option value="01">Mapas</option>
+										<option value="02">Barras</option>
+										<option value="03">Circulares</option>
+										<option value="04">Historico</option>
+									</select>
 								</div>
-								<div class="control-group">
-									<label class="control-label">Institucion:</label>
-									<div class="controls">
+							</div>
+							<div class="control-group">
+								<label class="control-label">Institucion:</label>
+								<div class="controls">
 									<select id="cbInstitucion" class="span6">
 
 									</select>
@@ -90,6 +91,9 @@
 							<legend id="tituloLeyenda">Leyenda</legend>
 							<div id="leyenda">
 
+							</div>
+							<div class="text-right">
+								<a id="btnExcel" class='btn btn-success'>Descargar Excel</a>
 							</div>
 						</div>
 

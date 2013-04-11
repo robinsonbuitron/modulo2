@@ -1,38 +1,12 @@
-<?php
-
-$provincia = '01';
-$indicador = '1001';
-$anio = '2013';
-$periodo = '101';
-include_once 'conexion/pgsql.php';
-$conexion = new ConexionPGSQL();
-$conexion->conectar();
-if ($provincia == 'xx') {
-	$resultado = $conexion->consulta("select tl.ubigeo, tp.nombre, tl.valor 
-		from tprovincia tp join tlectura tl on tl.ubigeo=tp.ubigeo
-		where tl.idindicador='$indicador' and tl.idperiodo='$periodo' and tl.anio='$anio'");
-	$filas = pg_numrows($resultado);
-	if ($filas != 0) {
-		$jsondata = array();
-		for ($cont = 0; $cont < $filas; $cont++) {
-			$ubigeo = pg_result($resultado, $cont, 0);
-			$jsondata[$ubigeo]['nombre'] = pg_result($resultado, $cont, 1);
-			$jsondata[$ubigeo]['valor'] = pg_result($resultado, $cont, 2);
-		}
-	}
-} else {
-	$resultado = $conexion->consulta("select tl.ubigeo, td.nombre, tl.valor 
-		from tdistrito td join tlectura tl on tl.ubigeo=td.ubigeo
-		where tl.idindicador='$indicador' and tl.idperiodo='$periodo' and tl.anio='$anio' and td.codprovincia='$provincia'");
-	$filas = pg_numrows($resultado);
-	if ($filas != 0) {
-		$jsondata = array();
-		for ($cont = 0; $cont < $filas; $cont++) {
-			$ubigeo = pg_result($resultado, $cont, 0);
-			$jsondata[$ubigeo]['nombre'] = pg_result($resultado, $cont, 1);
-			$jsondata[$ubigeo]['valor'] = pg_result($resultado, $cont, 2);
-		}
-	}
-}
-echo json_encode($jsondata);
-?>
+<script type="text/javascript" src="js/json2.js"></script>
+<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$.post("consulta_datos.php", {
+		peticion: "minimo_maximo",
+		indicador: '1006'
+	},
+	function(strJson) {
+		var data = JSON.getJSONArray(strJson);
+		alert("Unidad Medidad: " + data.unidadMedida);
+	}, "json");
+</script>
