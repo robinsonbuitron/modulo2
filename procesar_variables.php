@@ -37,6 +37,7 @@ if (isset($_GET['provincia'])) {
 			$aux = $objPHPExcel->getActiveSheet()->getCell('E' . $contador)->getValue();
 			$ubigeo = $objPHPExcel->getActiveSheet()->getCell('B' . $contador)->getValue();
 		}
+		//formula para el calculo de un indicador, apartir de variables
 		foreach ($jsondata as $key => $value) {
 			$jsondata[$key] = round(($jsondata[$key] / ($contador - 2)), 2);
 		}

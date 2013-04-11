@@ -54,6 +54,33 @@ if (!isset($_SESSION['s_username'])) {
 				$jsondata['html'] = '<div class="alert alert-success"><strong>Correcto!</strong> Se elimino un usuario</div>';
 			}
 		}
+		if ($action == "password") {
+			$password = $_POST["password"];
+			$newPassword = $_POST["newPassword"];
+			$resultado = $conexion->consulta("select * from tusuario where idusuario='" . $_SESSION["s_username"] . "'");
+			$filas = pg_numrows($resultado);
+			if ($filas != 0) {
+				include 'lib/Encrypter.php';
+				$password2 = pg_result($resultado, 0, 4);
+				$password = Encrypter::encrypt($password);
+				if ($password2 == $password) {
+					$sql = $conexion->consulta("UPDATE tusuario SET password='" . Encrypter::encrypt($newPassword) . "' WHERE idusuario='" . $_SESSION['s_username'] . "';");
+					if (!$sql) {
+						$jsondata['title'] = "error";
+						$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> No se pudo modificar la contraseña</div>';
+					} else {
+						$jsondata['title'] = "correcto";
+						$jsondata['html'] = '<div class="alert alert-success"><strong>Correcto!</strong> Se modifico la contraseña</div>';
+					}
+				} else {
+					$jsondata['title'] = "error";
+					$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> Las contraseñas no son iguales</div>';
+				}
+			} else {
+				$jsondata['title'] = "error";
+				$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> No se encontro el usuario</div>';
+			}
+		}
 	}
 	echo json_encode($jsondata);
 }

@@ -7,10 +7,6 @@ $(document).ready(function() {
         }, jQuery.format("Escriba Nombre y Apellidos"));
         $("#formInsertar").validate({
             rules: {
-                txtCodigo: {
-                    required: true,
-                    digits: true
-                },
                 txtNombre: {
                     required: true,
                     minlength: 2,
@@ -27,9 +23,6 @@ $(document).ready(function() {
                 }
             },
             messages: {
-                txtCodigo: {
-                    required: "Ingrese un número de DNI válido"
-                },
                 txtNombre: {
                     required: "Ingrese un Nombre y Apellido"
                 },

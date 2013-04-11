@@ -93,49 +93,53 @@ function graficarBarra(valores, colores) {
 
 function graficarMapa(provincia, data, minimo, maximo) {
 	$('#chaptersMap').html('');
-	$.getScript('js/data_' + provincia + '.js', function() {
-		var r = Raphael('chaptersMap', 400, 400);
-		r.safari();
-		var _label = r.popup(50, 50, "").hide();
-		var attributes = {
-			fill: '#485e96',
-			stroke: '#1e336a',
-			'stroke-width': 1,
-			'stroke-linejoin': 'round',
-			cursor: "pointer"
-		};
-		arr = new Array();
-		/* para cada path de nuestra fuente svg vamos a dibujar un path del tipo Raphael */
-		for (var correntPath in paths) {
-			var obj = r.path(paths[correntPath].path);
-			arr[obj.id] = correntPath;
-			var ubigeo = paths[correntPath].ubigeo;
-			var valor = parseFloat(data[ubigeo].valor);
-			if (valor < minimo) {
-				attributes.fill = 'red';
-			}
-			if (valor > maximo) {
-				attributes.fill = 'green';
-			}
-			if (valor <= maximo && valor >= minimo) {
-				attributes.fill = 'yellow';
-			}
-			//attributes.fill = paths[correntPath].color;
-			obj.attr(attributes);
-			/* Al estar encima el mouse de nuestro correntPath, Cambiamos el color y se restablece cuando se deja */
-			obj.hover(function() {
-				bbox = this.getBBox();
-				_label.attr({
-					text: paths[arr[this.id]].name + " , " + data[paths[arr[this.id]].ubigeo].valor
-				}).update(bbox.x, bbox.y + bbox.height / 2, bbox.width).toFront().show();
-			}, function() {
-				_label.hide();
-			}); 	 	/* Accion cuando le damos click a alguna parte de nuestro mapa */
-			obj.click(function() {
-				location.href = paths[arr[this.id]].url;
-			});
-		}//fin For
-	});
+	if (data.lenght !== 0 && data !== null) {
+		$.getScript('js/data_' + provincia + '.js', function() {
+			var r = Raphael('chaptersMap', 400, 400);
+			r.safari();
+			var _label = r.popup(50, 50, "").hide();
+			var attributes = {
+				fill: '#485e96',
+				stroke: '#1e336a',
+				'stroke-width': 1,
+				'stroke-linejoin': 'round',
+				cursor: "pointer"
+			};
+			arr = new Array();
+			/* para cada path de nuestra fuente svg vamos a dibujar un path del tipo Raphael */
+			for (var correntPath in paths) {
+				var obj = r.path(paths[correntPath].path);
+				arr[obj.id] = correntPath;
+				var ubigeo = paths[correntPath].ubigeo;
+				var valor = parseFloat(data[ubigeo].valor);
+				if (valor < minimo) {
+					attributes.fill = 'red';
+				}
+				if (valor > maximo) {
+					attributes.fill = 'green';
+				}
+				if (valor <= maximo && valor >= minimo) {
+					attributes.fill = 'yellow';
+				}
+				//attributes.fill = paths[correntPath].color;
+				obj.attr(attributes);
+				/* Al estar encima el mouse de nuestro correntPath, Cambiamos el color y se restablece cuando se deja */
+				obj.hover(function() {
+					bbox = this.getBBox();
+					_label.attr({
+						text: paths[arr[this.id]].name + " , " + data[paths[arr[this.id]].ubigeo].valor
+					}).update(bbox.x, bbox.y + bbox.height / 2, bbox.width).toFront().show();
+				}, function() {
+					_label.hide();
+				}); 	 	/* Accion cuando le damos click a alguna parte de nuestro mapa */
+				obj.click(function() {
+					location.href = paths[arr[this.id]].url;
+				});
+			}//fin For
+		});
+	} else {
+		$('#chaptersMap').html('<h2>No hay Datos</h2>');
+	}
 }
 
 function cargarIndicadores() {
@@ -164,6 +168,7 @@ function cargarLeyenda() {
 }
 
 function graficar() {
+	$('#chaptersMap').html('');
 	var provincia = $('#cbProvincia').val();
 	var indicador = $('#cbIndicador').val();
 	var anio = $('#cbAnio').val();
@@ -212,7 +217,10 @@ function graficar() {
 				minimo = datos2.minimo;
 				maximo = datos2.maximo;
 				if (grafico === '01') {
-					graficarMapa(provincia, data, minimo, maximo);
+					alert(data);
+					if (data.length !== 0 && data !== null) {
+						graficarMapa(provincia, data, minimo, maximo);
+					}
 				} else {
 					var valores = new Array();
 					var colores = new Array();
@@ -276,9 +284,9 @@ $(document).ready(function() {
 	$('#cbGrafico').on('change', function() {
 		graficar();
 	});
-	$('#cbInstitucion').on('change', function() {
-		graficar();
-	});
+	/*$('#cbInstitucion').on('change', function() {
+	 graficar();
+	 });*/
 	$('#cbIndicador').on('change', function() {
 		graficar();
 	});

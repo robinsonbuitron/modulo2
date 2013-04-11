@@ -32,9 +32,9 @@ if (!isset($_SESSION['s_username'])) {
 					<div class="span12 well">
 						<div class="span7 form-horizontal">
 							<div class="control-group">
-								<label class="control-label">DNI: </label>
+								<label class="control-label">E-mail: </label>
 								<div class="controls">
-									<input id="txtCodigo" name="txtCodigo" maxlength="8" class="span6" type="text" placeholder="Codigo">
+									<input id="txtCodigo" name="txtCodigo" class="span12" type="text" placeholder="Correo Electronico">
 								</div>
 							</div>
 							<div class="control-group">

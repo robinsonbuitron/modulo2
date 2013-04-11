@@ -30,10 +30,10 @@
 				</ul>
 				<div class="btn-group pull-right">
 					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-						<i class="icon-user"></i> administracion	<span class="caret"></span>
+						<i class="icon-user"></i> <?php print $_SESSION["s_nameape"]; ?>	<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="#"><i class="icon-wrench"></i> Configuracion</a></li>
+						<li><a href="configuracion_usuario.php"><i class="icon-wrench"></i> Configuracion</a></li>
 						<li class="divider"></li>
 						<li><a href="logout.php"><i class="icon-share"></i> Cerrar Sesion</a></li>
 					</ul>

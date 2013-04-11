@@ -1,5 +1,6 @@
 <?php
 
+$jsondata = null;
 if (isset($_POST['peticion'])) {
 	if ($_POST['peticion'] == "historico") {
 		$provincia = $_POST['provincia'];
