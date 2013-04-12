@@ -217,7 +217,7 @@ function graficar() {
 				minimo = datos2.minimo;
 				maximo = datos2.maximo;
 				if (grafico === '01') {
-					alert(data);
+					//alert(data);
 					if (data.length !== 0 && data !== null) {
 						graficarMapa(provincia, data, minimo, maximo);
 					}

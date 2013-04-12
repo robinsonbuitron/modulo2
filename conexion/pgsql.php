@@ -19,7 +19,7 @@ class ConexionPGSQL {
 	//creación de la función para cargar los valores de la conexión.
 	public function cargarValores() {
 		$this->host = 'localhost';
-		$this->db = 'dbsiar';
+		$this->db = 'dbindicador';
 		$this->user = 'postgres';
 		$this->pass = '123456';
 		$this->conexion = "host=$this->host dbname=$this->db user=$this->user password=$this->pass";
