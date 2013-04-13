@@ -4,25 +4,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>MAPAS-SIARAPURIMAC</title>
-		<link rel="stylesheet" type="text/css" href="jqplot/jquery.jqplot.min.css" />
-		<script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js" type="text/javascript"></script>
-		<script src="js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
-		<!--[if lt IE 9]><script language="javascript" type="text/javascript" src="js/excanvas.js"></script><![endif]-->
-		<script type="text/javascript" src="jqplot/jquery.jqplot.min.js"></script>
-		<script type="text/javascript" src="jqplot/plugins/jqplot.pieRenderer.min.js"></script>
+		<script src="js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/raphael-min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/highcharts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/modules/exporting.js" type="text/javascript" charset="utf-8"></script>
 		<link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min.css" />
-		<script type="text/javascript" src="jqplot/plugins/jqplot.barRenderer.min.js"></script>
-		<script type="text/javascript" src="jqplot/plugins/jqplot.pieRenderer.min.js"></script>
-		<script type="text/javascript" src="jqplot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-		<script type="text/javascript" src="jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
-		<script type="text/javascript" src="jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
-		<script type="text/javascript" src="jqplot/plugins/jqplot.dateAxisRenderer.min.js"></script>
-		<script type="text/javascript" src="jqplot/plugins/jqplot.pointLabels.min.js"></script>
-		<script type="text/javascript" src="jqplot/plugins/jqplot.donutRenderer.min.js"></script>
 		<script type="text/javascript" src="js/grafico.js"></script>
 		<style type="text/css">
-
             html,
             body {
                 height: 100%;
@@ -61,17 +49,6 @@
 					<div class="row-fluid">
 						<div class="span8 form-horizontal">
 							<div class="control-group">
-								<label class="control-label">Tipo de Grafico:</label>
-								<div class="controls">
-									<select id="cbGrafico" class="span5">
-										<option value="01">Mapas</option>
-										<option value="02">Barras</option>
-										<option value="03">Circulares</option>
-										<option value="04">Historico</option>
-									</select>
-								</div>
-							</div>
-							<div class="control-group">
 								<label class="control-label">Institucion:</label>
 								<div class="controls">
 									<select id="cbInstitucion" class="span6">
@@ -83,6 +60,17 @@
 								<label class="control-label">Indicadores:</label>
 								<div class="controls">
 									<select id="cbIndicador" class="span8">
+									</select>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">Tipo de Grafico:</label>
+								<div class="controls">
+									<select id="cbGrafico" class="span5">
+										<option value="01">Mapas</option>
+										<option value="02">Barras</option>
+										<option value="03">Circulares</option>
+										<option value="04">Historico</option>
 									</select>
 								</div>
 							</div>

@@ -1,16 +1,66 @@
-function graficarCirculares(data) {
-	$('#chaptersMap').html('');
-	var plot1 = jQuery.jqplot('chaptersMap', [data],
-			{
-				seriesDefaults: {
-					renderer: jQuery.jqplot.PieRenderer,
-					rendererOptions: {
-						showDataLabels: true
+function graficarCirculares(lienzo, indicador, provincia, periodo, anio) {
+	var indicadorName = $("#cbIndicador option:selected").text();
+	var peridoName = $("#cbPeriodo option:selected").text();
+	lienzo.highcharts({
+		chart: {
+			plotBackgroundColor: null,
+			plotBorderWidth: null,
+			plotShadow: false
+		},
+		legend: {
+			width: 200,
+			itemWidth: 200,
+			align: 'right',
+			verticalAlign: 'top',
+			x: 0,
+			y: 100
+		},
+		title: {
+			text: indicadorName + ' - ' + peridoName + ' ' + anio
+		},
+		tooltip: {
+			pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>',
+			percentageDecimals: 1
+		},
+		plotOptions: {
+			pie: {
+				allowPointSelect: true,
+				cursor: 'pointer',
+				dataLabels: {
+					enabled: true,
+					color: '#000000',
+					connectorColor: '#000000',
+					formatter: function() {
+						return '<b>' + this.point.name + '</b>: ' + this.percentage.toFixed(2) + ' %';
 					}
 				},
-				legend: {show: true, location: 'e'}
+				showInLegend: true
 			}
-	);
+		},
+		credits: {
+			enabled: false
+		},
+		series: []
+	});
+	$.post("consulta_grafico.php", {
+		peticion: "circulares",
+		provincia: provincia,
+		indicador: indicador,
+		periodo: periodo,
+		anio: anio
+	}, function(data) {
+		var chart = lienzo.highcharts();
+		if (data) {
+			chart.addSeries({
+				type: 'pie',
+				name: indicadorName,
+				data: data
+			});
+		} else {
+			chart.destroy();
+			lienzo.html("<h2>No hay Datos</h2>");
+		}
+	}, "json");
 }
 
 function graficarHistorico(valores, colores) {
@@ -52,43 +102,76 @@ function graficarHistorico(valores, colores) {
 	});
 }
 
-function graficarBarra(valores, colores) {
-	$('#chaptersMap').html('');
-	$('#chaptersMap').jqplot([valores], {
-		title: $("#cbIndicador option:selected").text(),
-// Provide a custom seriesColors array to override the default colors.
-		seriesColors: colores,
-		animate: !$.jqplot.use_excanvas,
-		seriesDefaults: {
-			renderer: $.jqplot.BarRenderer,
-			rendererOptions: {
-				// Set varyBarColor to tru to use the custom colors on the bars.
-				varyBarColor: true
-			},
-			pointLabels: {show: true}
+function graficarBarra(lienzo, indicador, provincia, periodo, anio, minimo, maximo, uMedida) {
+	var indicadorName = $("#cbIndicador option:selected").text();
+	var peridoName = $("#cbPeriodo option:selected").text();
+	lienzo.highcharts({
+		chart: {
+			type: 'column'
 		},
-		axesDefaults: {
-			tickRenderer: $.jqplot.CanvasAxisTickRenderer,
-			tickOptions: {
-				angle: -30,
-				fontSize: '10pt'
+		plotOptions: {
+			column: {
+				stacking: 'normal'
 			}
 		},
-		axes: {
-			xaxis: {
-				renderer: $.jqplot.CategoryAxisRenderer
-			},
-			yaxis: {
-				tickOptions: {
-					formatString: "%#.2f"
+		title: {
+			text: indicadorName + ' - ' + peridoName + ' ' + anio
+		},
+		xAxis: {
+			categories: [],
+			labels: {
+				rotation: -45,
+				align: 'right',
+				style: {
+					fontSize: '12px',
+					fontFamily: 'Verdana, sans-serif'
 				}
 			}
+		},
+		yAxis: {
+			min: 0,
+			title: {
+				text: indicadorName + ' (' + uMedida + ')'
+			},
+			stackLabels: {
+				enabled: true,
+				style: {
+					fontWeight: 'bold',
+					color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+				},
+				formatter: function() {
+					return this.total + uMedida;
+				}
+			}
+		},
+		tooltip: {
+			formatter: function() {
+				return '<b>' + this.x + '</b><br/>' + indicadorName + ': <b>' + this.y + '</b>' + uMedida;
+			}
+		},
+		credits: {
+			enabled: false
+		},
+		series: []
+	});
+	$.post("consulta_grafico.php", {
+		peticion: "barras",
+		provincia: provincia,
+		indicador: indicador,
+		periodo: periodo,
+		anio: anio
+	}, function(data) {
+		var chart = lienzo.highcharts();
+		if (data) {
+			chart.xAxis[0].setCategories(data.categories, false);
+			chart.addSeries(data.series[0], false);
+			chart.addSeries(data.series[1], false);
+			chart.addSeries(data.series[2]);
+		} else {
+			chart.destroy();
+			lienzo.html("<h2>No hay Datos</h2>");
 		}
-	});
-
-	$('#chaptersMap').bind('jqplotDataClick', function(ev, seriesIndex, pointIndex, data) {
-		$('#info1').html('series: ' + seriesIndex + ', point: ' + pointIndex + ', data: ' + data);
-	});
+	}, "json");
 }
 
 function graficarMapa(provincia, data, minimo, maximo) {
@@ -153,100 +236,133 @@ function cargarIndicadores() {
 	}, "html");
 }
 
-function cargarLeyenda() {
-	$.post("consulta_datos.php", {
-		peticion: "minimo_maximo",
-		indicador: $('#cbIndicador').val()
-	},
-	function(data) {
-		//var data = JSON.parse(datos);
-		$("#leyenda").html('');
-		$('#tituloLeyenda').html("Leyenda en " + data.unidadMedida);
-		$("#leyenda").html("<li class='text-error'>Bajo < " + data.minimo + "</li><li class='text-warning'> " + data.minimo + " <= Medio < " + data.maximo + "</li><li class='text-success'>Alto >= " + data.maximo + "</li>");
-		//alert(data.toSource());
-	}, "json");
+function cargarLeyenda(minimo, maximo, uMedida) {
+	$("#leyenda").html('');
+	$('#tituloLeyenda').html("Leyenda en " + uMedida);
+	$("#leyenda").html("<li class='text-error'>Bajo < " + minimo + "</li><li class='text-warning'> " + minimo + " <= Medio < " + maximo + "</li><li class='text-success'>Alto >= " + maximo + "</li>");
 }
+
+/*function graficar() {
+ $('#chaptersMap').html('');
+ var provincia = $('#cbProvincia').val();
+ var indicador = $('#cbIndicador').val();
+ var anio = $('#cbAnio').val();
+ var periodo = $('#cbPeriodo').val();
+ var data, minimo, maximo;
+ var grafico = $('#cbGrafico').val();
+ if (grafico === "04") {
+ $.post("consulta_grafico.php", {
+ peticion: "historico",
+ provincia: provincia,
+ indicador: indicador,
+ periodo: periodo
+ },
+ function(data) {
+ var valores = new Array();
+ var colores = new Array();
+ for (ubigeo in data) {
+ var dataValor = parseFloat(data[ubigeo].valor);
+ valores.push([String(data[ubigeo].anio), dataValor]);
+ if (dataValor < minimo) {
+ colores.push("red");
+ }
+ if (dataValor > maximo) {
+ colores.push("green");
+ }
+ if (dataValor >= minimo && dataValor <= maximo) {
+ colores.push("yellow");
+ }
+ }
+ graficarHistorico(valores, colores);
+ }, "json");
+ } else {
+ $.post("consulta_grafico.php", {
+ provincia: provincia,
+ indicador: indicador,
+ anio: anio,
+ periodo: periodo
+ },
+ function(datos) {
+ data = datos;
+ $.post("consulta_datos.php", {
+ peticion: "minimo_maximo",
+ indicador: indicador
+ },
+ function(datos2) {
+ minimo = datos2.minimo;
+ maximo = datos2.maximo;
+ if (grafico === '01') {
+ if (data.length !== 0 && data !== null) {
+ graficarMapa(provincia, data, minimo, maximo);
+ }
+ } else {
+ var valores = new Array();
+ var colores = new Array();
+ for (ubigeo in data) {
+ var dataValor = parseFloat(data[ubigeo].valor);
+ valores.push([data[ubigeo].nombre, dataValor]);
+ if (dataValor < minimo) {
+ colores.push("red");
+ }
+ if (dataValor > maximo) {
+ colores.push("green");
+ }
+ if (dataValor >= minimo && dataValor <= maximo) {
+ colores.push("yellow");
+ }
+ }
+ if (grafico === '02') {
+ graficarBarra(valores, colores);
+ }
+ if (grafico === '03') {
+ graficarCirculares(valores);
+ }
+ }
+ }, "json");
+ }, "json");
+ }
+ }*/
 
 function graficar() {
 	$('#chaptersMap').html('');
 	var provincia = $('#cbProvincia').val();
 	var indicador = $('#cbIndicador').val();
-	var anio = $('#cbAnio').val();
 	var periodo = $('#cbPeriodo').val();
-	var data, minimo, maximo;
+	var anio = $('#cbAnio').val();
 	var grafico = $('#cbGrafico').val();
-	if (grafico === "04") {
-		$.post("consulta_grafico.php", {
-			peticion: "historico",
-			provincia: provincia,
-			indicador: indicador,
-			periodo: periodo
-		},
-		function(data) {
-			var valores = new Array();
-			var colores = new Array();
-			for (ubigeo in data) {
-				var dataValor = parseFloat(data[ubigeo].valor);
-				valores.push([String(data[ubigeo].anio), dataValor]);
-				if (dataValor < minimo) {
-					colores.push("red");
-				}
-				if (dataValor > maximo) {
-					colores.push("green");
-				}
-				if (dataValor >= minimo && dataValor <= maximo) {
-					colores.push("yellow");
-				}
-			}
-			graficarHistorico(valores, colores);
-		}, "json");
-	} else {
-		$.post("consulta_grafico.php", {
-			provincia: provincia,
-			indicador: indicador,
-			anio: anio,
-			periodo: periodo
-		},
-		function(datos) {
-			data = datos;
-			$.post("consulta_datos.php", {
-				peticion: "minimo_maximo",
-				indicador: indicador
+	var uMedida, minimo, maximo;
+	$.post("consulta_datos.php", {
+		peticion: "datosIndicador",
+		indicador: indicador
+	},
+	function(datos) {
+		minimo = datos.minimo;
+		maximo = datos.maximo;
+		uMedida = datos.uMedida;
+		cargarLeyenda(minimo, maximo, uMedida);
+		if (grafico === "01") {
+			$.post("consulta_grafico.php", {
+				peticion: "mapas",
+				provincia: provincia,
+				indicador: indicador,
+				anio: anio,
+				periodo: periodo
 			},
-			function(datos2) {
-				minimo = datos2.minimo;
-				maximo = datos2.maximo;
-				if (grafico === '01') {
-					//alert(data);
-					if (data.length !== 0 && data !== null) {
-						graficarMapa(provincia, data, minimo, maximo);
-					}
+			function(data) {
+				if (data) {
+					graficarMapa(provincia, data, minimo, maximo);
 				} else {
-					var valores = new Array();
-					var colores = new Array();
-					for (ubigeo in data) {
-						var dataValor = parseFloat(data[ubigeo].valor);
-						valores.push([data[ubigeo].nombre, dataValor]);
-						if (dataValor < minimo) {
-							colores.push("red");
-						}
-						if (dataValor > maximo) {
-							colores.push("green");
-						}
-						if (dataValor >= minimo && dataValor <= maximo) {
-							colores.push("yellow");
-						}
-					}
-					if (grafico === '02') {
-						graficarBarra(valores, colores);
-					}
-					if (grafico === '03') {
-						graficarCirculares(valores);
-					}
+					$('#chaptersMap').html("<h2>No hay Datos</h2>");
 				}
 			}, "json");
-		}, "json");
-	}
+		}
+		if (grafico === "02") {
+			graficarBarra($('#chaptersMap'), indicador, provincia, periodo, anio, minimo, maximo, uMedida);
+		}
+		if (grafico === "03") {
+			graficarCirculares($('#chaptersMap'), indicador, provincia, periodo, anio);
+		}
+	}, "json");
 }
 
 function descargarExcel() {
@@ -284,9 +400,6 @@ $(document).ready(function() {
 	$('#cbGrafico').on('change', function() {
 		graficar();
 	});
-	/*$('#cbInstitucion').on('change', function() {
-	 graficar();
-	 });*/
 	$('#cbIndicador').on('change', function() {
 		graficar();
 	});
@@ -302,5 +415,4 @@ $(document).ready(function() {
 	$("#btnExcel").on('click', function() {
 		descargarExcel();
 	});
-	$('#cbGrafico').trigger('change');
 });
