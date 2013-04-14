@@ -174,55 +174,46 @@ function graficarBarra(lienzo, indicador, provincia, periodo, anio, minimo, maxi
 	}, "json");
 }
 
-function graficarMapa(provincia, data, minimo, maximo) {
-	$('#chaptersMap').html('');
-	if (data.lenght !== 0 && data !== null) {
-		$.getScript('js/data_' + provincia + '.js', function() {
-			var r = Raphael('chaptersMap', 400, 400);
-			r.safari();
-			var _label = r.popup(50, 50, "").hide();
-			var attributes = {
-				fill: '#485e96',
-				stroke: '#1e336a',
-				'stroke-width': 1,
-				'stroke-linejoin': 'round',
-				cursor: "pointer"
-			};
-			arr = new Array();
-			/* para cada path de nuestra fuente svg vamos a dibujar un path del tipo Raphael */
-			for (var correntPath in paths) {
-				var obj = r.path(paths[correntPath].path);
-				arr[obj.id] = correntPath;
-				var ubigeo = paths[correntPath].ubigeo;
-				var valor = parseFloat(data[ubigeo].valor);
-				if (valor < minimo) {
-					attributes.fill = 'red';
-				}
-				if (valor > maximo) {
-					attributes.fill = 'green';
-				}
-				if (valor <= maximo && valor >= minimo) {
-					attributes.fill = 'yellow';
-				}
-				//attributes.fill = paths[correntPath].color;
-				obj.attr(attributes);
-				/* Al estar encima el mouse de nuestro correntPath, Cambiamos el color y se restablece cuando se deja */
-				obj.hover(function() {
-					bbox = this.getBBox();
-					_label.attr({
-						text: paths[arr[this.id]].name + " , " + data[paths[arr[this.id]].ubigeo].valor
-					}).update(bbox.x, bbox.y + bbox.height / 2, bbox.width).toFront().show();
-				}, function() {
-					_label.hide();
-				}); 	 	/* Accion cuando le damos click a alguna parte de nuestro mapa */
-				obj.click(function() {
-					location.href = paths[arr[this.id]].url;
-				});
-			}//fin For
-		});
-	} else {
-		$('#chaptersMap').html('<h2>No hay Datos</h2>');
-	}
+function graficarMapa(provincia, data, minimo, maximo, uMedida) {
+	$.getScript('js/data_' + provincia + '.js', function() {
+		var r = Raphael('chaptersMap', 400, 450);
+		r.safari();
+		var _label = r.popup(50, 50, "").hide();
+		var attributes = {
+			fill: '#485e96',
+			stroke: '#1e336a',
+			'stroke-width': 1,
+			'stroke-linejoin': 'round',
+			cursor: "pointer"
+		};
+		arr = new Array();
+		/* para cada path de nuestra fuente svg vamos a dibujar un path del tipo Raphael */
+		for (var correntPath in paths) {
+			var obj = r.path(paths[correntPath].path);
+			arr[obj.id] = correntPath;
+			var ubigeo = paths[correntPath].ubigeo;
+			var valor = parseFloat(data[ubigeo].valor);
+			if (valor < minimo) {
+				attributes.fill = '#ff0000';
+			}
+			if (valor > maximo) {
+				attributes.fill = '#008000';
+			}
+			if (valor <= maximo && valor >= minimo) {
+				attributes.fill = '#ffff00';
+			}
+			obj.attr(attributes);
+			/* Al estar encima el mouse de nuestro correntPath, Cambiamos el color y se restablece cuando se deja */
+			obj.hover(function() {
+				bbox = this.getBBox();
+				_label.attr({
+					text: paths[arr[this.id]].name + " , " + data[paths[arr[this.id]].ubigeo].valor + uMedida
+				}).update(bbox.x, bbox.y + bbox.height / 2, bbox.width).toFront().show();
+			}, function() {
+				_label.hide();
+			});
+		}//fin For
+	});
 }
 
 function cargarIndicadores() {
@@ -237,8 +228,7 @@ function cargarIndicadores() {
 }
 
 function cargarLeyenda(minimo, maximo, uMedida) {
-	$("#leyenda").html('');
-	$('#tituloLeyenda').html("Leyenda en " + uMedida);
+	$("#tituloLeyenda").html("<h4>Leyenda en " + uMedida + "</h4>");
 	$("#leyenda").html("<li class='text-error'>Bajo < " + minimo + "</li><li class='text-warning'> " + minimo + " <= Medio < " + maximo + "</li><li class='text-success'>Alto >= " + maximo + "</li>");
 }
 
@@ -325,6 +315,7 @@ function cargarLeyenda(minimo, maximo, uMedida) {
 
 function graficar() {
 	$('#chaptersMap').html('');
+	$("#tituloLeyenda").html();
 	var provincia = $('#cbProvincia').val();
 	var indicador = $('#cbIndicador').val();
 	var periodo = $('#cbPeriodo').val();
@@ -336,8 +327,8 @@ function graficar() {
 		indicador: indicador
 	},
 	function(datos) {
-		minimo = datos.minimo;
-		maximo = datos.maximo;
+		minimo = parseFloat(datos.minimo);
+		maximo = parseFloat(datos.maximo);
 		uMedida = datos.uMedida;
 		cargarLeyenda(minimo, maximo, uMedida);
 		if (grafico === "01") {
@@ -350,7 +341,7 @@ function graficar() {
 			},
 			function(data) {
 				if (data) {
-					graficarMapa(provincia, data, minimo, maximo);
+					graficarMapa(provincia, data, minimo, maximo, uMedida);
 				} else {
 					$('#chaptersMap').html("<h2>No hay Datos</h2>");
 				}
@@ -387,15 +378,13 @@ $(document).ready(function() {
 		$("#cbProvincia").append(data);
 	}, "html");
 
-	$.post("consulta_datos.php", {
+	$.post("consulta_datos_html.php", {
 		peticion: "institucion"
 	},
 	function(data) {
-		$.each(data, function(index, value) {
-			$("#cbInstitucion").append("<option value='" + data[index].idinstitucion + "'>" + data[index].siglas + "</option>");
-		});
+		$("#cbInstitucion").html(data);
 		$("#cbInstitucion").trigger('change');
-	}, "json");
+	}, "html");
 
 	$('#cbGrafico').on('change', function() {
 		graficar();

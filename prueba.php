@@ -50,7 +50,7 @@
 					},
 					series: []
 				});
-				$.post("consulta_prueba.php", function(data) {
+				$.post("consulta_prueba.php", {peticion: "hola"}, function(data) {
 					var chart = $('#container').highcharts();
 					chart.addSeries({
 						type: 'pie',

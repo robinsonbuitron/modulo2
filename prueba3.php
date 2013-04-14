@@ -2,9 +2,8 @@
 	<head>
         <title>MAPAS-SIARAPURIMAC</title>
 		<!--[if lt IE 9]><script language="javascript" type="text/javascript" src="../excanvas.js"></script><![endif]-->
-		<script src="js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/raphael-min.js" type="text/javascript" charset="utf-8"></script>
-		<link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min.css" />
 		<script src="js/data_07.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			function graficar() {
@@ -27,19 +26,11 @@
 					obj.attr(attributes);
 					/* Al estar encima el mouse de nuestro correntPath, Cambiamos el color y se restablece cuando se deja */
 					obj.hover(function() {
-						this.animate({
-							fill: '#733A6A',
-							stroke: '#1F131D'
-						}, 300);
 						bbox = this.getBBox();
 						_label.attr({
 							text: paths[arr[this.id]].name
 						}).update(bbox.x, bbox.y + bbox.height / 2, bbox.width).toFront().show();
 					}, function() {
-						this.animate({
-							fill: paths[arr[this.id]].color,
-							stroke: attributes.stroke
-						}, 300);
 						_label.hide();
 					});
 					/* Accion cuando le damos click a alguna parte de nuestro mapa */

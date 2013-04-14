@@ -4,7 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>MAPAS-SIARAPURIMAC</title>
-		<script src="js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/raphael-min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/highcharts.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/modules/exporting.js" type="text/javascript" charset="utf-8"></script>
@@ -76,7 +76,7 @@
 							</div>
 						</div>
 						<div class="span4">
-							<legend id="tituloLeyenda">Leyenda</legend>
+							<div id="tituloLeyenda">Leyenda</div>
 							<div id="leyenda">
 
 							</div>
