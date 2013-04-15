@@ -22,7 +22,7 @@ if (isset($_GET['provincia'])) {
 			$ubigeo = pg_result($resultado, $cont, 0);
 			$jsondata[$ubigeo] = 0;
 		}
-		$objPHPExcel = PHPExcel_IOFactory::load('variablesExcel/' . $file);
+		$objPHPExcel = PHPExcel_IOFactory::load('excel/' . $file);
 		$contador = 2;
 		$aux = $objPHPExcel->getActiveSheet()->getCell('E' . $contador)->getValue();
 		$ubigeo = $objPHPExcel->getActiveSheet()->getCell('B' . $contador)->getValue();

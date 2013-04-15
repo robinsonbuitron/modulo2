@@ -315,7 +315,7 @@ function cargarLeyenda(minimo, maximo, uMedida) {
 
 function graficar() {
 	$('#chaptersMap').html('');
-	$("#tituloLeyenda").html();
+	$("#tituloLeyenda").html("");
 	var provincia = $('#cbProvincia').val();
 	var indicador = $('#cbIndicador').val();
 	var periodo = $('#cbPeriodo').val();

@@ -1,6 +1,6 @@
 <?php
 // defino la carpeta para subir
-$uploaddir = 'variablesExcel/';
+$uploaddir = 'excel/';
 // defino el nombre del archivo
 $uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
 // Lo mueve a la carpeta elegida

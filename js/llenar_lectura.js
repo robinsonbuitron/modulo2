@@ -40,12 +40,15 @@ function cargarTabla() {
 	}, "html");
 }
 
-function cargarExcel() {
+function descargarExcelIndicador() {
 	var provincia = $('#cbProvincia').val();
+	var idindicador = $('#cbIndicador').val();
 	var indicador = $('#cbIndicador option:selected').text();
 	var anio = $('#cbAnio option:selected').text();
+	var idperiodo = $('#cbPeriodo').val();
 	var periodo = $('#cbPeriodo option:selected').text();
-	window.location.href = 'llenar_lectura_tabla.php?excel=true&provincia=' + provincia + '&indicador=' + indicador + '&anio=' + anio + '&periodo=' + periodo;
+	//window.location.href = 'llenar_lectura_tabla.php?excel=true&provincia=' + provincia + '&indicador=' + indicador + '&anio=' + anio + '&periodo=' + periodo;
+	window.location.href = 'consulta_excel.php?tipo=indicador&provincia=' + provincia + '&indicador=' + indicador + '&anio=' + anio + '&periodo=' + periodo + '&idindicador=' + idindicador + '&idperiodo=' + idperiodo;
 }
 
 function guardarDato(indicador, ubigeo, periodo, anio, valor) {
