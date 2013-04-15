@@ -166,9 +166,11 @@ if (!isset($_SESSION['s_username'])) {
 							</div>
 						</div>
 						<div class="text-right">
-							<a id="btnCargar" class='btn btn-success'>Cargar Datos</a>
-							<a id="btnDescargarExcel" class='btn btn-info'>Descargar Excel</a>
-							<a id="btnCargarVariablesExcel" class='btn btn-info'>Cargar Variables Excel</a>
+							<a id="btnDescargarExcelIndicador" class='btn btn-info'>Descargar Excel Indicador</a>
+							<a id="btnCargarExcelIndicador" class='btn btn-warning'>Cargar Excel Indicador</a>
+							<a id="btnDescargarExcelVariables" class='btn btn-info'>Descargar Excel Variables</a>
+							<a id="btnCargarExcelVariables" class='btn btn-warning'>Cargar Excel Variables</a>
+							<a id="btnCargar" class='btn btn-primary'>Filtrar</a>
 						</div>
 					</div>
 				</form>

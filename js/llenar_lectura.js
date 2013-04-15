@@ -47,8 +47,16 @@ function descargarExcelIndicador() {
 	var anio = $('#cbAnio option:selected').text();
 	var idperiodo = $('#cbPeriodo').val();
 	var periodo = $('#cbPeriodo option:selected').text();
-	//window.location.href = 'llenar_lectura_tabla.php?excel=true&provincia=' + provincia + '&indicador=' + indicador + '&anio=' + anio + '&periodo=' + periodo;
 	window.location.href = 'consulta_excel.php?tipo=indicador&provincia=' + provincia + '&indicador=' + indicador + '&anio=' + anio + '&periodo=' + periodo + '&idindicador=' + idindicador + '&idperiodo=' + idperiodo;
+}
+
+function descargarExcelVariables() {
+	var provincia = $('#cbProvincia').val();
+	var indicador = $('#cbIndicador option:selected').text();
+	var anio = $('#cbAnio option:selected').text();
+	var idperiodo = $('#cbPeriodo').val();
+	var periodo = $('#cbPeriodo option:selected').text();
+	window.location.href = 'consulta_excel.php?tipo=variables&provincia=' + provincia + '&indicador=' + indicador + '&anio=' + anio + '&periodo=' + periodo + '&idperiodo=' + idperiodo;
 }
 
 function guardarDato(indicador, ubigeo, periodo, anio, valor) {
@@ -137,14 +145,16 @@ $(document).ready(function() {
 		cargarTabla();
 	});
 
-	$('#btnDescargarExcel').on('click', function() {
-		cargarExcel();
+	$('#btnDescargarExcelIndicador').on('click', function() {
+		descargarExcelIndicador();
 	});
-
+	$('#btnDescargarExcelVariables').on('click', function() {
+		descargarExcelVariables();
+	});
 	$('#btnGuardarDatos').on('click', function() {
 		guardarLectura();
 	});
-	$('#btnCargarVariablesExcel').on('click', function() {
+	$('#btnCargarExcelVariables').on('click', function() {
 		cargarTabla();
 		var aux = new AjaxUpload('#btnCargarVariablesExcel', {
 			action: 'upload.php',
