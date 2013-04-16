@@ -162,7 +162,7 @@ $(document).ready(function() {
 			}, "json");
 
 		} else {
-			$("#resultado").html('<div class="alert alert-error"><strong>Error!</strong> Campos requeridos para insertar nuevo usuario</div>');
+			$("#resultado").html('<div class="alert alert-error"><strong>Error!</strong> Campos requeridos para insertar nuevo indicador</div>');
 		}
 	});
 });

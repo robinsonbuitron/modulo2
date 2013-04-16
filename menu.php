@@ -10,7 +10,7 @@
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<?php if ($_SESSION["s_idprivilegios"] == "00001") { ?>
-						<li id="menuUsuarios"><a href="usuarios.php"><i class="icon-home icon-white"></i> Usuaios</a></li>
+						<li id="menuUsuarios"><a href="usuarios.php"><i class="icon-home icon-white"></i> Usuarios</a></li>
 						<li class="divider-vertical"></li>
 						<li id="menuInstitucion"><a href="institucion.php"><i class="icon-lock icon-white"></i> Instituciones</a></li>
 						<li class="divider-vertical"></li>

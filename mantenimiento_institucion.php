@@ -31,11 +31,11 @@ if (!isset($_SESSION['s_username'])) {
 			$sql = $conexion->consulta("INSERT INTO tinstitucion VALUES ('$idinstitucion','$siglas','$nombinst')");
 			if (!$sql) {
 				$jsondata['title'] = "error";
-				$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> No se pudo registrar el nuevo usuario</div>';
+				$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> No se pudo registrar la institución</div>';
 				//echo "Consulta: " . $contador . "Fallo en la insercion de registro en la Base de Datos: " . mysql_error() . "<br>";
 			} else {
 				$jsondata['title'] = $idinstitucion;
-				$jsondata['html'] = '<div class="alert alert-success"><strong>Correcto!</strong> Se ingreso un nuevo usuario</div>';
+				$jsondata['html'] = '<div class="alert alert-success"><strong>Correcto!</strong> Se ingreso correctamente la institución</div>';
 			}
 		}
 		if ($action == "modificar") {
@@ -45,11 +45,11 @@ if (!isset($_SESSION['s_username'])) {
 			$sql = $conexion->consulta("UPDATE tinstitucion SET siglas='$siglas', nominst='$nombinst' WHERE idinstitucion='$idinstitucion';");
 			if (!$sql) {
 				$jsondata['title'] = "error";
-				$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> No se pudo modificar el usuario</div>';
+				$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> No se pudo modificar la institución/div>';
 				//echo "Consulta: " . $contador . "Fallo en la insercion de registro en la Base de Datos: " . mysql_error() . "<br>";
 			} else {
 				$jsondata['title'] = "correcto";
-				$jsondata['html'] = '<div class="alert alert-success"><strong>Correcto!</strong> Se modifico un usuario</div>';
+				$jsondata['html'] = '<div class="alert alert-success"><strong>Correcto!</strong> Se modifico los datos de Institución</div>';
 			}
 		}
 		if ($action == "eliminar") {
@@ -57,11 +57,11 @@ if (!isset($_SESSION['s_username'])) {
 			$sql = $conexion->consulta("delete from tinstitucion where idinstitucion='$idinstitucion'");
 			if (!$sql) {
 				$jsondata['title'] = "error";
-				$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> No se pudo eliminar el usuario</div>';
+				$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> No se pudo eliminar</div>';
 				//echo "Consulta: " . $contador . "Fallo en la insercion de registro en la Base de Datos: " . mysql_error() . "<br>";
 			} else {
 				$jsondata['title'] = "correcto";
-				$jsondata['html'] = '<div class="alert alert-success"><strong>Correcto!</strong> Se elimino un usuario</div>';
+				$jsondata['html'] = '<div class="alert alert-success"><strong>Correcto!</strong> Se elimino correctamente...</div>';
 			}
 		}
 	}
