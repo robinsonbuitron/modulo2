@@ -39,6 +39,8 @@ if (isset($_POST['peticion'])) {
 	}
 	if ($peticion == "barras") {
 		$anio = $_POST['anio'];
+		$minimo = (float) $_POST['minimo'];
+		$maximo = (float) $_POST['maximo'];
 		if ($provincia == 'xx') {
 			$resultado = $conexion->consulta("select tp.nombre, tl.valor from tprovincia tp join tlectura tl on tl.ubigeo=tp.ubigeo where tl.idindicador='$indicador' and tl.idperiodo='$periodo' and tl.anio='$anio'");
 		} else {
@@ -58,13 +60,13 @@ if (isset($_POST['peticion'])) {
 				$jsondata["series"][0]["data"][$cont] = 0;
 				$jsondata["series"][1]["data"][$cont] = 0;
 				$jsondata["series"][2]["data"][$cont] = 0;
-				if ($valor < 10) {
+				if ($valor < $minimo) {
 					$jsondata["series"][0]["data"][$cont] = $valor;
 				}
-				if ($valor > 80) {
+				if ($valor > $maximo) {
 					$jsondata["series"][2]["data"][$cont] = $valor;
 				}
-				if ($valor <= 80 && $valor >= 10) {
+				if ($valor <= $maximo && $valor >= $minimo) {
 					$jsondata["series"][1]["data"][$cont] = $valor;
 				}
 				$jsondata["categories"][$cont] = pg_result($resultado, $cont, 0);

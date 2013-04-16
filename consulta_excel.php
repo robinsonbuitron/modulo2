@@ -54,7 +54,7 @@ if (isset($_GET['tipo'])) {
 		$filas = pg_numrows($resultado);
 		if ($filas != 0) {
 			$objPHPExcel = PHPExcel_IOFactory::load('plantillas/variables.xls');
-			$objPHPExcel->getActiveSheet()->setCellValue('A4', 'VARIABLES DE ' + $indicador);
+			$objPHPExcel->getActiveSheet()->setCellValue('A4', 'VARIABLES DE ' . $indicador);
 			$objPHPExcel->getActiveSheet()->setCellValue('B6', $anio);
 			$objPHPExcel->getActiveSheet()->setCellValue('F6', $periodo);
 			$objPHPExcel->getActiveSheet()->setCellValue('F7', $idperiodo);
@@ -67,7 +67,7 @@ if (isset($_GET['tipo'])) {
 		}
 	}
 	header('Content-Type: application/vnd.ms-excel');
-	header('Content-Disposition: attachment;filename="' . $indicador . '.xls"');
+	header('Content-Disposition: attachment;filename="' . $tipo . " " . $indicador . '.xls"');
 	header('Cache-Control: max-age=0');
 
 	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');

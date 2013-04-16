@@ -51,7 +51,7 @@
 							<div class="control-group">
 								<label class="control-label">Institucion:</label>
 								<div class="controls">
-									<select id="cbInstitucion" class="span6">
+									<select id="cbInstitucion" class="span12">
 
 									</select>
 								</div>

@@ -53,7 +53,7 @@ if (isset($_POST['username'])) {
                 <form action="#" method="POST">
                     <fieldset>
                         <div class="control-group">
-                            <label class="control-label">DNI:</label>
+                            <label class="control-label">Email:</label>
                             <div class="controls">
                                 <span class="add-on"><i class="icon-user"></i></span> <input type="text" name="username" id="username" placeholder="Ingrese usuario">
                             </div>

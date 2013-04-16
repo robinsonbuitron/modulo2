@@ -159,7 +159,9 @@ function graficarBarra(lienzo, indicador, provincia, periodo, anio, minimo, maxi
 		provincia: provincia,
 		indicador: indicador,
 		periodo: periodo,
-		anio: anio
+		anio: anio,
+		minimo: minimo,
+		maximo: maximo
 	}, function(data) {
 		var chart = lienzo.highcharts();
 		if (data) {

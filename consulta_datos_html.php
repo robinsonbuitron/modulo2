@@ -47,11 +47,11 @@ if (isset($_POST['peticion'])) {
 		}
 	}
 	if ($peticion == "institucion") {
-		$resultado = $conexion->consulta("select idinstitucion, Siglas from tinstitucion");
+		$resultado = $conexion->consulta("select idinstitucion, nominst ,Siglas from tinstitucion");
 		$filas = pg_numrows($resultado);
 		if ($filas != 0) {
 			for ($cont = 0; $cont < $filas; $cont++) {
-				echo "<option value='" . pg_result($resultado, $cont, 0) . "'>" . pg_result($resultado, $cont, 1) . "</option>";
+				echo "<option value='" . pg_result($resultado, $cont, 0) . "'>" . pg_result($resultado, $cont, 1) . " - " . pg_result($resultado, $cont, 2) . "</option>";
 			}
 		}
 	}

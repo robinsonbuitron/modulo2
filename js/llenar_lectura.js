@@ -1,6 +1,29 @@
-function cargarVariablesExcel(file) {
+function cargarExcelVariables(file) {
 	var provincia = $('#cbProvincia').val();
-	$.get("procesar_variables.php", {
+	$.get("procesar_excel.php", {
+		tipo: "variables",
+		provincia: provincia,
+		file: file
+	},
+	function(data) {
+		$("#example tbody tr").each(function(index) {
+			var valor, ubigeo;
+			$(this).children("td").each(function(index2) {
+				ubigeo = $(this).closest('tr').attr("id");
+				switch (index2) {
+					case 4:
+						valor = $(this).children().first().val(data[ubigeo]);
+						break;
+				}
+			});
+		});
+	}, "json");
+}
+
+function cargarExcelIndicador(file) {
+	var provincia = $('#cbProvincia').val();
+	$.get("procesar_excel.php", {
+		tipo: "indicador",
 		provincia: provincia,
 		file: file
 	},
@@ -36,7 +59,6 @@ function cargarTabla() {
 	},
 	function(data) {
 		$("#tablaInstitucion").html(data);
-		//$("#tablaInstitucion").valid();
 	}, "html");
 }
 
@@ -156,7 +178,7 @@ $(document).ready(function() {
 	});
 	$('#btnCargarExcelVariables').on('click', function() {
 		cargarTabla();
-		var aux = new AjaxUpload('#btnCargarVariablesExcel', {
+		var aux = new AjaxUpload('#btnCargarExcelVariables', {
 			action: 'upload.php',
 			onSubmit: function(file, ext) {
 				if (!(ext && /^(xls|xlsx|xlt|xltx)$/.test(ext))) {
@@ -165,13 +187,36 @@ $(document).ready(function() {
 					// cancela upload
 					return false;
 				} else {
-					$('#btnCargarVariablesExcel').val('Cargando...');
+					$('#btnCargarExcelVariables').val('Cargando...');
 					this.disable();
 				}
 			},
 			onComplete: function(file, response) {
-				cargarVariablesExcel(file);
-				$('#btnCargarVariablesExcel').val('Importar');
+				cargarExcelVariables(file);
+				$('#btnCargarExcelVariables').val('Cargar Excel Variables');
+				alert('El Archivo ha sido cargado, empezaremos a procesar...');
+				this.enable();
+			}
+		});
+	});
+	$('#btnCargarExcelIndicador').on('click', function() {
+		cargarTabla();
+		var aux = new AjaxUpload('#btnCargarExcelIndicador', {
+			action: 'upload.php',
+			onSubmit: function(file, ext) {
+				if (!(ext && /^(xls|xlsx|xlt|xltx)$/.test(ext))) {
+					// extensiones permitidas
+					alert('Error: Solo se permiten archivos excel');
+					// cancela upload
+					return false;
+				} else {
+					$('#btnCargarExcelIndicador').val('Cargando...');
+					this.disable();
+				}
+			},
+			onComplete: function(file, response) {
+				cargarExcelIndicador(file);
+				$('#btnCargarExcelIndicador').val('Cargar Excel Indicador');
 				alert('El Archivo ha sido cargado, empezaremos a procesar...');
 				this.enable();
 			}
