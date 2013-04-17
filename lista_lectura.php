@@ -14,7 +14,6 @@ if (!isset($_SESSION['s_username'])) {
 				<th width="11%">Periodo</th>
 				<th width="5%">Valor</th>
 				<th width="11%">Editar</th>
-				<th width="13%">Eliminar</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -48,7 +47,6 @@ if (!isset($_SESSION['s_username'])) {
 					echo "<td>$periodo</td>";
 					echo "<td>$valor</td>";
 					echo "<td><a href='#myModal' data-toggle='modal' class='btn-small btn-success'><i class='icon-edit'></i><strong> Editar</strong></a></td>";
-					echo "<td><a href='#' class='btn-small btn-danger'><i class='icon-trash'></i><strong> Eliminar</strong></a></td>";
 					echo "</tr>";
 				}
 			}

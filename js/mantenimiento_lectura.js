@@ -101,7 +101,7 @@ $(document).ready(function() {
 			if (data.title !== "error") {
 				$("#example tbody tr").each(function(index) {
 					if ($(this).attr("id") === $("#txtId").val()) {
-						$(this).html('<td>' + $('#txtIndicadorE').val() + '</td><td>' + $('#txtDistritoE').val() + '</td><td>' + $('#txtAnioE').val() + '</td><td>' + $('#txtPeriodoE').val() + '</td><td>' + $('#txtValorE').val() + '</td><td><a class="btn-small btn-success" href="#myModal" data-toggle="modal"><i class="icon-edit"></i><strong> Editar</strong></a></td><td><a class="btn-small btn-danger" href="#"><i class="icon-trash"></i><strong> Eliminar</strong></a></td>');
+						$(this).html('<td>' + $('#txtIndicadorE').val() + '</td><td>' + $('#txtDistritoE').val() + '</td><td>' + $('#txtAnioE').val() + '</td><td>' + $('#txtPeriodoE').val() + '</td><td>' + $('#txtValorE').val() + '</td><td><a class="btn-small btn-success" href="#myModal" data-toggle="modal"><i class="icon-edit"></i><strong> Editar</strong></a></td>');
 					}
 				});
 				$("#resultado").html(data.html);
@@ -131,7 +131,7 @@ $(document).ready(function() {
 			},
 			function(data) {
 				if (data.title !== "error") {
-					$('#example > tbody:last').append('<tr id="' + codigo + '"><td>' + $('#cbIndicador option:selected').text() + '</td><td>' + $('#cbDistrito option:selected').text() + '</td><td>' + $("#cbAnio option:selected").text() + '</td><td>' + $("#cbPeriodo option:selected").text() + '</td><td>' + $("#txtValor").val() + '</td><td><a class="btn-small btn-success" href="#myModal" data-toggle="modal"><i class="icon-trash"></i><strong> Editar</strong></a></td><td><a class="btn-small btn-danger" href="#"><i class="icon-trash"></i><strong> Eliminar</strong></a></td></tr>');
+					$('#example > tbody:last').append('<tr id="' + codigo + '"><td>' + $('#cbIndicador option:selected').text() + '</td><td>' + $('#cbDistrito option:selected').text() + '</td><td>' + $("#cbAnio option:selected").text() + '</td><td>' + $("#cbPeriodo option:selected").text() + '</td><td>' + $("#txtValor").val() + '</td><td><a class="btn-small btn-success" href="#myModal" data-toggle="modal"><i class="icon-trash"></i><strong> Editar</strong></a></td></tr>');
 					$("#formInsertar input").val("");
 				}
 				$("#resultado").html(data.html);
