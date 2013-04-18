@@ -269,87 +269,6 @@ function cargarLeyenda(minimo, maximo, uMedida) {
 	$("#leyenda").html("<li class='text-error'>Bajo < " + minimo + "</li><li class='text-warning'> " + minimo + " <= Medio < " + maximo + "</li><li class='text-success'>Alto >= " + maximo + "</li>");
 }
 
-/*function graficar() {
- $('#chaptersMap').html('');
- var provincia = $('#cbProvincia').val();
- var indicador = $('#cbIndicador').val();
- var anio = $('#cbAnio').val();
- var periodo = $('#cbPeriodo').val();
- var data, minimo, maximo;
- var grafico = $('#cbGrafico').val();
- if (grafico === "04") {
- $.post("consulta_grafico.php", {
- peticion: "historico",
- provincia: provincia,
- indicador: indicador,
- periodo: periodo
- },
- function(data) {
- var valores = new Array();
- var colores = new Array();
- for (ubigeo in data) {
- var dataValor = parseFloat(data[ubigeo].valor);
- valores.push([String(data[ubigeo].anio), dataValor]);
- if (dataValor < minimo) {
- colores.push("red");
- }
- if (dataValor > maximo) {
- colores.push("green");
- }
- if (dataValor >= minimo && dataValor <= maximo) {
- colores.push("yellow");
- }
- }
- graficarHistorico(valores, colores);
- }, "json");
- } else {
- $.post("consulta_grafico.php", {
- provincia: provincia,
- indicador: indicador,
- anio: anio,
- periodo: periodo
- },
- function(datos) {
- data = datos;
- $.post("consulta_datos.php", {
- peticion: "minimo_maximo",
- indicador: indicador
- },
- function(datos2) {
- minimo = datos2.minimo;
- maximo = datos2.maximo;
- if (grafico === '01') {
- if (data.length !== 0 && data !== null) {
- graficarMapa(provincia, data, minimo, maximo);
- }
- } else {
- var valores = new Array();
- var colores = new Array();
- for (ubigeo in data) {
- var dataValor = parseFloat(data[ubigeo].valor);
- valores.push([data[ubigeo].nombre, dataValor]);
- if (dataValor < minimo) {
- colores.push("red");
- }
- if (dataValor > maximo) {
- colores.push("green");
- }
- if (dataValor >= minimo && dataValor <= maximo) {
- colores.push("yellow");
- }
- }
- if (grafico === '02') {
- graficarBarra(valores, colores);
- }
- if (grafico === '03') {
- graficarCirculares(valores);
- }
- }
- }, "json");
- }, "json");
- }
- }*/
-
 function graficar() {
 	$('#chaptersMap').html('');
 	$("#tituloLeyenda").html("");
@@ -427,6 +346,11 @@ $(document).ready(function() {
 	}, "html");
 
 	$('#cbGrafico').on('change', function() {
+		if ($("#cbGrafico").val() === "04") {
+			$("#cbAnio").attr("disabled", "disabled");
+		} else {
+			$("#cbAnio").removeAttr("disabled");
+		}
 		graficar();
 	});
 	$('#cbIndicador').on('change', function() {

@@ -1,9 +1,8 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html lang="en">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>MAPAS-SIARAPURIMAC</title>
+<html lang="es">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>MAPAS-SIARAPURIMAC</title>
 		<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/raphael-min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/highcharts.js" type="text/javascript" charset="utf-8"></script>
@@ -59,7 +58,7 @@
 							<div class="control-group">
 								<label class="control-label">Indicadores:</label>
 								<div class="controls">
-									<select id="cbIndicador" class="span8">
+									<select id="cbIndicador" class="span12">
 									</select>
 								</div>
 							</div>
@@ -84,9 +83,7 @@
 								<a id="btnExcel" class='btn btn-success'>Descargar Excel</a>
 							</div>
 						</div>
-
 					</div>
-
 				</div>
 				<div class="row-fluid">
 					<div class="span3">
