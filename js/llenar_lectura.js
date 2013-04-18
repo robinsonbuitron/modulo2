@@ -49,17 +49,19 @@ function cargarTabla() {
 	var periodo = $('#cbPeriodo option:selected').text();
 	var idperiodo = $('#cbPeriodo').val();
 	var idindicador = $('#cbIndicador').val();
-	$.get("llenar_lectura_tabla.php", {
-		provincia: provincia,
-		indicador: indicador,
-		anio: anio,
-		periodo: periodo,
-		idindicador: idindicador,
-		idperiodo: idperiodo
-	},
-	function(data) {
-		$("#tablaInstitucion").html(data);
-	}, "html");
+	if (idindicador !== null && idindicador !== "") {
+		$.get("llenar_lectura_tabla.php", {
+			provincia: provincia,
+			indicador: indicador,
+			anio: anio,
+			periodo: periodo,
+			idindicador: idindicador,
+			idperiodo: idperiodo
+		},
+		function(data) {
+			$("#tablaInstitucion").html(data);
+		}, "html");
+	}
 }
 
 function descargarExcelIndicador() {

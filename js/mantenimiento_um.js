@@ -28,10 +28,6 @@ $(document).ready(function() {
 	$("#example").dataTable().fnDestroy();
 	oTable = $('#example').dataTable(elementosEspanol);
 // Agregamos un metodo nuevo para revisar el nombre
-	jQuery.validator.addMethod("check_um", function(value, element, params) {
-		return this.optional(element) || /^([a-zA-Z'-áéíóúÁÉÍÓÚ]+\s+){1,4}[a-zA-z'-áéíóúÁÉÍÓÚ]+$/i.test(value);
-	},
-			jQuery.format("Ingrese una descripcion valida"));
 	$("#frmInsertar").validate({
 		rules: {
 			txtabreviatura: {
@@ -42,7 +38,6 @@ $(document).ready(function() {
 			txtdescripcion: {
 				required: true,
 				minlength: 5,
-				check_um: true
 			}
 		},
 		messages: {
