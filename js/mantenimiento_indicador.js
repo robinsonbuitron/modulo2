@@ -1,3 +1,27 @@
+var elementosEspanol = {
+	"bJQueryUI": true,
+	"oLanguage": {
+		"sEmptyTable": "No hay datos",
+		"sInfo": "Mostrando (_START_-_END_) de _TOTAL_ registros",
+		"sLengthMenu": "Mostrar <select>" +
+				'<option value="10">10</option>' +
+				'<option value="25">25</option>' +
+				'<option value="50">50</option>' +
+				'<option value="100">100</option>' +
+				'<option value="-1">Todos</option>' +
+				'</select> Registros',
+		"sLoadingRecords": "Espere un momento, cargando...",
+		"sSearch": "Buscar:",
+		"sZeroRecords": "No hay datos con esta busqueda",
+		"oPaginate": {
+			"sFirst": "Primero",
+			"sLast": "Ultimo",
+			"sNext": "Siguiente",
+			"sPrevious": "Anterior"
+		}
+	}
+};
+
 $(document).ready(function() {
 	$(function() {
 // Agregamos un metodo nuevo para revisar el nombre
@@ -165,6 +189,8 @@ $(document).ready(function() {
 			$("#resultado").html('<div class="alert alert-error"><strong>Error!</strong> Campos requeridos para insertar nuevo indicador</div>');
 		}
 	});
+	$("#example").dataTable().fnDestroy();
+	$('#example').dataTable(elementosEspanol);
 });
 
 

@@ -8,11 +8,11 @@ if (!isset($_SESSION['s_username'])) {
 	<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example" width="100%">
 		<thead>
 			<tr>
-				<th width="8%">id</th>
+				<th width="10%">id</th>
 				<th width="10%">Unidad</th>
 				<th width="50%">Descripcion</th>
-				<th width="10%">Editar</th>
-				<th width="12%">Eliminar</th>
+				<th width="15%">Editar</th>
+				<th width="15%">Eliminar</th>
 			</tr>
 		</thead>
 		<tbody>

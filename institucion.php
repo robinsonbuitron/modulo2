@@ -14,11 +14,11 @@ if (!isset($_SESSION['s_username'])) {
 			<link href="css/DT_bootstrap.css" rel="stylesheet">
 			<script class="include" src="js/jquery-1.9.1.min.js"></script>
 			<script class="include" src="js/bootstrap.min.js"></script>
-			<script class="include" src="js/mantenimiento_institucion.js"></script>
 			<script src="js/jquery.dataTables.min.js"></script>
 			<script src="js/jquery.validate.min.js"></script>
 			<script src="js/messages_es.js"></script>
 			<script src="js/DT_bootstrap.js"></script>
+			<script class="include" src="js/mantenimiento_institucion.js"></script>
 			<script type="text/javascript">
 				$(function() {
 					$("#menuInstitucion").addClass("active");

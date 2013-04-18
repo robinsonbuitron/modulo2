@@ -10,13 +10,33 @@ if (isset($_POST['peticion'])) {
 	$conexion = new ConexionPGSQL();
 	$conexion->conectar();
 	if ($peticion == "historico") {
-		$resultado = $conexion->consulta("select tl.valor, tl.anio from tlectura tl join tprovincia tp on tl.ubigeo=tp.ubigeo where tl.idindicador='$indicador' and tl.idperiodo='$periodo' and tp.codprovincia='$provincia'");
+		$minimo = (float) $_POST['minimo'];
+		$maximo = (float) $_POST['maximo'];
+		$resultado = $conexion->consulta("select tl.anio, tl.valor from tlectura tl join tprovincia tp on tl.ubigeo=tp.ubigeo where tl.idindicador='$indicador' and tl.idperiodo='$periodo' and tp.codprovincia='$provincia'");
 		$filas = pg_numrows($resultado);
 		if ($filas != 0) {
 			$jsondata = array();
+			$jsondata["series"][0]["name"] = "Bajo";
+			$jsondata["series"][0]["color"] = "red";
+			$jsondata["series"][1]["name"] = "Medio";
+			$jsondata["series"][1]["color"] = "yellow";
+			$jsondata["series"][2]["name"] = "Alto";
+			$jsondata["series"][2]["color"] = "green";
 			for ($cont = 0; $cont < $filas; $cont++) {
-				$jsondata[$cont]["anio"] = pg_result($resultado, $cont, 1);
-				$jsondata[$cont]["valor"] = pg_result($resultado, $cont, 0);
+				$valor = (float) pg_result($resultado, $cont, 1);
+				$jsondata["series"][0]["data"][$cont] = 0;
+				$jsondata["series"][1]["data"][$cont] = 0;
+				$jsondata["series"][2]["data"][$cont] = 0;
+				if ($valor < $minimo) {
+					$jsondata["series"][0]["data"][$cont] = $valor;
+				}
+				if ($valor > $maximo) {
+					$jsondata["series"][2]["data"][$cont] = $valor;
+				}
+				if ($valor <= $maximo && $valor >= $minimo) {
+					$jsondata["series"][1]["data"][$cont] = $valor;
+				}
+				$jsondata["categories"][$cont] = pg_result($resultado, $cont, 0);
 			}
 		}
 	}

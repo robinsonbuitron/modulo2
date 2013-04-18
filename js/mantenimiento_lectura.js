@@ -3,6 +3,30 @@
  * @GRA
  * Proyecto Siar
  */
+var elementosEspanol = {
+	"bJQueryUI": true,
+	"oLanguage": {
+		"sEmptyTable": "No hay datos",
+		"sInfo": "Mostrando (_START_-_END_) de _TOTAL_ registros",
+		"sLengthMenu": "Mostrar <select>" +
+				'<option value="10">10</option>' +
+				'<option value="25">25</option>' +
+				'<option value="50">50</option>' +
+				'<option value="100">100</option>' +
+				'<option value="-1">Todos</option>' +
+				'</select> Registros',
+		"sLoadingRecords": "Espere un momento, cargando...",
+		"sSearch": "Buscar:",
+		"sZeroRecords": "No hay datos con esta busqueda",
+		"oPaginate": {
+			"sFirst": "Primero",
+			"sLast": "Ultimo",
+			"sNext": "Siguiente",
+			"sPrevious": "Anterior"
+		}
+	}
+};
+
 function cargarDistritos() {
 	$.post("consulta_datos_html.php", {
 		peticion: "distrito",
@@ -149,7 +173,7 @@ $(document).ready(function() {
 		},
 		function(data) {
 			$("#tablaInstitucion").html(data);
-			$('#example').dataTable();
+			$('#example').dataTable(elementosEspanol);
 			editarEliminar();
 		}, "html");
 	});
