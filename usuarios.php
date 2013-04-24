@@ -88,33 +88,35 @@ if (!isset($_SESSION['s_username'])) {
 							<h3 id="myModalLabel">Editar Usuario</h3>
 						</div>
 						<div class="modal-body">
-							<input id="txtId" type="hidden">
-							<div class="control-group">
-								<label class="control-label">Codigo:</label>
-								<div class="controls">
-									<input id="txtCodigoE" readonly type="text">
+							<form id="formEditar">
+								<input id="txtId" type="hidden">
+								<div class="control-group">
+									<label class="control-label">Codigo:</label>
+									<div class="controls">
+										<input id="txtCodigoE" readonly type="text">
+									</div>
 								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">Nombre:</label>
-								<div class="controls">
-									<input id="txtNombreE" type="text" class="span3" placeholder="nombre">
+								<div class="control-group">
+									<label class="control-label">Nombre:</label>
+									<div class="controls">
+										<input id="txtNombreE" name="txtNombreE" type="text" class="span3" placeholder="nombre">
+									</div>
 								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">Institucion:</label>
-								<div class="controls">
-									<select id="cbInstitucionE" class="cbInstitucion">
-									</select>
+								<div class="control-group">
+									<label class="control-label">Institucion:</label>
+									<div class="controls">
+										<select id="cbInstitucionE" class="cbInstitucion">
+										</select>
+									</div>
 								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">Cargo:</label>
-								<div class="controls">
-									<select id="cbCargoE" class="cbCargo">
-									</select>
+								<div class="control-group">
+									<label class="control-label">Cargo:</label>
+									<div class="controls">
+										<select id="cbCargoE" class="cbCargo">
+										</select>
+									</div>
 								</div>
-							</div>
+							</form>
 						</div>
 						<div class="modal-footer">
 							<button id="btnEditar" type="button" class="btn btn-primary">Editar</button>

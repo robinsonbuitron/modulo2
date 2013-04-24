@@ -62,26 +62,27 @@ if (!isset($_SESSION['s_username'])) {
 							<h3 id="myModalLabel">Editar Institución</h3>
 						</div>
 						<div class="modal-body">
-							<input id="txtId" type="hidden">
-							<div class="control-group">
-								<label class="control-label">Codigo:</label>
-								<div class="controls">
-									<input id="txtIdInstitucionE" readonly type="text">
+							<form id="formEditar">
+								<input id="txtId" type="hidden">
+								<div class="control-group">
+									<label class="control-label">Codigo:</label>
+									<div class="controls">
+										<input id="txtIdInstitucionE" readonly type="text">
+									</div>
 								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">Sigla:</label>
-								<div class="controls">
-									<input id="txtSiglaE" type="text" class="span3" placeholder="Sigla">
+								<div class="control-group">
+									<label class="control-label">Sigla:</label>
+									<div class="controls">
+										<input id="txtSiglaE" name="txtSiglaE" type="text" class="span3" placeholder="Sigla">
+									</div>
 								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">Nombre de Institucion:</label>
-								<div class="controls">
-									<input id="txtNombreInstE" class="span4" type="text" placeholder="Institucion ">
+								<div class="control-group">
+									<label class="control-label">Nombre de Institucion:</label>
+									<div class="controls">
+										<input id="txtNombreInstE" name="txtNombreInstE" class="span4" type="text" placeholder="Institucion">
+									</div>
 								</div>
-							</div>
-
+							</form>
 						</div>
 						<div class="modal-footer">
 							<button id="btnEditar" type="button" class="btn btn-primary">Agregar</button>

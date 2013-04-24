@@ -88,52 +88,52 @@ function editarEliminar() {
 }
 
 $(document).ready(function() {
-
-	$("#frmInsertar").validate({
+	$("#formEditar").validate({
 		rules: {
-			txtValor: {
+			txtValorE: {
 				required: true,
 				minlength: 1,
 				number: true
 			}
 		},
 		messages: {
-			txtValor: {
+			txtValorE: {
 				required: "Debe ingresar por lo menos un valor"
 			}
 		}
 	});
-
 	$("#btnEditar").click(function() {
-		$("#btnEditar").text("Editandoo...");
-		$("#btnEditar").attr("disabled", "disabled");
-		var codigo = $("#txtId").val();
-		var indicador = codigo.substring(0, 4);
-		var ubigeo = codigo.substring(4, 10);
-		var anio = codigo.substring(10, 14);
-		var periodo = codigo.substring(14, 17);
-		//$("#resultado").html(codigo + " : " + indicador + " - " + ubigeo + " - " + anio + " - " + periodo);
-		$.post("mantenimiento_lectura.php", {
-			action: "modificar",
-			indicador: indicador,
-			ubigeo: ubigeo,
-			anio: anio,
-			periodo: periodo,
-			valor: $("#txtValorE").val()
-		},
-		function(data) {
-			if (data.title !== "error") {
-				$("#example tbody tr").each(function(index) {
-					if ($(this).attr("id") === $("#txtId").val()) {
-						$(this).html('<td>' + $('#txtIndicadorE').val() + '</td><td>' + $('#txtDistritoE').val() + '</td><td>' + $('#txtAnioE').val() + '</td><td>' + $('#txtPeriodoE').val() + '</td><td>' + $('#txtValorE').val() + '</td><td><a class="btn-small btn-success" href="#myModal" data-toggle="modal"><i class="icon-edit"></i><strong> Editar</strong></a></td>');
-					}
-				});
-				$("#resultado").html(data.html);
-				$("#btnEditar").removeAttr("disabled");
-				$("#btnEditar").text("Editar");
-				$('#myModal').modal('hide');
-			}
-		}, "json");
+		if ($("#formEditar").valid()) {
+			$("#btnEditar").text("Editandoo...");
+			$("#btnEditar").attr("disabled", "disabled");
+			var codigo = $("#txtId").val();
+			var indicador = codigo.substring(0, 4);
+			var ubigeo = codigo.substring(4, 10);
+			var anio = codigo.substring(10, 14);
+			var periodo = codigo.substring(14, 17);
+			//$("#resultado").html(codigo + " : " + indicador + " - " + ubigeo + " - " + anio + " - " + periodo);
+			$.post("mantenimiento_lectura.php", {
+				action: "modificar",
+				indicador: indicador,
+				ubigeo: ubigeo,
+				anio: anio,
+				periodo: periodo,
+				valor: $("#txtValorE").val()
+			},
+			function(data) {
+				if (data.title !== "error") {
+					$("#example tbody tr").each(function(index) {
+						if ($(this).attr("id") === $("#txtId").val()) {
+							$(this).html('<td>' + $('#txtIndicadorE').val() + '</td><td>' + $('#txtDistritoE').val() + '</td><td>' + $('#txtAnioE').val() + '</td><td>' + $('#txtPeriodoE').val() + '</td><td>' + $('#txtValorE').val() + '</td><td><a class="btn-small btn-success" href="#myModal" data-toggle="modal"><i class="icon-edit"></i><strong> Editar</strong></a></td>');
+						}
+					});
+					$("#resultado").html(data.html);
+					$("#btnEditar").removeAttr("disabled");
+					$("#btnEditar").text("Editar");
+					$('#myModal').modal('hide');
+				}
+			}, "json");
+		}
 	});
 
 	$("#btnAgregar").click(function() {

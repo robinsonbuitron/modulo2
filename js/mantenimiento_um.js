@@ -49,20 +49,43 @@ $(document).ready(function() {
 			}
 		}
 	});
+	$("#frmEditar").validate({
+		rules: {
+			txtabreviaturaE: {
+				required: true,
+				minlength: 1
+
+			},
+			txtdescripcionE: {
+				required: true,
+				minlength: 5,
+			}
+		},
+		messages: {
+			txtabreviaturaE: {
+				required: "Debe ingresar Unidad de Medida"
+			},
+			txtdescripcionE: {
+				required: "Ingrese la descripcion de la Unidad de Medida"
+			}
+		}
+	});
 	$("#example").delegate("a", "click", function(event) {
 		if ($(this).text() === ' Eliminar') {
 			var codigo = $(this).closest("tr").attr("id");
-			var tr = $(this).closest("tr");
-			$.post("mantenimiento_um.php", {
-				action: "eliminar",
-				idunidadmedida: codigo
-			},
-			function(data) {
-				if (data.title !== "error") {
-					tr.remove();
-				}
-				$("#resultado").html(data.html);
-			}, "json");
+			if (confirm("¿Seguro que desea elimnar el registro " + codigo + "?")) {
+				var tr = $(this).closest("tr");
+				$.post("mantenimiento_um.php", {
+					action: "eliminar",
+					idunidadmedida: codigo
+				},
+				function(data) {
+					if (data.title !== "error") {
+						tr.remove();
+					}
+					$("#resultado").html(data.html);
+				}, "json");
+			}
 		}
 		if ($(this).text() === ' Editar') {
 			$(this).closest("tr").each(function(index) {
@@ -88,31 +111,33 @@ $(document).ready(function() {
 	});
 	//funcionalidad de modificar la tabla unidad de media
 	$("#btnEditar").click(function() {
-		$("#btnEditar").text("Editandoo...");
-		$("#btnEditar").attr("disabled", "disabled");
-		var codigo = $('#txtidunidadmedidaE').val();
-		var unidad = $('#txtabreviaturaE').val();
-		var desc = $('#txtdescripcionE').val();
-		$.post("mantenimiento_um.php", {
-			action: "modificar",
-			unidadmedida: codigo,
-			abreviatura: unidad,
-			descripcion: desc
+		if ($("#frmEditar").valid()) {
+			$("#btnEditar").text("Editandoo...");
+			$("#btnEditar").attr("disabled", "disabled");
+			var codigo = $('#txtidunidadmedidaE').val();
+			var unidad = $('#txtabreviaturaE').val();
+			var desc = $('#txtdescripcionE').val();
+			$.post("mantenimiento_um.php", {
+				action: "modificar",
+				unidadmedida: codigo,
+				abreviatura: unidad,
+				descripcion: desc
 
-		},
-		function(data) {
-			if (data.title !== "error") {
-				$("#example tbody tr").each(function(index) {
-					if ($(this).attr("id") === codigo) {
-						$(this).html('<td>' + codigo + '</td><td>' + unidad + '</td><td>' + desc + '</td><td><a href="#myModal" data-toggle="modal" class="btn-small btn-success"><i class="icon-edit"></i><strong> Editar</strong></a></td><td><a href="#" class="btn-small btn-danger"><i class="icon-trash"></i><strong> Eliminar</strong></a></td></tr>');
-					}
-				});
-				$("#resultado").html(data.html);
-				$("#btnEditar").removeAttr("disabled");
-				$("#btnEditar").text("Editar");
-				$('#myModal').modal('hide');
-			}
-		}, "json");
+			},
+			function(data) {
+				if (data.title !== "error") {
+					$("#example tbody tr").each(function(index) {
+						if ($(this).attr("id") === codigo) {
+							$(this).html('<td>' + codigo + '</td><td>' + unidad + '</td><td>' + desc + '</td><td><a href="#myModal" data-toggle="modal" class="btn-small btn-success"><i class="icon-edit"></i><strong> Editar</strong></a></td><td><a href="#" class="btn-small btn-danger"><i class="icon-trash"></i><strong> Eliminar</strong></a></td></tr>');
+						}
+					});
+					$("#resultado").html(data.html);
+					$("#btnEditar").removeAttr("disabled");
+					$("#btnEditar").text("Editar");
+					$('#myModal').modal('hide');
+				}
+			}, "json");
+		}
 	});
 	//funcionalidad de la accion de insertar nueva unidad de medida 
 	$("#btnAgregar").click(function() {

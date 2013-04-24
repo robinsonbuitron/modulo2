@@ -16,22 +16,27 @@ if (!isset($_SESSION['s_username'])) {
 		$conexion->conectar();
 		$action = $_POST['action'];
 		if ($action == "insertar") {
-			//$idunidadmedida = "100";
 			$resultado1 = $conexion->consulta("SELECT MAX(idunidadmedida) AS idunidadmedida FROM tunidadmedida");
 			$idunidadmedida = pg_result($resultado1, 0, 0);
 			if ($idunidadmedida == null && $idunidadmedida == "")
 				$idunidadmedida = "100";
-
 			$abreviatura = $_POST['abreviatura'];
 			$descripcion = $_POST['descripcion'];
 			$idunidadmedida++;
-			$sql = $conexion->consulta("INSERT INTO tunidadmedida VALUES ('$idunidadmedida','$abreviatura','$descripcion')");
-			if (!$sql) {
-				$jsondata['title'] = "error";
-				$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> No se pudo registrar el nuevo registro</div>';
+			$resultado2 = $conexion->consulta("select abreviatura from tunidadmedida where abreviatura='$abreviatura'");
+			$sux = pg_result($resultado2, 0, 0);
+			if ($sux == null && $sux == "") {
+				$sql = $conexion->consulta("INSERT INTO tunidadmedida VALUES ('$idunidadmedida','$abreviatura','$descripcion')");
+				if (!$sql) {
+					$jsondata['title'] = "error";
+					$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> No se pudo registrar el nuevo registro</div>';
+				} else {
+					$jsondata['title'] = $idunidadmedida;
+					$jsondata['html'] = '<div class="alert alert-success"><strong>Correcto!</strong> Se ingreso una nueva Unidad de Medida</div>';
+				}
 			} else {
-				$jsondata['title'] = $idunidadmedida;
-				$jsondata['html'] = '<div class="alert alert-success"><strong>Correcto!</strong> Se ingreso una nueva Unidad de Medida</div>';
+				$jsondata['title'] = "error";
+				$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> La Unidad de medida ya existe</div>';
 			}
 		}
 		if ($action == "modificar") {

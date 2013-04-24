@@ -93,44 +93,46 @@ if (!isset($_SESSION['s_username'])) {
 							<h3 id="myModalLabel">Editar Indicador</h3>
 						</div>
 						<div class="modal-body">
-							<input id="txtId" type="hidden">
-							<div class="control-group">
-								<label class="control-label">Codigo:</label>
-								<div class="controls">
-									<input id="txtIdindicadorE" readonly type="text">
+							<form id="formEditar">
+								<input id="txtId" type="hidden">
+								<div class="control-group">
+									<label class="control-label">Codigo:</label>
+									<div class="controls">
+										<input id="txtIdindicadorE" readonly type="text">
+									</div>
 								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">Institucion: </label>
-								<div class="controls">
-									<input id="txtInstitucionE" type="text" disabled=""> 
+								<div class="control-group">
+									<label class="control-label">Institucion: </label>
+									<div class="controls">
+										<input id="txtInstitucionE" type="text" readonly> 
+									</div>
 								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">Indicador:</label>
-								<div class="controls">
-									<input id="txtIndicadorE" type="text" class="span3" placeholder="Descripcion Indicador">
+								<div class="control-group">
+									<label class="control-label">Indicador:</label>
+									<div class="controls">
+										<input id="txtIndicadorE" name="txtIndicadorE" type="text" class="span3" placeholder="Descripcion Indicador">
+									</div>
 								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">Unidad Medida: </label>
-								<div class="controls">
-									<select id="cbUnidadMedidaE" class="cbUnidadMedida">
-									</select>
+								<div class="control-group">
+									<label class="control-label">Unidad Medida: </label>
+									<div class="controls">
+										<select id="cbUnidadMedidaE" class="cbUnidadMedida">
+										</select>
+									</div>
 								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">Valor Min: </label>
-								<div class="controls">
-									<input id="txtValorMinE" class="span1" type="text" placeholder="Valor Minimo">
+								<div class="control-group">
+									<label class="control-label">Valor Min: </label>
+									<div class="controls">
+										<input id="txtValorMinE" name="txtValorMinE" class="span1" type="text" placeholder="Valor Minimo">
+									</div>
 								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">Valor Max: </label>
-								<div class="controls">
-									<input id="txtValorMaxE"  class="span1" type="text" placeholder="Valor Máximo">
+								<div class="control-group">
+									<label class="control-label">Valor Max: </label>
+									<div class="controls">
+										<input id="txtValorMaxE" name="txtValorMaxE"  class="span1" type="text" placeholder="Valor Máximo">
+									</div>
 								</div>
-							</div>
+							</form>
 						</div>
 						<div class="modal-footer">
 							<button id="btnEditar" type="button" class="btn btn-primary">Editar</button>

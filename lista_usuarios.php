@@ -8,7 +8,7 @@ if (!isset($_SESSION['s_username'])) {
 	<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
 		<thead>
 			<tr>
-				<th width="10%">DNI</th>
+				<th width="10%">E-mail</th>
 				<th width="30%">Nombre y Apellidos</th>
 				<th width="14%">Institucion</th>
 				<th width="22%">Cargo</th>
@@ -21,7 +21,7 @@ if (!isset($_SESSION['s_username'])) {
 			include_once 'conexion/pgsql.php';
 			$conexion = new ConexionPGSQL();
 			$conexion->conectar();
-			$resultado = $conexion->consulta("select tu.idusuario, ti.siglas, tp.nombprivi, tu.nomape from tusuario tu join tinstitucion ti on tu.idinstitucion=ti.idinstitucion join tprivilegios tp on tp.idprivilegios=tu.idprivilegios");
+			$resultado = $conexion->consulta("select tu.idusuario, ti.siglas, tp.nombprivi, tu.nomape from tusuario tu join tinstitucion ti on tu.idinstitucion=ti.idinstitucion join tprivilegios tp on tp.idprivilegios=tu.idprivilegios where tu.idusuario!='42048612'");
 			$filas = pg_numrows($resultado);
 			if ($filas != 0) {
 				for ($cont = 0; $cont < $filas; $cont++) {

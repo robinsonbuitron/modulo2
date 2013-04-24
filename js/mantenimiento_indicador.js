@@ -23,44 +23,74 @@ var elementosEspanol = {
 };
 
 $(document).ready(function() {
-	$(function() {
 // Agregamos un metodo nuevo para revisar el nombre
-		jQuery.validator.addMethod("check_indicador", function(value, element, params) {
-			return this.optional(element) || /^([a-zA-Z'-áéíóúÁÉÍÓÚ]+\s+){1,4}[a-zA-z'-áéíóúÁÉÍÓÚ]+$/i.test(value);
-		}, jQuery.format("Escriba un indicador válido"));
+	jQuery.validator.addMethod("check_indicador", function(value, element, params) {
+		return this.optional(element) || /^[A-Za-z0-9 ]{3,100}$/i.test(value);
+	}, jQuery.format("Escriba un indicador válido"));
 // Validamos el form
-		$("#formInsertar").validate({
-			rules: {
-				txtIndicador: {
-					required: true,
-					minlength: 5,
-					check_indicador: true
+	$("#formInsertar").validate({
+		rules: {
+			txtIndicador: {
+				required: true,
+				minlength: 5,
+				check_indicador: true
 
-				},
-				txtValorMin: {
-					required: true,
-					number: true,
-					minlength: 1
-				},
-				txtValorMax: {
-					required: true,
-					number: true,
-					minlength: 1,
-					min: "#txtValorMin"
-				}
 			},
-			messages: {
-				txtIndicador: {
-					required: "Ingrese la descripcion del Indicador. Por Favor"
-				},
-				txtValorMin: {
-					required: "se requiere el Valor Minimo"
-				},
-				txtValorMax: {
-					required: "se requiere el Valor Maximo"
-				}
+			txtValorMin: {
+				required: true,
+				number: true,
+				minlength: 1
+			},
+			txtValorMax: {
+				required: true,
+				number: true,
+				minlength: 1,
+				min: "#txtValorMin"
 			}
-		});
+		},
+		messages: {
+			txtIndicador: {
+				required: "Ingrese la descripcion del Indicador. Por Favor"
+			},
+			txtValorMin: {
+				required: "se requiere el Valor Minimo"
+			},
+			txtValorMax: {
+				required: "se requiere el Valor Maximo"
+			}
+		}
+	});
+	$("#formEditar").validate({
+		rules: {
+			txtIndicadorE: {
+				required: true,
+				minlength: 5,
+				check_indicador: true
+
+			},
+			txtValorMinE: {
+				required: true,
+				number: true,
+				minlength: 1
+			},
+			txtValorMaxE: {
+				required: true,
+				number: true,
+				minlength: 1,
+				min: "#txtValorMinE"
+			}
+		},
+		messages: {
+			txtIndicadorE: {
+				required: "Ingrese la descripcion del Indicador. Por Favor"
+			},
+			txtValorMinE: {
+				required: "se requiere el Valor Minimo"
+			},
+			txtValorMaxE: {
+				required: "se requiere el Valor Maximo"
+			}
+		}
 	});
 
 	//cargar conbobox unidad de medida
@@ -76,17 +106,19 @@ $(document).ready(function() {
 	$("#example").delegate("a", "click", function(event) {
 		if ($(this).text() === ' Eliminar') {
 			var codigo = $(this).closest("tr").attr("id");
-			var tr = $(this).closest("tr");
-			$.post("mantenimiento_indicador.php", {
-				action: "eliminar",
-				idindicador: codigo
-			},
-			function(data) {
-				if (data.title !== "error") {
-					tr.remove();
-				}
-				$("#resultado").html(data.html);
-			}, "json");
+			if (confirm("¿Seguro que desea elimnar el registro " + codigo + "?")) {
+				var tr = $(this).closest("tr");
+				$.post("mantenimiento_indicador.php", {
+					action: "eliminar",
+					idindicador: codigo
+				},
+				function(data) {
+					if (data.title !== "error") {
+						tr.remove();
+					}
+					$("#resultado").html(data.html);
+				}, "json");
+			}
 		}
 		if ($(this).text() === ' Editar') {
 			$(this).closest("tr").each(function(index) {
@@ -126,36 +158,38 @@ $(document).ready(function() {
 	});
 	//funcionalidad de modificar un indicador
 	$("#btnEditar").click(function() {
-		$("#btnEditar").text("Editandoo...");
-		$("#btnEditar").attr("disabled", "disabled");
-		var codigo = $('#txtIdindicadorE').val();
-		var institucion = $('#txtInstitucionE').val();
-		var indicador = $('#txtIndicadorE').val();
-		var unidadmedida = $('#cbUnidadMedidaE').val();
-		var valormin = $('#txtValorMinE').val();
-		var valormax = $('#txtValorMaxE').val();
-		$.post("mantenimiento_indicador.php", {
-			action: "modificar",
-			idindicador: codigo,
-			idunidadmedida: unidadmedida,
-			idinstitucion: institucion,
-			descripcion: indicador,
-			valorminimo: valormin,
-			valormaximo: valormax
-		},
-		function(data) {
-			if (data.title !== "error") {
-				$("#example tbody tr").each(function(index) {
-					if ($(this).attr("id") === $("#txtIdindicadorE").val()) {
-						$(this).html('<td>' + codigo + '</td><td>' + institucion + '</td><td>' + indicador + '</td><td>' + $('#cbUnidadMedidaE option:selected').text() + '</td><td>' + valormin + '</td><td>' + valormax + '</td><td><a href="#myModal" data-toggle="modal" class="btn-small btn-success"><i class="icon-edit"></i><strong> Editar</strong></a></td><td><a href="#" class="btn-small btn-danger"><i class="icon-trash"></i><strong> Eliminar</strong></a></td></tr>');
-					}
-				});
-				$("#resultado").html(data.html);
-				$("#btnEditar").removeAttr("disabled");
-				$("#btnEditar").text("Editar");
-				$('#myModal').modal('hide');
-			}
-		}, "json");
+		if ($("#formEditar").valid()) {
+			$("#btnEditar").text("Editandoo...");
+			$("#btnEditar").attr("disabled", "disabled");
+			var codigo = $('#txtIdindicadorE').val();
+			var institucion = $('#txtInstitucionE').val();
+			var indicador = $('#txtIndicadorE').val();
+			var unidadmedida = $('#cbUnidadMedidaE').val();
+			var valormin = $('#txtValorMinE').val();
+			var valormax = $('#txtValorMaxE').val();
+			$.post("mantenimiento_indicador.php", {
+				action: "modificar",
+				idindicador: codigo,
+				idunidadmedida: unidadmedida,
+				idinstitucion: institucion,
+				descripcion: indicador,
+				valorminimo: valormin,
+				valormaximo: valormax
+			},
+			function(data) {
+				if (data.title !== "error") {
+					$("#example tbody tr").each(function(index) {
+						if ($(this).attr("id") === $("#txtIdindicadorE").val()) {
+							$(this).html('<td>' + codigo + '</td><td>' + institucion + '</td><td>' + indicador + '</td><td>' + $('#cbUnidadMedidaE option:selected').text() + '</td><td>' + valormin + '</td><td>' + valormax + '</td><td><a href="#myModal" data-toggle="modal" class="btn-small btn-success"><i class="icon-edit"></i><strong> Editar</strong></a></td><td><a href="#" class="btn-small btn-danger"><i class="icon-trash"></i><strong> Eliminar</strong></a></td></tr>');
+						}
+					});
+					$("#resultado").html(data.html);
+					$("#btnEditar").removeAttr("disabled");
+					$("#btnEditar").text("Editar");
+					$('#myModal').modal('hide');
+				}
+			}, "json");
+		}
 	});
 	//funcionalidad de la accion de insertar un nuevo indicador
 	$("#btnAgregar").click(function() {

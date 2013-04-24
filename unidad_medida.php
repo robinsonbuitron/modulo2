@@ -15,7 +15,7 @@ if (!isset($_SESSION['s_username'])) {
 			<script class="include" src="js/jquery-1.9.1.min.js"></script>
 			<script class="include" src="js/bootstrap.min.js"></script>
 			<script src="js/jquery.dataTables.min.js"></script>
-                         <script src="js/jquery.validate.min.js"></script>
+			<script src="js/jquery.validate.min.js"></script>
 			<script src="js/messages_es.js"></script>
 			<script src="js/DT_bootstrap.js"></script>
 			<script class="include" src="js/mantenimiento_um.js"></script>
@@ -34,14 +34,14 @@ if (!isset($_SESSION['s_username'])) {
 							<div class="control-group">
 								<label class="control-label">Unidad de medida: </label>
 								<div class="controls">
-                                                                    <input id="txtabreviatura" name="txtabreviatura" class="span12" type="text" placeholder="Unida de medida">
+									<input id="txtabreviatura" name="txtabreviatura" class="span12" type="text" placeholder="Unida de medida">
 								</div>
 							</div>
 
 							<div class="control-group">
 								<label class="control-label">Descrpcion: </label>
 								<div class="controls">
-                                                                    <input id="txtdescripcion" name="txtdescripcion" class="span12" type="text" placeholder="Descripcion">
+									<input id="txtdescripcion" name="txtdescripcion" class="span12" type="text" placeholder="Descripcion">
 								</div>
 							</div>
 						</div>
@@ -62,25 +62,27 @@ if (!isset($_SESSION['s_username'])) {
 							<h3 id="myModalLabel">Editar Unidad de Medida</h3>
 						</div>
 						<div class="modal-body">
-							<input id="txtId" type="hidden">
-							<div class="control-group">
-								<label class="control-label">Codigo:</label>
-								<div class="controls">
-									<input id="txtidunidadmedidaE" readonly type="text">
+							<form id="frmEditar">
+								<input id="txtId" type="hidden">
+								<div class="control-group">
+									<label class="control-label">Codigo:</label>
+									<div class="controls">
+										<input id="txtidunidadmedidaE" readonly type="text">
+									</div>
 								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">Sigla:</label>
-								<div class="controls">
-									<input id="txtabreviaturaE" type="text" class="span3" placeholder="Unidad de Medida">
+								<div class="control-group">
+									<label class="control-label">Sigla:</label>
+									<div class="controls">
+										<input id="txtabreviaturaE" name="txtabreviaturaE" type="text" class="span3" placeholder="Unidad de Medida">
+									</div>
 								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">Nombre de Institucion:</label>
-								<div class="controls">
-									<input id="txtdescripcionE" class="span4" type="text" placeholder="Descripcion">
+								<div class="control-group">
+									<label class="control-label">Nombre de Institucion:</label>
+									<div class="controls">
+										<input id="txtdescripcionE" name="txtdescripcionE" class="span4" type="text" placeholder="Descripcion">
+									</div>
 								</div>
-							</div>
+							</form>
 						</div>
 						<div class="modal-footer">
 							<button id="btnEditar" type="button" class="btn btn-primary">Agregar</button>
