@@ -274,9 +274,13 @@ function cargarIndicadores() {
 	}, "html");
 }
 
-function cargarLeyenda(minimo, maximo, uMedida) {
+function cargarLeyenda(minimo, maximo, uMedida, semaforo) {
 	$("#tituloLeyenda").html("<h4>Leyenda en " + uMedida + "</h4>");
-	$("#leyenda").html("<li class='text-error'>Bajo < " + minimo + "</li><li class='text-warning'> " + minimo + " <= Medio < " + maximo + "</li><li class='text-success'>Alto >= " + maximo + "</li>");
+	if (semaforo === "maximo") {
+		$("#leyenda").html("<li class='text-error'>Bajo < " + minimo + "</li><li class='text-warning'> " + minimo + " <= Medio < " + maximo + "</li><li class='text-success'>Alto >= " + maximo + "</li>");
+	} else {
+		$("#leyenda").html("<li class='text-success'>Bajo < " + minimo + "</li><li class='text-warning'> " + minimo + " <= Medio < " + maximo + "</li><li class='text-error'>Alto >= " + maximo + "</li>");
+	}
 }
 
 function graficar() {
@@ -298,7 +302,7 @@ function graficar() {
 		maximo = parseFloat(datos.maximo);
 		uMedida = datos.uMedida;
 		semaforo = datos.semaforo;
-		cargarLeyenda(minimo, maximo, uMedida);
+		cargarLeyenda(minimo, maximo, uMedida, semaforo);
 		if (grafico === "01") {
 			$.post("consulta_grafico.php", {
 				peticion: "mapas",
