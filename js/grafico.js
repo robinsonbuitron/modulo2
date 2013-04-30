@@ -276,7 +276,7 @@ function cargarIndicadores() {
 
 function cargarLeyenda(minimo, maximo, uMedida, semaforo) {
 	$("#tituloLeyenda").html("<h4>Leyenda en " + uMedida + "</h4>");
-	if (semaforo === "maximo") {
+	if (semaforo === "minimo") {
 		$("#leyenda").html("<li class='text-error'>Bajo < " + minimo + "</li><li class='text-warning'> " + minimo + " <= Medio < " + maximo + "</li><li class='text-success'>Alto >= " + maximo + "</li>");
 	} else {
 		$("#leyenda").html("<li class='text-success'>Bajo < " + minimo + "</li><li class='text-warning'> " + minimo + " <= Medio < " + maximo + "</li><li class='text-error'>Alto >= " + maximo + "</li>");
