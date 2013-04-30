@@ -30,12 +30,16 @@ if (isset($_GET['tipo'])) {
 			$contador = 10;
 			$aux = $objPHPExcel->getActiveSheet()->getCell('D' . $contador)->getValue();
 			$ubigeo = $objPHPExcel->getActiveSheet()->getCell('A' . $contador)->getValue();
-			while ($aux != "" && $aux != NULL) {
-				foreach ($jsondata as $key => $value) {
-					if ($ubigeo == $key) {
-						$jsondata[$key]+=$aux;
-						$numVariables[$key]++;
+			while ($ubigeo != "" && $ubigeo != NULL) {
+				if (is_numeric($aux)) {
+					foreach ($jsondata as $key => $value) {
+						if ($ubigeo == $key) {
+							$jsondata[$key]+=$aux;
+							$numVariables[$key]++;
+						}
 					}
+				} else {
+					$jsondata['html'] = 'Error al procesar las variables, por favor revise el archivo excel';
 				}
 				$contador++;
 				$aux = $objPHPExcel->getActiveSheet()->getCell('D' . $contador)->getValue();
@@ -43,7 +47,9 @@ if (isset($_GET['tipo'])) {
 			}
 			//formula para el calculo de un indicador, apartir de variables
 			foreach ($jsondata as $key => $value) {
-				$jsondata[$key] = round(($jsondata[$key] / ($numVariables[$key])), 2);
+				if ($key != "html") {
+					$jsondata[$key] = round(($jsondata[$key] / ($numVariables[$key])), 2);
+				}
 			}
 		}
 		if ($tipo == "indicador") {

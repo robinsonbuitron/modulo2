@@ -6,17 +6,21 @@ function cargarExcelVariables(file) {
 		file: file
 	},
 	function(data) {
-		$("#example tbody tr").each(function(index) {
-			var valor, ubigeo;
-			$(this).children("td").each(function(index2) {
-				ubigeo = $(this).closest('tr').attr("id");
-				switch (index2) {
-					case 4:
-						valor = $(this).children().first().val(data[ubigeo]);
-						break;
-				}
+		if (data.html) {
+			alert(data.html);
+		} else {
+			$("#example tbody tr").each(function(index) {
+				var valor, ubigeo;
+				$(this).children("td").each(function(index2) {
+					ubigeo = $(this).closest('tr').attr("id");
+					switch (index2) {
+						case 4:
+							valor = $(this).children().first().val(data[ubigeo]);
+							break;
+					}
+				});
 			});
-		});
+		}
 	}, "json");
 }
 
