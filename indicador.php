@@ -47,7 +47,6 @@ if (!isset($_SESSION['s_username'])) {
 									<input id="txtInstitucion" class="span8" type="text" value="<?php echo $siglas; ?>" disabled=""> 
 								</div>
 							</div>
-
 							<div class="control-group">
 								<label class="control-label">Ingrese Indicador: </label>
 								<div class="controls">
@@ -64,18 +63,26 @@ if (!isset($_SESSION['s_username'])) {
 						</div>
 						<div class="span5 form-horizontal">
 							<div class="control-group">
-								<label class="control-label">Valor Min: </label>
+								<label class="control-label">Valor Minimo: </label>
 								<div class="controls">
 									<input id="txtValorMin" name="txtValorMin" class="span6" type="text" placeholder="Valor Minimo">
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label">Valor Max: </label>
+								<label class="control-label">Valor Maximo: </label>
 								<div class="controls">
 									<input id="txtValorMax" name="txtValorMax" class="span6" type="text" placeholder="Valor Máximo">
 								</div>
 							</div>
-
+							<div class="control-group">
+								<label class="control-label">Semaforización Rojo: </label>
+								<div class="controls">
+									<select id="cbColor" class="span6">
+										<option value="minimo">Minimo</option>
+										<option value="maximo">Maximo</option>
+									</select>
+								</div>
+							</div>
 						</div>
 						<div class="text-right">
 							<button id="btnAgregar" type="button" class="btn btn-primary">Agregar</button>
@@ -121,17 +128,26 @@ if (!isset($_SESSION['s_username'])) {
 									</div>
 								</div>
 								<div class="control-group">
-									<label class="control-label">Valor Min: </label>
+									<label class="control-label">Valor Minimo: </label>
 									<div class="controls">
 										<input id="txtValorMinE" name="txtValorMinE" class="span1" type="text" placeholder="Valor Minimo">
 									</div>
 								</div>
 								<div class="control-group">
-									<label class="control-label">Valor Max: </label>
+									<label class="control-label">Valor Maximo: </label>
 									<div class="controls">
 										<input id="txtValorMaxE" name="txtValorMaxE"  class="span1" type="text" placeholder="Valor Máximo">
 									</div>
 								</div>
+								<div class="control-group">
+								<label class="control-label">Semaforización Rojo: </label>
+								<div class="controls">
+									<select id="cbColorE" class="span2">
+										<option value="minimo">Minimo</option>
+										<option value="maximo">Maximo</option>
+									</select>
+								</div>
+							</div>
 							</form>
 						</div>
 						<div class="modal-footer">

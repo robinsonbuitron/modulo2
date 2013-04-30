@@ -6,6 +6,7 @@ if (isset($_POST['peticion'])) {
 	$provincia = $_POST['provincia'];
 	$indicador = $_POST['indicador'];
 	$periodo = $_POST['periodo'];
+	$semaforo = $_POST['semaforo'];
 	include_once 'conexion/pgsql.php';
 	$conexion = new ConexionPGSQL();
 	$conexion->conectar();
@@ -17,11 +18,16 @@ if (isset($_POST['peticion'])) {
 		if ($filas != 0) {
 			$jsondata = array();
 			$jsondata["series"][0]["name"] = "Bajo";
-			$jsondata["series"][0]["color"] = "red";
+			if ($semaforo == "minimo") {
+				$jsondata["series"][0]["color"] = "red";
+				$jsondata["series"][2]["color"] = "green";
+			} else {
+				$jsondata["series"][2]["color"] = "red";
+				$jsondata["series"][0]["color"] = "green";
+			}
 			$jsondata["series"][1]["name"] = "Medio";
 			$jsondata["series"][1]["color"] = "yellow";
 			$jsondata["series"][2]["name"] = "Alto";
-			$jsondata["series"][2]["color"] = "green";
 			for ($cont = 0; $cont < $filas; $cont++) {
 				$valor = (float) pg_result($resultado, $cont, 1);
 				$jsondata["series"][0]["data"][$cont] = 0;
@@ -70,11 +76,16 @@ if (isset($_POST['peticion'])) {
 		if ($filas != 0) {
 			$jsondata = array();
 			$jsondata["series"][0]["name"] = "Bajo";
-			$jsondata["series"][0]["color"] = "red";
 			$jsondata["series"][1]["name"] = "Medio";
 			$jsondata["series"][1]["color"] = "yellow";
 			$jsondata["series"][2]["name"] = "Alto";
-			$jsondata["series"][2]["color"] = "green";
+			if ($semaforo == "minimo") {
+				$jsondata["series"][0]["color"] = "red";
+				$jsondata["series"][2]["color"] = "green";
+			} else {
+				$jsondata["series"][2]["color"] = "red";
+				$jsondata["series"][0]["color"] = "green";
+			}
 			for ($cont = 0; $cont < $filas; $cont++) {
 				$valor = (float) pg_result($resultado, $cont, 1);
 				$jsondata["series"][0]["data"][$cont] = 0;

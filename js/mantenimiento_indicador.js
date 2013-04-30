@@ -21,7 +21,6 @@ var elementosEspanol = {
 		}
 	}
 };
-
 $(document).ready(function() {
 // Agregamos un metodo nuevo para revisar el nombre
 	jQuery.validator.addMethod("check_indicador", function(value, element, params) {
@@ -92,7 +91,6 @@ $(document).ready(function() {
 			}
 		}
 	});
-
 	//cargar conbobox unidad de medida
 	$.post("consulta_datos.php", {
 		peticion: "unidad_medida"
@@ -102,7 +100,6 @@ $(document).ready(function() {
 			$(".cbUnidadMedida").append("<option value='" + data[index].idunidadmedida + "'>" + data[index].abreviatura + "</option>");
 		});
 	}, "json");
-
 	$("#example").delegate("a", "click", function(event) {
 		if ($(this).text() === ' Eliminar') {
 			var codigo = $(this).closest("tr").attr("id");
@@ -146,7 +143,9 @@ $(document).ready(function() {
 						case 5:
 							$("#txtValorMaxE").val($(this).text());
 							break;
-
+						case 6:
+							$("#cbColorE").val($(this).text());
+							break;
 					}
 				});
 			});
@@ -167,6 +166,7 @@ $(document).ready(function() {
 			var unidadmedida = $('#cbUnidadMedidaE').val();
 			var valormin = $('#txtValorMinE').val();
 			var valormax = $('#txtValorMaxE').val();
+			var semaforo = $('#cbColorE').val();
 			$.post("mantenimiento_indicador.php", {
 				action: "modificar",
 				idindicador: codigo,
@@ -174,13 +174,14 @@ $(document).ready(function() {
 				idinstitucion: institucion,
 				descripcion: indicador,
 				valorminimo: valormin,
-				valormaximo: valormax
+				valormaximo: valormax,
+				semaforo: semaforo
 			},
 			function(data) {
 				if (data.title !== "error") {
 					$("#example tbody tr").each(function(index) {
 						if ($(this).attr("id") === $("#txtIdindicadorE").val()) {
-							$(this).html('<td>' + codigo + '</td><td>' + institucion + '</td><td>' + indicador + '</td><td>' + $('#cbUnidadMedidaE option:selected').text() + '</td><td>' + valormin + '</td><td>' + valormax + '</td><td><a href="#myModal" data-toggle="modal" class="btn-small btn-success"><i class="icon-edit"></i><strong> Editar</strong></a></td><td><a href="#" class="btn-small btn-danger"><i class="icon-trash"></i><strong> Eliminar</strong></a></td></tr>');
+							$(this).html('<td>' + codigo + '</td><td>' + institucion + '</td><td>' + indicador + '</td><td>' + $('#cbUnidadMedidaE option:selected').text() + '</td><td>' + valormin + '</td><td>' + valormax + '</td><td>' + semaforo + '</td><td><a href="#myModal" data-toggle="modal" class="btn-small btn-success"><i class="icon-edit"></i><strong> Editar</strong></a></td><td><a href="#" class="btn-small btn-danger"><i class="icon-trash"></i><strong> Eliminar</strong></a></td></tr>');
 						}
 					});
 					$("#resultado").html(data.html);
@@ -201,24 +202,25 @@ $(document).ready(function() {
 			var unidadmedida = $('#cbUnidadMedida').val();
 			var valormin = $('#txtValorMin').val();
 			var valormax = $('#txtValorMax').val();
+			var semaforo = $('#cbColor').val();
 			$.post("mantenimiento_indicador.php", {
 				action: "insertar",
 				idunidadmedida: unidadmedida,
 				idinstitucion: institucion,
 				descripcion: indicador,
 				valorminimo: valormin,
-				valormaximo: valormax
+				valormaximo: valormax,
+				semaforo: semaforo
 			},
 			function(data) {
 				if (data.title !== "error") {
-					$('#example > tbody:last').append('<tr id="' + data.title + '"><td>' + data.title + '</td><td>' + institucion + '</td><td>' + indicador + '</td><td>' + $('#cbUnidadMedida option:selected').text() + '</td><td>' + valormin + '</td><td>' + valormax + '</td><td><a href="#myModal" data-toggle="modal" class="btn-small btn-success"><i class="icon-edit"></i><strong> Editar</strong></a></td><td><a href="#" class="btn-small btn-danger"><i class="icon-trash"></i><strong> Eliminar</strong></a></td></tr>');
+					$('#example > tbody:last').append('<tr id="' + data.title + '"><td>' + data.title + '</td><td>' + institucion + '</td><td>' + indicador + '</td><td>' + $('#cbUnidadMedida option:selected').text() + '</td><td>' + valormin + '</td><td>' + valormax + '</td><td>' + semaforo + '</td><td><a href="#myModal" data-toggle="modal" class="btn-small btn-success"><i class="icon-edit"></i><strong> Editar</strong></a></td><td><a href="#" class="btn-small btn-danger"><i class="icon-trash"></i><strong> Eliminar</strong></a></td></tr>');
 					$("#formInsertar input").val("");
 				}
 				$("#resultado").html(data.html);
 				$("#btnAgregar").removeAttr("disabled");
 				$("#btnAgregar").text("Agregar");
 			}, "json");
-
 		} else {
 			$("#resultado").html('<div class="alert alert-error"><strong>Error!</strong> Campos requeridos para insertar nuevo indicador</div>');
 		}

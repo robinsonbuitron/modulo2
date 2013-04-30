@@ -20,13 +20,14 @@ if (!isset($_SESSION['s_username'])) {
 			$descripcion = $_POST['descripcion'];
 			$valormin = $_POST['valorminimo'];
 			$valormax = $_POST['valormaximo'];
+			$semaforo = $_POST['semaforo'];
 			$idindicador++;
-
-			$sql = $conexion->consulta("INSERT INTO tindicador VALUES (E'$idindicador',E'$idunidadmedida',E'$idinstitucion',E'$descripcion',E'$valormin',E'$valormax')");
+			$sentencia = "INSERT INTO tindicador VALUES (E'$idindicador',E'$idunidadmedida',E'$idinstitucion',E'$descripcion',E'$valormin',E'$valormax',E'$semaforo')";
+			$sql = $conexion->consulta($sentencia);
 			if (!$sql) {
 				$jsondata['title'] = "error";
 				$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> No se pudo registrar el Indicador</div>';
-				//echo "Consulta: " . $contador . "Fallo en la insercion de registro en la Base de Datos: " . mysql_error() . "<br>";
+				//$jsondata['html'] = "Consulta: " . $contador . "Fallo en la insercion de registro en la Base de Datos: " . mysql_error() . "<br>";
 			} else {
 				$jsondata['title'] = $idindicador;
 				$jsondata['html'] = '<div class="alert alert-success"><strong>Correcto!</strong> Se ingreso correctamente su nuevo indicador</div>';
@@ -38,7 +39,8 @@ if (!isset($_SESSION['s_username'])) {
 			$descripcion = $_POST['descripcion'];
 			$valormin = $_POST['valorminimo'];
 			$valormax = $_POST['valormaximo'];
-			$sql = $conexion->consulta("UPDATE tindicador SET idunidadmedida='$idunidadmedida', descripcion='$descripcion', valorminimo='$valormin', valormaximo='$valormax'  WHERE idindicador='$idindicador';");
+			$semaforo = $_POST['semaforo'];
+			$sql = $conexion->consulta("UPDATE tindicador SET idunidadmedida='$idunidadmedida', descripcion='$descripcion', valorminimo='$valormin', valormaximo='$valormax', semaforo='$semaforo'  WHERE idindicador='$idindicador';");
 			if (!$sql) {
 				$jsondata['title'] = "error";
 				$jsondata['html'] = '<div class="alert alert-error"><strong>Error!</strong> No se pudo modificar el Indicador</div>';
