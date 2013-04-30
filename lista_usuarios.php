@@ -21,7 +21,7 @@ if (!isset($_SESSION['s_username'])) {
 			include_once 'conexion/pgsql.php';
 			$conexion = new ConexionPGSQL();
 			$conexion->conectar();
-			$resultado = $conexion->consulta("select tu.idusuario, ti.siglas, tp.nombprivi, tu.nomape from tusuario tu join tinstitucion ti on tu.idinstitucion=ti.idinstitucion join tprivilegios tp on tp.idprivilegios=tu.idprivilegios where tu.idusuario!='42048612'");
+			$resultado = $conexion->consulta("select tu.idusuario, ti.siglas, tp.nombprivi, tu.nomape from tusuario tu join tinstitucion ti on tu.idinstitucion=ti.idinstitucion join tprivilegios tp on tp.idprivilegios=tu.idprivilegios where tu.idusuario!='yarghu@gmail.com'");
 			$filas = pg_numrows($resultado);
 			if ($filas != 0) {
 				for ($cont = 0; $cont < $filas; $cont++) {

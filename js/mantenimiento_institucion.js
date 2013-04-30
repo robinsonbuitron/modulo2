@@ -30,7 +30,7 @@ $(document).ready(function() {
 		return this.optional(element) || /^([a-zA-Z'-áéíóúÁÉÍÓÚ]+){1,4}[a-zA-z'-áéíóúÁÉÍÓÚ]+$/i.test(value);
 	}, jQuery.format("Escriba una SIGLA válida"));
 	jQuery.validator.addMethod("check_institucion", function(value, element, params) {
-		return this.optional(element) || /^[A-Za-z0-9 ]{3,20}$/i.test(value);
+		return this.optional(element) || /^[A-Za-z0-9 ]{3,100}$/i.test(value);
 	}, jQuery.format("Escriba un nombre de institucion válido"));
 
 	$("#frmInsertar").validate({

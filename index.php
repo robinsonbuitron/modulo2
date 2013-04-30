@@ -66,10 +66,7 @@
             <div style="padding-top: 60px" class="container">
                 <div class="row-fluid">
                     <div class="span8">    
-                        <h2>Bienvenidos al SIAR</h2>
-                        <p>
-                            Descripción del producto presentado. Descripción del producto presentado. 
-                        </p>
+                        <img src="img/logo.png" alt="SIAR" border="1" width="500" height="324" />
                     </div>
                     <div class="span4">
 
@@ -81,7 +78,7 @@
         </div>
         <div id="footer">
             <div class="container">
-                <p class="muted credit">SIAR Apurimac <a href="http://siar.regionapurimac.gob.pe/">SIAR Apurimac 2013</a> and <a href="http://ryanfait.com/sticky-footer/">t</a>.</p>
+                <p class="muted credit">SIAR Apurimac - 2013 <a href="http://siar.regionapurimac.gob.pe/">SIAR Apurimac</a> Gobierno Regional de Apurímac.</p>
             </div>
         </div>
     </body>

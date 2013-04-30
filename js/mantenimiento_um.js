@@ -37,7 +37,7 @@ $(document).ready(function() {
 			},
 			txtdescripcion: {
 				required: true,
-				minlength: 5,
+				minlength: 3,
 			}
 		},
 		messages: {
