@@ -29,7 +29,7 @@ if (isset($_POST['peticion'])) {
 			$jsondata["series"][1]["color"] = "yellow";
 			$jsondata["series"][2]["name"] = "Alto";
 			for ($cont = 0; $cont < $filas; $cont++) {
-				$valor = (float) pg_result($resultado, $cont, 1);
+				$valor = round((float) pg_result($resultado, $cont, 1),2);
 				$jsondata["series"][0]["data"][$cont] = 0;
 				$jsondata["series"][1]["data"][$cont] = 0;
 				$jsondata["series"][2]["data"][$cont] = 0;
@@ -59,7 +59,7 @@ if (isset($_POST['peticion'])) {
 			for ($cont = 0; $cont < $filas; $cont++) {
 				$ubigeo = pg_result($resultado, $cont, 0);
 				$jsondata[$ubigeo]['nombre'] = pg_result($resultado, $cont, 1);
-				$jsondata[$ubigeo]['valor'] = pg_result($resultado, $cont, 2);
+				$jsondata[$ubigeo]['valor'] = round(pg_result($resultado, $cont, 2),2);
 			}
 		}
 	}
@@ -87,7 +87,7 @@ if (isset($_POST['peticion'])) {
 				$jsondata["series"][0]["color"] = "green";
 			}
 			for ($cont = 0; $cont < $filas; $cont++) {
-				$valor = (float) pg_result($resultado, $cont, 1);
+				$valor = round((float) pg_result($resultado, $cont, 1),2);
 				$jsondata["series"][0]["data"][$cont] = 0;
 				$jsondata["series"][1]["data"][$cont] = 0;
 				$jsondata["series"][2]["data"][$cont] = 0;
@@ -115,7 +115,7 @@ if (isset($_POST['peticion'])) {
 		if ($filas != 0) {
 			$jsondata = array();
 			for ($cont = 0; $cont < $filas; $cont++) {
-				$valor = (float) pg_result($resultado, $cont, 1);
+				$valor = round((float) pg_result($resultado, $cont, 1),2);
 				$nombre = pg_result($resultado, $cont, 0);
 				$jsondata[$cont] = array($nombre, $valor);
 			}

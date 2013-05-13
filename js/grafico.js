@@ -96,9 +96,12 @@ function graficarHistorico(lienzo, indicador, provincia, periodo, anio, minimo, 
 			},
 			stackLabels: {
 				enabled: true,
+				align: 'center',
+				rotation: -70,
 				style: {
 					fontWeight: 'bold',
-					color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+					color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray',
+					fontSize: '9px'
 				},
 				formatter: function() {
 					return this.total + uMedida;
@@ -171,9 +174,12 @@ function graficarBarra(lienzo, indicador, provincia, periodo, anio, minimo, maxi
 			},
 			stackLabels: {
 				enabled: true,
+				align: 'center',
+				rotation: -70,
 				style: {
 					fontWeight: 'bold',
-					color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+					color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray',
+					fontSize: '9px'
 				},
 				formatter: function() {
 					return this.total + uMedida;
@@ -274,6 +280,29 @@ function cargarIndicadores() {
 	}, "html");
 }
 
+function cargarAnio() {
+	$.post("consulta_datos_html.php", {
+		peticion: "anio_indicador",
+		indicador: $('#cbIndicador').val()
+	},
+	function(data) {
+		$("#cbAnio").html(data);
+		cargarPeriodo();
+	}, "html");
+}
+
+function cargarPeriodo() {
+	$.post("consulta_datos_html.php", {
+		peticion: "periodo_indicador",
+		indicador: $('#cbIndicador').val(),
+		anio: $("#cbAnio").val()
+	},
+	function(data) {
+		$("#cbPeriodo").html(data);
+		$("#cbPeriodo").trigger('change');
+	}, "html");
+}
+
 function cargarLeyenda(minimo, maximo, uMedida, semaforo) {
 	$("#tituloLeyenda").html("<h4>Leyenda en " + uMedida + "</h4>");
 	if (semaforo === "minimo") {
@@ -339,6 +368,11 @@ function descargarExcel() {
 	window.location.href = 'excel_grafico.php?provincia=' + provincia + '&idindicador=' + indicador + '&anio=' + anio + '&idperiodo=' + periodo;
 }
 
+function descargarFicha() {
+	var indicador = $('#cbIndicador').val();
+	window.location.href = 'fichas/' + indicador + '.docx';
+}
+
 $(document).ready(function() {
 	$('#cbInstitucion').change(function() {
 		cargarIndicadores();
@@ -370,11 +404,12 @@ $(document).ready(function() {
 		graficar();
 	});
 	$('#cbIndicador').on('change', function() {
-		graficar();
+		//graficar();
+		cargarAnio();
 	});
-	$('#cbAnio').on('change', function() {
-		graficar();
-	});
+	/*$('#cbAnio').on('change', function() {
+	 graficar();
+	 });*/
 	$('#cbPeriodo').on('change', function() {
 		graficar();
 	});
@@ -383,5 +418,8 @@ $(document).ready(function() {
 	});
 	$("#btnExcel").on('click', function() {
 		descargarExcel();
+	});
+	$("#btnFicha").on('click', function() {
+		descargarFicha();
 	});
 });

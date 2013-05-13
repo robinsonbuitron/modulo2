@@ -81,6 +81,7 @@
 							</div>
 							<div class="text-right">
 								<a id="btnExcel" class='btn btn-success'>Descargar Excel</a>
+								<a id="btnFicha" class='btn btn-info'>Descargar Ficha</a>
 							</div>
 						</div>
 					</div>

@@ -56,7 +56,7 @@ if (isset($_GET['tipo'])) {
 			$contador = 11;
 			$aux = $objPHPExcel->getActiveSheet()->getCell('C' . $contador)->getValue();
 			$ubigeo = $objPHPExcel->getActiveSheet()->getCell('A' . $contador)->getValue();
-			while ($aux != "" && $aux != NULL) {
+			while ($aux !== "" && $aux !== NULL) {
 				foreach ($jsondata as $key => $value) {
 					if ($ubigeo == $key) {
 						$jsondata[$key] = $aux;

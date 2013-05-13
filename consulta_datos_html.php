@@ -55,5 +55,26 @@ if (isset($_POST['peticion'])) {
 			}
 		}
 	}
+	if ($peticion == "anio_indicador") {
+		$indicador = $_POST["indicador"];
+		$resultado = $conexion->consulta("select anio from tlectura where idindicador = '$indicador' GROUP BY anio");
+		$filas = pg_numrows($resultado);
+		if ($filas != 0) {
+			for ($cont = 0; $cont < $filas; $cont++) {
+				echo "<option value='" . pg_result($resultado, $cont, 0) . "'>" . pg_result($resultado, $cont, 0) . "</option>";
+			}
+		}
+	}
+	if ($peticion == "periodo_indicador") {
+		$indicador = $_POST["indicador"];
+		$anio = $_POST["anio"];
+		$resultado = $conexion->consulta("select tl.idperiodo, tp.descripcion from tlectura tl join tperiodo tp on tl.idperiodo=tp.idperiodo where tl.idindicador = '$indicador' and tl.anio = '$anio' GROUP BY tl.idperiodo, tp.descripcion");
+		$filas = pg_numrows($resultado);
+		if ($filas != 0) {
+			for ($cont = 0; $cont < $filas; $cont++) {
+				echo "<option value='" . pg_result($resultado, $cont, 0) . "'>" . pg_result($resultado, $cont, 1) . "</option>";
+			}
+		}
+	}
 }
 ?>
