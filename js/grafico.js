@@ -407,9 +407,10 @@ $(document).ready(function() {
 		//graficar();
 		cargarAnio();
 	});
-	/*$('#cbAnio').on('change', function() {
-	 graficar();
-	 });*/
+	$('#cbAnio').on('change', function() {
+		//graficar();
+		cargarPeriodo();
+	});
 	$('#cbPeriodo').on('change', function() {
 		graficar();
 	});
