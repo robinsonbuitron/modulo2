@@ -168,7 +168,6 @@ function graficarBarra(lienzo, indicador, provincia, periodo, anio, minimo, maxi
 			}
 		},
 		yAxis: {
-			min: 0,
 			title: {
 				text: indicadorName + ' (' + uMedida + ')'
 			},
