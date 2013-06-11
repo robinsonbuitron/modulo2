@@ -219,6 +219,7 @@ function graficarBarra(lienzo, indicador, provincia, periodo, anio, minimo, maxi
 }
 
 function graficarMapa(provincia, data, minimo, maximo, uMedida, semaforo) {
+	$("#lienzoTitle").html("<h3>" + $("#cbProvincia option:selected").text() + "</h3>");
 	$.getScript('js/data_' + provincia + '.js', function() {
 		var r = Raphael('chaptersMap', 400, 450);
 		r.safari();
@@ -312,7 +313,10 @@ function cargarLeyenda(minimo, maximo, uMedida, semaforo) {
 }
 
 function graficar() {
+	$("#lienzoTitle").html("");
+	$("#lienzoFuente").html("");
 	$('#chaptersMap').html('');
+	$('#chaptersMap').addClass("fondo");
 	$("#tituloLeyenda").html("");
 	var provincia = $('#cbProvincia').val();
 	var indicador = $('#cbIndicador').val();
@@ -340,6 +344,7 @@ function graficar() {
 				periodo: periodo
 			},
 			function(data) {
+				$('#chaptersMap').removeClass("fondo");
 				if (data) {
 					graficarMapa(provincia, data, minimo, maximo, uMedida, semaforo);
 				} else {
@@ -348,14 +353,18 @@ function graficar() {
 			}, "json");
 		}
 		if (grafico === "02") {
+			$('#chaptersMap').removeClass("fondo");
 			graficarBarra($('#chaptersMap'), indicador, provincia, periodo, anio, minimo, maximo, uMedida, semaforo);
 		}
 		if (grafico === "03") {
+			$('#chaptersMap').removeClass("fondo");
 			graficarCirculares($('#chaptersMap'), indicador, provincia, periodo, anio);
 		}
 		if (grafico === "04") {
+			$('#chaptersMap').removeClass("fondo");
 			graficarHistorico($('#chaptersMap'), indicador, provincia, periodo, anio, minimo, maximo, uMedida, semaforo);
 		}
+		$("#lienzoFuente").html("Fuente: " + $("#cbInstitucion option:selected").text());
 	}, "json");
 }
 
@@ -422,4 +431,5 @@ $(document).ready(function() {
 	$("#btnFicha").on('click', function() {
 		descargarFicha();
 	});
+	$("[rel='tooltip']").tooltip();
 });

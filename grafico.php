@@ -8,7 +8,6 @@
 		<script src="js/highcharts.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/modules/exporting.js" type="text/javascript" charset="utf-8"></script>
 		<link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min.css" />
-		<script type="text/javascript" src="js/grafico.js"></script>
 		<style type="text/css">
             html,
             body {
@@ -35,18 +34,25 @@
                     padding-right: 20px;
                 }
             }
-
+			.fondo {
+				background: white url('img/loading.gif') center center no-repeat;
+			}
+			.fondoLogo {
+				background: url('img/logoregion.png') no-repeat;
+				background-size:100px 100px;
+			}
             .container .credit {
                 margin: 20px 0;
             }
         </style>
+		<script type="text/javascript" src="js/grafico.js"></script>
 	</head>
     <body>
 		<div class="container">
 			<div class="row-fluid">
 				<div class="span12 well">
 					<div class="row-fluid">
-						<div class="span8 form-horizontal">
+						<div class="span8 form-horizontal fondoLogo">
 							<div class="control-group">
 								<label class="control-label">Institucion:</label>
 								<div class="controls">
@@ -77,11 +83,10 @@
 						<div class="span4">
 							<div id="tituloLeyenda">Leyenda</div>
 							<div id="leyenda">
-
 							</div>
-							<div class="text-right">
-								<a id="btnExcel" class='btn btn-success'>Descargar Excel</a>
-								<a id="btnFicha" class='btn btn-info'>Descargar Ficha</a>
+							<div class="text-center">
+								<a id="btnExcel" rel="tooltip" title="Descargar data en xls" class='btn btn-success'>Descargar Datos</a>
+								<a id="btnFicha" rel="tooltip" title="Descargar Ficha Metodologica" class='btn btn-info'>Descargar Ficha</a>
 							</div>
 						</div>
 					</div>
@@ -144,7 +149,11 @@
 						</select>
 					</div>
 					<div class="span9 text-center">
-						<div id="chaptersMap">
+						<div id="lienzoTitle">
+						</div>
+						<div style="height: 400px;" id="chaptersMap" class="fondo">
+						</div>
+						<div id="lienzoFuente">
 						</div>
 					</div>
 				</div>

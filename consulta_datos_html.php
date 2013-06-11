@@ -57,7 +57,7 @@ if (isset($_POST['peticion'])) {
 	}
 	if ($peticion == "anio_indicador") {
 		$indicador = $_POST["indicador"];
-		$resultado = $conexion->consulta("select anio from tlectura where idindicador = '$indicador' GROUP BY anio");
+		$resultado = $conexion->consulta("select anio from tlectura where idindicador = '$indicador' GROUP BY anio order by anio desc");
 		$filas = pg_numrows($resultado);
 		if ($filas != 0) {
 			for ($cont = 0; $cont < $filas; $cont++) {

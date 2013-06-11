@@ -13,7 +13,11 @@ if (isset($_POST['peticion'])) {
 	if ($peticion == "historico") {
 		$minimo = (float) $_POST['minimo'];
 		$maximo = (float) $_POST['maximo'];
-		$resultado = $conexion->consulta("select tl.anio, tl.valor from tlectura tl join tprovincia tp on tl.ubigeo=tp.ubigeo where tl.idindicador='$indicador' and tl.idperiodo='$periodo' and tp.codprovincia='$provincia'");
+		if ($provincia=="xx") {
+			$resultado = $conexion->consulta("select tl.anio, avg(tl.valor) from tlectura tl join tprovincia tp on tl.ubigeo=tp.ubigeo where tl.idindicador='$indicador' and tl.idperiodo='$periodo' group by tl.anio");
+		} else {
+			$resultado = $conexion->consulta("select tl.anio, tl.valor from tlectura tl join tprovincia tp on tl.ubigeo=tp.ubigeo where tl.idindicador='$indicador' and tl.idperiodo='$periodo' and tp.codprovincia='$provincia'");
+		}
 		$filas = pg_numrows($resultado);
 		if ($filas != 0) {
 			$jsondata = array();
